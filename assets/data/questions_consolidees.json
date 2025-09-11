@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": ["24", "30", "32", "64"],
+    "reponse": "32",
+    "explication": "Suite géométrique de raison 2 : chaque terme est multiplié par 2 (2×2=4, 4×2=8, 8×2=16, 16×2=32).",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 2,
+    "categorie": "aptitude_numerique", 
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": ["1875", "1900", "2000", "2250"],
+    "reponse": "1875",
+    "explication": "Calcul : 25% de 2500 = 625. Prix final = 2500 - 625 = 1875 FCFA.",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 3,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'ardent' ?",
+    "options": ["froid", "calme", "passionné", "indifférent"],
+    "reponse": "passionné",
+    "explication": "'Ardent' signifie qui manifeste beaucoup de passion, d'enthousiasme. Synonyme : passionné.",
+    "niveau": "facile", 
+    "proba_simple": 0.9
+  },
+  {
+    "id": 4,
+    "categorie": "raisonnement_spatial",
+    "question": "Dans une matrice 3x3, si la diagonale principale contient des triangles (▲), que doit contenir la case manquante ?",
+    "options": ["●", "◻", "▲", "◆"],
+    "reponse": "▲",
+    "explication": "Les éléments de la diagonale principale suivent le même pattern (triangles).",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 5,
+    "categorie": "memoire_attention",
+    "question": "Mémorisez cette suite : G – B – F – 6 – F – 2. Quel était le 3ᵉ élément ?",
+    "options": ["B", "F", "6", "G"],
+    "reponse": "F",
+    "explication": "Sequence : G(1), B(2), F(3), 6(4), F(5), 2(6). Le 3ᵉ élément est F.",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 6,
+    "categorie": "rapidite_personnalite",
+    "question": "Quel élément est différent parmi : ▲, ▲, ●, ▲ ?",
+    "options": ["Premier ▲", "Deuxième ▲", "●", "Troisième ▲"],
+    "reponse": "●",
+    "explication": "Parmi quatre éléments, trois sont des triangles (▲) et un est un cercle (●). L'élément différent est ●.",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 7,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 1, 1, 2, 3, 5, 8, ?",
+    "options": ["11", "13", "15", "16"],
+    "reponse": "13",
+    "explication": "Suite de Fibonacci : chaque terme est la somme des deux précédents (5+8=13).",
+    "niveau": "moyen",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 8,
+    "categorie": "aptitude_numerique",
+    "question": "Calculez : (15 + 25) × 2 - 30 ÷ 5 = ?",
+    "options": ["74", "78", "80", "84"],
+    "reponse": "74",
+    "explication": "Ordre des opérations : (15+25)×2-30÷5 = 40×2-6 = 80-6 = 74.",
+    "niveau": "moyen",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 9,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Livre est à Bibliothèque comme Médicament est à... ?",
+    "options": ["Hôpital", "Pharmacie", "Médecin", "Patient"],
+    "reponse": "Pharmacie",
+    "explication": "Relation lieu de stockage : les livres se trouvent en bibliothèque, les médicaments en pharmacie.",
+    "niveau": "moyen",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 10,
+    "categorie": "raisonnement_spatial",
+    "question": "Un cube est déplié en croix. Si la face supérieure porte le chiffre 1, quelle face porte le chiffre opposé ?",
+    "options": ["2", "3", "4", "6"],
+    "reponse": "6",
+    "explication": "Sur un dé standard, les faces opposées font toujours 7 : 1-6, 2-5, 3-4.",
+    "niveau": "moyen",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 11,
+    "categorie": "memoire_attention",
+    "question": "Observez 10 secondes : ROUGE-BLEU-VERT-JAUNE-ROUGE-VIOLET. Combien de fois apparaît ROUGE ?",
+    "options": ["1", "2", "3", "4"],
+    "reponse": "2",
+    "explication": "ROUGE apparaît en position 1 et position 5 dans la séquence.",
+    "niveau": "moyen",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 12,
+    "categorie": "rapidite_personnalite", 
+    "question": "Quelle qualité décrit le mieux une personne ponctuelle ?",
+    "options": ["Organisée", "Créative", "Spontanée", "Décontractée"],
+    "reponse": "Organisée",
+    "explication": "La ponctualité reflète un trait d'organisation et de respect des horaires.",
+    "niveau": "facile",
+    "proba_simple": 0.9
+  },
+  {
+    "id": 13,
+    "categorie": "raisonnement_logique",
+    "question": "Si tous les A sont B et tous les B sont C, alors :",
+    "options": ["Tous les C sont A", "Tous les A sont C", "Aucun A n'est C", "On ne peut pas conclure"],
+    "reponse": "Tous les A sont C",
+    "explication": "Syllogisme logique : si A⊆B et B⊆C, alors par transitivité A⊆C.",
+    "niveau": "difficile",
+    "proba_simple": 0.4
+  },
+  {
+    "id": 14,
+    "categorie": "aptitude_numerique",
+    "question": "Un capital de 10000€ placé à 5% par an rapporte combien d'intérêts en 3 ans (intérêts composés) ?",
+    "options": ["1500€", "1576€", "1625€", "1750€"],
+    "reponse": "1576€",
+    "explication": "Formule : 10000×(1,05)³ = 11576,25€. Intérêts = 11576,25 - 10000 = 1576,25€.",
+    "niveau": "difficile",
+    "proba_simple": 0.4
+  },
+  {
+    "id": 15,
+    "categorie": "aptitude_verbale",
+    "question": "Quel mot NE fait PAS partie du même champ lexical ?",
+    "options": ["Navire", "Voilier", "Ancre", "Aviron"],
+    "reponse": "Aviron",
+    "explication": "Navire, voilier et ancre appartiennent au domaine maritime. Aviron peut désigner le sport ou la rame, mais est moins spécifiquement maritime.",
+    "niveau": "difficile",
+    "proba_simple": 0.4
+  },
+  {
+    "id": 16,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens horaire. C'est équivalent à :",
+    "options": ["90° sens horaire", "90° sens antihoraire", "180° sens horaire", "360° sens horaire"],
+    "reponse": "90° sens antihoraire", 
+    "explication": "270° horaire = 360° - 270° = 90° antihoraire (même position finale).",
+    "niveau": "difficile",
+    "proba_simple": 0.4
+  },
+  {
+    "id": 17,
+    "categorie": "memoire_attention",
+    "question": "Code secret : A=1, B=2...Z=26. Décodez : 3-15-4-5",
+    "options": ["CODE", "BODE", "CAGE", "CAME"],
+    "reponse": "CODE",
+    "explication": "3=C, 15=O, 4=D, 5=E. Le mot décodé est CODE.",
+    "niveau": "difficile",
+    "proba_simple": 0.4
+  },
+  {
+    "id": 18,
+    "categorie": "rapidite_personnalite",
+    "question": "Dans un conflit, quelle approche est généralement la plus constructive ?",
+    "options": ["Éviter le problème", "Imposer sa solution", "Chercher un compromis", "Céder complètement"],
+    "reponse": "Chercher un compromis",
+    "explication": "La recherche de compromis permet une résolution équitable et constructive des conflits.",
+    "niveau": "moyen", 
+    "proba_simple": 0.7
+  },
+  {
+    "id": 19,
+    "categorie": "raisonnement_logique",
+    "question": "Dans la suite 2, 6, 12, 20, 30, quel est le terme suivant ?",
+    "options": ["40", "42", "45", "48"],
+    "reponse": "42",
+    "explication": "Différences entre termes : +4, +6, +8, +10... La prochaine différence est +12, donc 30+12=42.",
+    "niveau": "moyen",
+    "proba_simple": 0.6
+  },
+  {
+    "id": 20,
+    "categorie": "aptitude_numerique",
+    "question": "Un train roule à 120 km/h. En combien de temps parcourt-il 450 km ?",
+    "options": ["3h15min", "3h30min", "3h45min", "4h00min"],
+    "reponse": "3h45min",
+    "explication": "Temps = Distance ÷ Vitesse = 450 ÷ 120 = 3,75h = 3h45min.",
+    "niveau": "facile",
+    "proba_simple": 0.8
+  }
+]

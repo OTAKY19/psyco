@@ -1,0 +1,3404 @@
+[
+  {
+    "id": 1,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "50",
+      "27",
+      "32",
+      "33"
+    ],
+    "reponse": "32",
+    "explication": "Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 2,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 3,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 5, 10, 20, 40, ?",
+    "options": [
+      "73",
+      "102",
+      "80",
+      "90"
+    ],
+    "reponse": "80",
+    "explication": "Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 4,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 5,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 3, 6, 12, 24, ?",
+    "options": [
+      "48",
+      "65",
+      "40",
+      "53"
+    ],
+    "reponse": "48",
+    "explication": "Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 6,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 7,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 4, 8, 16, 32, ?",
+    "options": [
+      "64",
+      "88",
+      "73",
+      "59"
+    ],
+    "reponse": "64",
+    "explication": "Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 8,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite géométrique, multiplication par 2.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 9,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 1, 4, 9, 16, ?",
+    "options": [
+      "17",
+      "27",
+      "25",
+      "50"
+    ],
+    "reponse": "25",
+    "explication": "Suite suivant la règle : carrés parfaits. 16 → 25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 10,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite suivant la règle : carrés parfaits. 16 → 25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 11,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 5, 10, 15, 20, ?",
+    "options": [
+      "50",
+      "25",
+      "18",
+      "34"
+    ],
+    "reponse": "25",
+    "explication": "Suite suivant la règle : +5. 20 → 25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 12,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite suivant la règle : +5. 20 → 25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 13,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 1, 3, 6, 10, ?",
+    "options": [
+      "10",
+      "30",
+      "15",
+      "23"
+    ],
+    "reponse": "15",
+    "explication": "Suite suivant la règle : nombres triangulaires. 10 → 15.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 14,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite suivant la règle : nombres triangulaires. 10 → 15.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 15,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 6, 18, 54, ?",
+    "options": [
+      "162",
+      "159",
+      "324",
+      "170"
+    ],
+    "reponse": "162",
+    "explication": "Suite suivant la règle : ×3. 54 → 162.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 16,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite suivant la règle : ×3. 54 → 162.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 17,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 100, 50, 25, 12.5, ?",
+    "options": [
+      "6.25",
+      "-0.75",
+      "12.5",
+      "9.25"
+    ],
+    "reponse": "6.25",
+    "explication": "Suite suivant la règle : ÷2. 12.5 → 6.25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 18,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite suivant la règle : ÷2. 12.5 → 6.25.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 19,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 1, 1, 2, 3, 5, 8, ?",
+    "options": [
+      "11",
+      "13",
+      "15",
+      "16"
+    ],
+    "reponse": "13",
+    "explication": "Suite de Fibonacci : chaque terme est la somme des deux précédents (5+8=13).",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 20,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Suite de Fibonacci : chaque terme est la somme des deux précédents (5+8=13).",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 21,
+    "categorie": "raisonnement_logique",
+    "question": "Dans la suite 2, 6, 12, 20, 30, quel est le terme suivant ?",
+    "options": [
+      "40",
+      "42",
+      "45",
+      "48"
+    ],
+    "reponse": "42",
+    "explication": "Différences entre termes : +4, +6, +8, +10... La prochaine différence est +12, donc 30+12=42.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 22,
+    "categorie": "raisonnement_logique",
+    "question": "Quelle est la prochaine valeur dans la suite : 2, 4, 8, 16, ?",
+    "options": [
+      "32",
+      "37",
+      "29",
+      "64"
+    ],
+    "reponse": "32",
+    "explication": "[Variante] Différences entre termes : +4, +6, +8, +10... La prochaine différence est +12, donc 30+12=42.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 23,
+    "categorie": "raisonnement_logique",
+    "question": "Si tous les A sont B et tous les B sont C, alors :",
+    "options": [
+      "Tous les C sont A",
+      "Tous les A sont C",
+      "Aucun A n'est C",
+      "On ne peut pas conclure"
+    ],
+    "reponse": "Tous les A sont C",
+    "explication": "Syllogisme logique : si A⊆B et B⊆C, alors par transitivité A⊆C.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 24,
+    "categorie": "raisonnement_logique",
+    "question": "Si tous les A sont B et tous les B sont C, alors :",
+    "options": [
+      "Tous les C sont A",
+      "Tous les A sont C",
+      "Aucun A n'est C",
+      "On ne peut pas conclure"
+    ],
+    "reponse": "Tous les A sont C",
+    "explication": "[Variante] Syllogisme logique : si A⊆B et B⊆C, alors par transitivité A⊆C.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 25,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 7200 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "6832",
+      "6362",
+      "6483",
+      "6480"
+    ],
+    "reponse": "6480",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 26,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "2250",
+      "2400",
+      "2600",
+      "2000"
+    ],
+    "reponse": "2250",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 27,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 5000 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "4000",
+      "3828",
+      "4024",
+      "4282"
+    ],
+    "reponse": "4000",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 28,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 4500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "4000",
+      "3828",
+      "4024",
+      "4282"
+    ],
+    "reponse": "4000",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 29,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1200 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "1080",
+      "1121",
+      "1031",
+      "1186"
+    ],
+    "reponse": "1080",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 30,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "1350",
+      "1400",
+      "1600",
+      "1200"
+    ],
+    "reponse": "1350",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 31,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "2343",
+      "2282",
+      "2053",
+      "2250"
+    ],
+    "reponse": "2250",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 32,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "2250",
+      "2400",
+      "2600",
+      "2000"
+    ],
+    "reponse": "2250",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 33,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "1882",
+      "2133",
+      "1817",
+      "1875"
+    ],
+    "reponse": "1875",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 34,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "1882",
+      "2133",
+      "1817",
+      "1875"
+    ],
+    "reponse": "1875",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 35,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3600 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "2896",
+      "2582",
+      "2700",
+      "2745"
+    ],
+    "reponse": "2700",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 36,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 6500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "2896",
+      "2582",
+      "2700",
+      "2745"
+    ],
+    "reponse": "2700",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 37,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 5000 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "4514",
+      "4587",
+      "4500",
+      "4353"
+    ],
+    "reponse": "4500",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 38,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 8500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "7650",
+      "8400",
+      "8600",
+      "6800"
+    ],
+    "reponse": "7650",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 39,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 7200 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "5737",
+      "5408",
+      "5388",
+      "5400"
+    ],
+    "reponse": "5400",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 40,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 4500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "5737",
+      "5408",
+      "5388",
+      "5400"
+    ],
+    "reponse": "5400",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 41,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1200 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "1038",
+      "926",
+      "1274",
+      "1020"
+    ],
+    "reponse": "1020",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 42,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "1038",
+      "926",
+      "1274",
+      "1020"
+    ],
+    "reponse": "1020",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 43,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 7200 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "6268",
+      "6120",
+      "6003",
+      "6163"
+    ],
+    "reponse": "6120",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 44,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "6268",
+      "6120",
+      "6003",
+      "6163"
+    ],
+    "reponse": "6120",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 45,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 5000 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "3703",
+      "3924",
+      "3792",
+      "3750"
+    ],
+    "reponse": "3750",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 46,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "3703",
+      "3924",
+      "3792",
+      "3750"
+    ],
+    "reponse": "3750",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 47,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 5000 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "4528",
+      "4250",
+      "4272",
+      "4172"
+    ],
+    "reponse": "4250",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 48,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "4528",
+      "4250",
+      "4272",
+      "4172"
+    ],
+    "reponse": "4250",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 49,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3600 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "3266",
+      "3240",
+      "3093",
+      "3381"
+    ],
+    "reponse": "3240",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 50,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -10%. Quel est le prix final ?",
+    "options": [
+      "2250",
+      "2400",
+      "2600",
+      "2000"
+    ],
+    "reponse": "2250",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 51,
+    "categorie": "aptitude_numerique",
+    "question": "Un train roule à 120 km/h. En combien de temps parcourt-il 450 km ?",
+    "options": [
+      "3h15min",
+      "3h30min",
+      "3h45min",
+      "4h00min"
+    ],
+    "reponse": "3h45min",
+    "explication": "Temps = Distance ÷ Vitesse = 450 ÷ 120 = 3,75h = 3h45min.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 52,
+    "categorie": "aptitude_numerique",
+    "question": "Un train roule à 120 km/h. En combien de temps parcourt-il 450 km ?",
+    "options": [
+      "3h15min",
+      "3h30min",
+      "3h45min",
+      "4h00min"
+    ],
+    "reponse": "3h45min",
+    "explication": "[Variante] Temps = Distance ÷ Vitesse = 450 ÷ 120 = 3,75h = 3h45min.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 53,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3600 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "3294",
+      "3080",
+      "3005",
+      "3060"
+    ],
+    "reponse": "3060",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 54,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 8500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "3294",
+      "3080",
+      "3005",
+      "3060"
+    ],
+    "reponse": "3060",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 55,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3600 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "2906",
+      "2693",
+      "3249",
+      "2880"
+    ],
+    "reponse": "2880",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 56,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 6500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "2906",
+      "2693",
+      "3249",
+      "2880"
+    ],
+    "reponse": "2880",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 57,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 7200 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "5760",
+      "5877",
+      "5779",
+      "5727"
+    ],
+    "reponse": "5760",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 58,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "5760",
+      "5877",
+      "5779",
+      "5727"
+    ],
+    "reponse": "5760",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 59,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1200 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "1104",
+      "724",
+      "927",
+      "900"
+    ],
+    "reponse": "900",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 60,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -25%. Quel est le prix final ?",
+    "options": [
+      "1104",
+      "724",
+      "927",
+      "900"
+    ],
+    "reponse": "900",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 61,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 1200 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "997",
+      "918",
+      "960",
+      "1134"
+    ],
+    "reponse": "960",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 62,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "997",
+      "918",
+      "960",
+      "1134"
+    ],
+    "reponse": "960",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 63,
+    "categorie": "aptitude_numerique",
+    "question": "Calculez : (15 + 25) × 2 - 30 ÷ 5 = ?",
+    "options": [
+      "74",
+      "78",
+      "80",
+      "84"
+    ],
+    "reponse": "74",
+    "explication": "Ordre des opérations : (15+25)×2-30÷5 = 40×2-6 = 80-6 = 74.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 64,
+    "categorie": "aptitude_numerique",
+    "question": "Calculez : (15 + 25) × 2 - 30 ÷ 5 = ?",
+    "options": [
+      "74",
+      "78",
+      "80",
+      "84"
+    ],
+    "reponse": "74",
+    "explication": "[Variante] Ordre des opérations : (15+25)×2-30÷5 = 40×2-6 = 80-6 = 74.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 65,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "2008",
+      "1907",
+      "2198",
+      "2000"
+    ],
+    "reponse": "2000",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 66,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3500 FCFA. Il est soldé à -20%. Quel est le prix final ?",
+    "options": [
+      "2008",
+      "1907",
+      "2198",
+      "2000"
+    ],
+    "reponse": "2000",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 67,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 2500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "2125",
+      "2156",
+      "2042",
+      "2194"
+    ],
+    "reponse": "2125",
+    "explication": "Calcul du pourcentage et soustraction.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 68,
+    "categorie": "aptitude_numerique",
+    "question": "Un article coûte 3500 FCFA. Il est soldé à -15%. Quel est le prix final ?",
+    "options": [
+      "2125",
+      "2156",
+      "2042",
+      "2194"
+    ],
+    "reponse": "2125",
+    "explication": "[Variante] Calcul du pourcentage et soustraction.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 69,
+    "categorie": "aptitude_numerique",
+    "question": "Un capital de 10000€ placé à 5% par an rapporte combien d'intérêts en 3 ans (intérêts composés) ?",
+    "options": [
+      "1500€",
+      "1576€",
+      "1625€",
+      "1750€"
+    ],
+    "reponse": "1576€",
+    "explication": "Formule : 10000×(1,05)³ = 11576,25€. Intérêts = 11576,25 - 10000 = 1576,25€.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 70,
+    "categorie": "aptitude_numerique",
+    "question": "Un capital de 10000€ placé à 5% par an rapporte combien d'intérêts en 3 ans (intérêts composés) ?",
+    "options": [
+      "1500€",
+      "1576€",
+      "1625€",
+      "1750€"
+    ],
+    "reponse": "1576€",
+    "explication": "[Variante] Formule : 10000×(1,05)³ = 11576,25€. Intérêts = 11576,25 - 10000 = 1576,25€.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 71,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'ardent' ?",
+    "options": [
+      "opposé",
+      "indéfini",
+      "pareil",
+      "passionné"
+    ],
+    "reponse": "passionné",
+    "explication": "'ardent' peut être remplacé par 'passionné'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 72,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'ardent' ?",
+    "options": [
+      "opposé",
+      "indéfini",
+      "pareil",
+      "passionné"
+    ],
+    "reponse": "passionné",
+    "explication": "[Variante] 'ardent' peut être remplacé par 'passionné'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 73,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'soutenu' ?",
+    "options": [
+      "indéfini",
+      "pareil",
+      "opposé",
+      "intense"
+    ],
+    "reponse": "intense",
+    "explication": "'soutenu' peut être remplacé par 'intense'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 74,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'soutenu' ?",
+    "options": [
+      "indéfini",
+      "pareil",
+      "opposé",
+      "intense"
+    ],
+    "reponse": "intense",
+    "explication": "[Variante] 'soutenu' peut être remplacé par 'intense'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 75,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'frugal' ?",
+    "options": [
+      "opposé",
+      "sobre",
+      "pareil",
+      "indéfini"
+    ],
+    "reponse": "sobre",
+    "explication": "'frugal' peut être remplacé par 'sobre'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 76,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'frugal' ?",
+    "options": [
+      "opposé",
+      "sobre",
+      "pareil",
+      "indéfini"
+    ],
+    "reponse": "sobre",
+    "explication": "[Variante] 'frugal' peut être remplacé par 'sobre'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 77,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'lucide' ?",
+    "options": [
+      "clair",
+      "pareil",
+      "opposé",
+      "indéfini"
+    ],
+    "reponse": "clair",
+    "explication": "'lucide' peut être remplacé par 'clair'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 78,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'lucide' ?",
+    "options": [
+      "clair",
+      "pareil",
+      "opposé",
+      "indéfini"
+    ],
+    "reponse": "clair",
+    "explication": "[Variante] 'lucide' peut être remplacé par 'clair'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 79,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'obstiné' ?",
+    "options": [
+      "indéfini",
+      "pareil",
+      "têtu",
+      "opposé"
+    ],
+    "reponse": "têtu",
+    "explication": "'obstiné' peut être remplacé par 'têtu'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 80,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'obstiné' ?",
+    "options": [
+      "indéfini",
+      "pareil",
+      "têtu",
+      "opposé"
+    ],
+    "reponse": "têtu",
+    "explication": "[Variante] 'obstiné' peut être remplacé par 'têtu'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 81,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'loquace' ?",
+    "options": [
+      "bavard",
+      "pareil",
+      "indéfini",
+      "opposé"
+    ],
+    "reponse": "bavard",
+    "explication": "'loquace' peut être remplacé par 'bavard'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 82,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'loquace' ?",
+    "options": [
+      "bavard",
+      "pareil",
+      "indéfini",
+      "opposé"
+    ],
+    "reponse": "bavard",
+    "explication": "[Variante] 'loquace' peut être remplacé par 'bavard'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 83,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'inexorable' ?",
+    "options": [
+      "pareil",
+      "indéfini",
+      "opposé",
+      "inévitable"
+    ],
+    "reponse": "inévitable",
+    "explication": "'inexorable' peut être remplacé par 'inévitable'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 84,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'inexorable' ?",
+    "options": [
+      "pareil",
+      "indéfini",
+      "opposé",
+      "inévitable"
+    ],
+    "reponse": "inévitable",
+    "explication": "[Variante] 'inexorable' peut être remplacé par 'inévitable'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 85,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'négliger' ?",
+    "options": [
+      "indéfini",
+      "opposé",
+      "omettre",
+      "pareil"
+    ],
+    "reponse": "omettre",
+    "explication": "'négliger' peut être remplacé par 'omettre'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 86,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'négliger' ?",
+    "options": [
+      "indéfini",
+      "opposé",
+      "omettre",
+      "pareil"
+    ],
+    "reponse": "omettre",
+    "explication": "[Variante] 'négliger' peut être remplacé par 'omettre'.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 87,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'grand' ?",
+    "options": [
+      "court",
+      "petit",
+      "minuscule",
+      "immense"
+    ],
+    "reponse": "immense",
+    "explication": "'grand' et 'immense' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.8517224042497684,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 88,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'grand' ?",
+    "options": [
+      "court",
+      "petit",
+      "minuscule",
+      "immense"
+    ],
+    "reponse": "immense",
+    "explication": "[Variante] 'grand' et 'immense' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.8517224042497684,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 89,
+    "categorie": "aptitude_verbale",
+    "question": "Quel mot n'appartient pas au même domaine ?",
+    "options": [
+      "Tulipe",
+      "Orchidée",
+      "Marteau",
+      "Rose"
+    ],
+    "reponse": "Marteau",
+    "explication": "'Marteau' n'appartient pas au même champ lexical que les autres mots.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 90,
+    "categorie": "aptitude_verbale",
+    "question": "Quel mot n'appartient pas au même domaine ?",
+    "options": [
+      "Tulipe",
+      "Orchidée",
+      "Marteau",
+      "Rose"
+    ],
+    "reponse": "Marteau",
+    "explication": "[Variante] 'Marteau' n'appartient pas au même champ lexical que les autres mots.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 91,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'nouveau' ?",
+    "options": [
+      "récent",
+      "vieux",
+      "dépassé",
+      "ancien"
+    ],
+    "reponse": "récent",
+    "explication": "'nouveau' et 'récent' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.7929263836108177,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 92,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'nouveau' ?",
+    "options": [
+      "récent",
+      "vieux",
+      "dépassé",
+      "ancien"
+    ],
+    "reponse": "récent",
+    "explication": "[Variante] 'nouveau' et 'récent' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.7929263836108177,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 93,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'habile' ?",
+    "options": [
+      "difficile",
+      "lent",
+      "adroit",
+      "maladroit"
+    ],
+    "reponse": "adroit",
+    "explication": "'habile' et 'adroit' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.6091777541505479,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 94,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'habile' ?",
+    "options": [
+      "difficile",
+      "lent",
+      "adroit",
+      "maladroit"
+    ],
+    "reponse": "adroit",
+    "explication": "[Variante] 'habile' et 'adroit' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.6091777541505479,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 95,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'fort' ?",
+    "options": [
+      "délicat",
+      "puissant",
+      "faible",
+      "fragile"
+    ],
+    "reponse": "puissant",
+    "explication": "'fort' et 'puissant' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.6373145643992967,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 96,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'fort' ?",
+    "options": [
+      "délicat",
+      "puissant",
+      "faible",
+      "fragile"
+    ],
+    "reponse": "puissant",
+    "explication": "[Variante] 'fort' et 'puissant' ont des sens similaires.",
+    "niveau": "facile",
+    "proba_simple": 0.6373145643992967,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 97,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'démystifier' ?",
+    "options": [
+      "expliquer",
+      "indéfini",
+      "pareil",
+      "opposé"
+    ],
+    "reponse": "expliquer",
+    "explication": "'démystifier' peut être remplacé par 'expliquer'.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 98,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'démystifier' ?",
+    "options": [
+      "expliquer",
+      "indéfini",
+      "pareil",
+      "opposé"
+    ],
+    "reponse": "expliquer",
+    "explication": "[Variante] 'démystifier' peut être remplacé par 'expliquer'.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 99,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'hâtif' ?",
+    "options": [
+      "pareil",
+      "précipité",
+      "indéfini",
+      "opposé"
+    ],
+    "reponse": "précipité",
+    "explication": "'hâtif' peut être remplacé par 'précipité'.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 100,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'hâtif' ?",
+    "options": [
+      "pareil",
+      "précipité",
+      "indéfini",
+      "opposé"
+    ],
+    "reponse": "précipité",
+    "explication": "[Variante] 'hâtif' peut être remplacé par 'précipité'.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 101,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Médecin est à Hôpital comme Professeur est à ... ?",
+    "options": [
+      "Cinéma",
+      "École",
+      "Magasin",
+      "Restaurant"
+    ],
+    "reponse": "École",
+    "explication": "Relation : Médecin → Hôpital, donc Professeur → École.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 102,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Médecin est à Hôpital comme Professeur est à ... ?",
+    "options": [
+      "Cinéma",
+      "École",
+      "Magasin",
+      "Restaurant"
+    ],
+    "reponse": "École",
+    "explication": "[Variante] Relation : Médecin → Hôpital, donc Professeur → École.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 103,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Voiture est à Conduire comme Avion est à ... ?",
+    "options": [
+      "Nager",
+      "Marcher",
+      "Piloter",
+      "Courir"
+    ],
+    "reponse": "Piloter",
+    "explication": "Relation : Voiture → Conduire, donc Avion → Piloter.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 104,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Voiture est à Conduire comme Avion est à ... ?",
+    "options": [
+      "Nager",
+      "Marcher",
+      "Piloter",
+      "Courir"
+    ],
+    "reponse": "Piloter",
+    "explication": "[Variante] Relation : Voiture → Conduire, donc Avion → Piloter.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 105,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'joyeux' ?",
+    "options": [
+      "mélancolique",
+      "morne",
+      "triste",
+      "gai"
+    ],
+    "reponse": "gai",
+    "explication": "'joyeux' et 'gai' ont des sens similaires.",
+    "niveau": "moyen",
+    "proba_simple": 0.701946761601463,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 106,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'joyeux' ?",
+    "options": [
+      "mélancolique",
+      "morne",
+      "triste",
+      "gai"
+    ],
+    "reponse": "gai",
+    "explication": "[Variante] 'joyeux' et 'gai' ont des sens similaires.",
+    "niveau": "moyen",
+    "proba_simple": 0.701946761601463,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 107,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Livre est à Lire comme Musique est à ... ?",
+    "options": [
+      "Voir",
+      "Écouter",
+      "Toucher",
+      "Sentir"
+    ],
+    "reponse": "Écouter",
+    "explication": "Relation : Livre → Lire, donc Musique → Écouter.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 108,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Livre est à Lire comme Musique est à ... ?",
+    "options": [
+      "Voir",
+      "Écouter",
+      "Toucher",
+      "Sentir"
+    ],
+    "reponse": "Écouter",
+    "explication": "[Variante] Relation : Livre → Lire, donc Musique → Écouter.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 109,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'calme' ?",
+    "options": [
+      "nerveux",
+      "serein",
+      "turbulent",
+      "agité"
+    ],
+    "reponse": "serein",
+    "explication": "'calme' et 'serein' ont des sens similaires.",
+    "niveau": "moyen",
+    "proba_simple": 0.7709332922364432,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 110,
+    "categorie": "aptitude_verbale",
+    "question": "Quel est le synonyme du mot 'calme' ?",
+    "options": [
+      "nerveux",
+      "serein",
+      "turbulent",
+      "agité"
+    ],
+    "reponse": "serein",
+    "explication": "[Variante] 'calme' et 'serein' ont des sens similaires.",
+    "niveau": "moyen",
+    "proba_simple": 0.7709332922364432,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 111,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Chat est à Miauler comme Chien est à ... ?",
+    "options": [
+      "Courir",
+      "Aboyer",
+      "Dormir",
+      "Manger"
+    ],
+    "reponse": "Aboyer",
+    "explication": "Relation : Chat → Miauler, donc Chien → Aboyer.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 112,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Chat est à Miauler comme Chien est à ... ?",
+    "options": [
+      "Courir",
+      "Aboyer",
+      "Dormir",
+      "Manger"
+    ],
+    "reponse": "Aboyer",
+    "explication": "[Variante] Relation : Chat → Miauler, donc Chien → Aboyer.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 113,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Livre est à Bibliothèque comme Médicament est à... ?",
+    "options": [
+      "Hôpital",
+      "Pharmacie",
+      "Médecin",
+      "Patient"
+    ],
+    "reponse": "Pharmacie",
+    "explication": "Relation lieu de stockage : les livres se trouvent en bibliothèque, les médicaments en pharmacie.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 114,
+    "categorie": "aptitude_verbale",
+    "question": "Complétez l'analogie : Livre est à Bibliothèque comme Médicament est à... ?",
+    "options": [
+      "Hôpital",
+      "Pharmacie",
+      "Médecin",
+      "Patient"
+    ],
+    "reponse": "Pharmacie",
+    "explication": "[Variante] Relation lieu de stockage : les livres se trouvent en bibliothèque, les médicaments en pharmacie.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 115,
+    "categorie": "aptitude_verbale",
+    "question": "Quel mot NE fait PAS partie du même champ lexical ?",
+    "options": [
+      "Navire",
+      "Voilier",
+      "Ancre",
+      "Aviron"
+    ],
+    "reponse": "Aviron",
+    "explication": "Navire, voilier et ancre appartiennent au domaine maritime. Aviron peut désigner le sport ou la rame, mais est moins spécifiquement maritime.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 116,
+    "categorie": "aptitude_verbale",
+    "question": "Quel mot NE fait PAS partie du même champ lexical ?",
+    "options": [
+      "Navire",
+      "Voilier",
+      "Ancre",
+      "Aviron"
+    ],
+    "reponse": "Aviron",
+    "explication": "[Variante] Navire, voilier et ancre appartiennent au domaine maritime. Aviron peut désigner le sport ou la rame, mais est moins spécifiquement maritime.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 117,
+    "categorie": "raisonnement_spatial",
+    "question": "Complétez la grille suivante en remplaçant le '?'.",
+    "options": [
+      "▲",
+      "◻",
+      "▲",
+      "◻"
+    ],
+    "reponse": "▲",
+    "explication": "La diagonale principale partage le même symbole.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "image": "/mnt/data/psychotest_images_200/matrix_200_3.png",
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 118,
+    "categorie": "raisonnement_spatial",
+    "question": "Complétez la grille suivante en remplaçant le '?'.",
+    "options": [
+      "▲",
+      "◻",
+      "▲",
+      "◻"
+    ],
+    "reponse": "▲",
+    "explication": "[Variante] La diagonale principale partage le même symbole.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "image": "/mnt/data/psychotest_images_200/matrix_200_3.png",
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 119,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 360° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position D",
+    "explication": "Rotation de 360° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 120,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 360° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position D",
+    "explication": "[Variante] Rotation de 360° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 121,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 180° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position D",
+    "explication": "Rotation de 180° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 122,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 180° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position D",
+    "explication": "[Variante] Rotation de 180° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 123,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 90° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position B",
+    "explication": "Rotation de 90° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 124,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 90° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position B",
+    "explication": "[Variante] Rotation de 90° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 125,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position B",
+    "explication": "Rotation de 270° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 126,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens antihoraire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position B",
+    "explication": "[Variante] Rotation de 270° antihoraire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 127,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens horaire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position A",
+    "explication": "Rotation de 270° horaire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 128,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens horaire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position A",
+    "explication": "[Variante] Rotation de 270° horaire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 129,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 180° dans le sens horaire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position C",
+    "explication": "Rotation de 180° horaire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 130,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 180° dans le sens horaire. Quelle est sa nouvelle position ?",
+    "options": [
+      "Position A",
+      "Position B",
+      "Position C",
+      "Position D"
+    ],
+    "reponse": "Position C",
+    "explication": "[Variante] Rotation de 180° horaire appliquée à la figure de base.",
+    "niveau": "facile",
+    "proba_simple": 0.8,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 131,
+    "categorie": "raisonnement_spatial",
+    "question": "Dans une matrice 3x3, si la diagonale principale contient des triangles (▲), que doit contenir la case manquante ?",
+    "options": [
+      "●",
+      "◻",
+      "▲",
+      "◆"
+    ],
+    "reponse": "▲",
+    "explication": "Les éléments de la diagonale principale suivent le même pattern (triangles).",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 132,
+    "categorie": "raisonnement_spatial",
+    "question": "Dans une matrice 3x3, si la diagonale principale contient des triangles (▲), que doit contenir la case manquante ?",
+    "options": [
+      "●",
+      "◻",
+      "▲",
+      "◆"
+    ],
+    "reponse": "▲",
+    "explication": "[Variante] Les éléments de la diagonale principale suivent le même pattern (triangles).",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 133,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe vertical ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure B",
+    "explication": "Symétrie axiale par rapport à l'axe vertical.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 134,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe vertical ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure B",
+    "explication": "[Variante] Symétrie axiale par rapport à l'axe vertical.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 135,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe diagonal ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure C",
+    "explication": "Symétrie axiale par rapport à l'axe diagonal.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 136,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe diagonal ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure C",
+    "explication": "[Variante] Symétrie axiale par rapport à l'axe diagonal.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 137,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe horizontal ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure A",
+    "explication": "Symétrie axiale par rapport à l'axe horizontal.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 138,
+    "categorie": "raisonnement_spatial",
+    "question": "Quelle figure est le symétrique par rapport à l'axe horizontal ?",
+    "options": [
+      "Figure A",
+      "Figure B",
+      "Figure C",
+      "Figure D"
+    ],
+    "reponse": "Figure A",
+    "explication": "[Variante] Symétrie axiale par rapport à l'axe horizontal.",
+    "niveau": "moyen",
+    "proba_simple": 0.6,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 139,
+    "categorie": "raisonnement_spatial",
+    "question": "Un cube est déplié en croix. Si la face supérieure porte le chiffre 1, quelle face porte le chiffre opposé ?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "6"
+    ],
+    "reponse": "6",
+    "explication": "Sur un dé standard, les faces opposées font toujours 7 : 1-6, 2-5, 3-4.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 140,
+    "categorie": "raisonnement_spatial",
+    "question": "Un cube est déplié en croix. Si la face supérieure porte le chiffre 1, quelle face porte le chiffre opposé ?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "6"
+    ],
+    "reponse": "6",
+    "explication": "[Variante] Sur un dé standard, les faces opposées font toujours 7 : 1-6, 2-5, 3-4.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 141,
+    "categorie": "raisonnement_spatial",
+    "question": "Sur un dé standard, quelle face est opposée à la face '1' ?",
+    "options": [
+      "6",
+      "2",
+      "4",
+      "5"
+    ],
+    "reponse": "6",
+    "explication": "Sur un dé standard, les faces opposées font toujours 7 : 1↔6, 2↔5, 3↔4.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 142,
+    "categorie": "raisonnement_spatial",
+    "question": "Sur un dé standard, quelle face est opposée à la face '1' ?",
+    "options": [
+      "6",
+      "2",
+      "4",
+      "5"
+    ],
+    "reponse": "6",
+    "explication": "[Variante] Sur un dé standard, les faces opposées font toujours 7 : 1↔6, 2↔5, 3↔4.",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 143,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens horaire. C'est équivalent à :",
+    "options": [
+      "90° sens horaire",
+      "90° sens antihoraire",
+      "180° sens horaire",
+      "360° sens horaire"
+    ],
+    "reponse": "90° sens antihoraire",
+    "explication": "270° horaire = 360° - 270° = 90° antihoraire (même position finale).",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 144,
+    "categorie": "raisonnement_spatial",
+    "question": "Une figure est tournée de 270° dans le sens horaire. C'est équivalent à :",
+    "options": [
+      "90° sens horaire",
+      "90° sens antihoraire",
+      "180° sens horaire",
+      "360° sens horaire"
+    ],
+    "reponse": "90° sens antihoraire",
+    "explication": "[Variante] 270° horaire = 360° - 270° = 90° antihoraire (même position finale).",
+    "niveau": "difficile",
+    "proba_simple": 0.4,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 145,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : G – B – F – 6 – F – 2. Quel était le 3ᵉ élément ?",
+    "options": [
+      "7",
+      "G",
+      "F",
+      "M"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 146,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – B – D – 2 – 4 – F. Quel était le 2ᵉ élément ?",
+    "options": [
+      "7",
+      "F",
+      "B",
+      "9"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 147,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 4 – 4 – E – 1 – 5 – C. Quel était le 5ᵉ élément ?",
+    "options": [
+      "Z",
+      "5",
+      "N",
+      "4"
+    ],
+    "reponse": "5",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 148,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : B – F – A – 2 – 1 – D. Quel était le 5ᵉ élément ?",
+    "options": [
+      "F",
+      "X",
+      "M",
+      "1"
+    ],
+    "reponse": "1",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 149,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : D – 6 – B – H – 5 – 6. Quel était le 5ᵉ élément ?",
+    "options": [
+      "D",
+      "X",
+      "M",
+      "5"
+    ],
+    "reponse": "5",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 150,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : G – B – 2 – D – 2 – 2. Quel était le 1ᵉ élément ?",
+    "options": [
+      "9",
+      "G",
+      "2",
+      "X"
+    ],
+    "reponse": "G",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 151,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 5 – 5 – C – G – A – C. Quel était le 6ᵉ élément ?",
+    "options": [
+      "C",
+      "N",
+      "C",
+      "7"
+    ],
+    "reponse": "C",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 152,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – A – 4 – G – A – 1. Quel était le 5ᵉ élément ?",
+    "options": [
+      "Y",
+      "1",
+      "A",
+      "O"
+    ],
+    "reponse": "A",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 153,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – 1 – 3 – 3 – 2 – F. Quel était le 1ᵉ élément ?",
+    "options": [
+      "N",
+      "Z",
+      "E",
+      "1"
+    ],
+    "reponse": "E",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 154,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : C – 4 – 6 – H – H – E. Quel était le 2ᵉ élément ?",
+    "options": [
+      "4",
+      "Z",
+      "9",
+      "E"
+    ],
+    "reponse": "4",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 155,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – G – H – A – G – F. Quel était le 6ᵉ élément ?",
+    "options": [
+      "F",
+      "7",
+      "F",
+      "N"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 156,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 3 – B – 2 – D – H – 4. Quel était le 3ᵉ élément ?",
+    "options": [
+      "Y",
+      "2",
+      "M",
+      "2"
+    ],
+    "reponse": "2",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 157,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : B – B – 6 – H – 2 – 1. Quel était le 1ᵉ élément ?",
+    "options": [
+      "B",
+      "8",
+      "N",
+      "1"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 158,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : A – E – D – A – 5 – D. Quel était le 1ᵉ élément ?",
+    "options": [
+      "Z",
+      "A",
+      "D",
+      "9"
+    ],
+    "reponse": "A",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 159,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : F – H – A – 4 – 6 – F. Quel était le 5ᵉ élément ?",
+    "options": [
+      "M",
+      "4",
+      "Z",
+      "6"
+    ],
+    "reponse": "6",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 160,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – 5 – E – 4 – H – D. Quel était le 5ᵉ élément ?",
+    "options": [
+      "E",
+      "7",
+      "N",
+      "H"
+    ],
+    "reponse": "H",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 161,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 3 – B – H – H – 3 – 1. Quel était le 3ᵉ élément ?",
+    "options": [
+      "8",
+      "H",
+      "N",
+      "B"
+    ],
+    "reponse": "H",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 162,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 5 – 2 – G – 2 – 3 – A. Quel était le 4ᵉ élément ?",
+    "options": [
+      "O",
+      "2",
+      "A",
+      "8"
+    ],
+    "reponse": "2",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 163,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 6 – F – 2 – 4 – F – D. Quel était le 2ᵉ élément ?",
+    "options": [
+      "F",
+      "8",
+      "4",
+      "9"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 164,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 5 – 1 – E – 6 – 2 – 3. Quel était le 5ᵉ élément ?",
+    "options": [
+      "2",
+      "Y",
+      "5",
+      "M"
+    ],
+    "reponse": "2",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 165,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : F – 6 – D – 6 – B – E. Quel était le 4ᵉ élément ?",
+    "options": [
+      "9",
+      "6",
+      "6",
+      "7"
+    ],
+    "reponse": "6",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 166,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : F – 4 – H – E – E – E. Quel était le 2ᵉ élément ?",
+    "options": [
+      "F",
+      "O",
+      "Y",
+      "4"
+    ],
+    "reponse": "4",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 167,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : G – H – B – 2 – 3 – 3. Quel était le 1ᵉ élément ?",
+    "options": [
+      "H",
+      "Y",
+      "O",
+      "G"
+    ],
+    "reponse": "G",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 168,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : G – B – 1 – D – 3 – C. Quel était le 3ᵉ élément ?",
+    "options": [
+      "1",
+      "X",
+      "M",
+      "B"
+    ],
+    "reponse": "1",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 169,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : F – 3 – B – 6 – C – F. Quel était le 4ᵉ élément ?",
+    "options": [
+      "F",
+      "6",
+      "7",
+      "O"
+    ],
+    "reponse": "6",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 170,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : H – B – 3 – 6 – C – H. Quel était le 6ᵉ élément ?",
+    "options": [
+      "H",
+      "8",
+      "3",
+      "O"
+    ],
+    "reponse": "H",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 171,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : F – 4 – H – 4 – 5 – G. Quel était le 4ᵉ élément ?",
+    "options": [
+      "Y",
+      "G",
+      "9",
+      "4"
+    ],
+    "reponse": "4",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 172,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – F – F – G – C – D. Quel était le 5ᵉ élément ?",
+    "options": [
+      "N",
+      "8",
+      "C",
+      "G"
+    ],
+    "reponse": "C",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 173,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : A – 6 – 3 – G – E – A. Quel était le 5ᵉ élément ?",
+    "options": [
+      "9",
+      "A",
+      "E",
+      "X"
+    ],
+    "reponse": "E",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 174,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : B – 5 – G – A – E – 1. Quel était le 1ᵉ élément ?",
+    "options": [
+      "B",
+      "A",
+      "Z",
+      "O"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 175,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – A – 4 – F – D – H. Quel était le 4ᵉ élément ?",
+    "options": [
+      "F",
+      "A",
+      "M",
+      "Z"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 176,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : A – C – E – A – C – 4. Quel était le 4ᵉ élément ?",
+    "options": [
+      "A",
+      "X",
+      "C",
+      "M"
+    ],
+    "reponse": "A",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 177,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 6 – 3 – 3 – 5 – 1 – 4. Quel était le 2ᵉ élément ?",
+    "options": [
+      "3",
+      "7",
+      "5",
+      "N"
+    ],
+    "reponse": "3",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "moyen",
+    "proba_simple": 0.5,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 178,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : D – 6 – B – F – 6 – 1. Quel était le 3ᵉ élément ?",
+    "options": [
+      "D",
+      "B",
+      "Z",
+      "N"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 179,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : H – 2 – H – G – E – D. Quel était le 5ᵉ élément ?",
+    "options": [
+      "9",
+      "Z",
+      "H",
+      "E"
+    ],
+    "reponse": "E",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 180,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – B – G – A – F – C. Quel était le 5ᵉ élément ?",
+    "options": [
+      "A",
+      "Z",
+      "F",
+      "M"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 181,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : C – H – B – H – H – 3. Quel était le 3ᵉ élément ?",
+    "options": [
+      "B",
+      "B",
+      "M",
+      "8"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 182,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : E – G – G – 5 – F – 3. Quel était le 5ᵉ élément ?",
+    "options": [
+      "M",
+      "E",
+      "F",
+      "Z"
+    ],
+    "reponse": "F",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 183,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 5 – 2 – C – 2 – G – C. Quel était le 2ᵉ élément ?",
+    "options": [
+      "8",
+      "2",
+      "2",
+      "N"
+    ],
+    "reponse": "2",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 184,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite : 6 – G – B – D – 6 – H. Quel était le 3ᵉ élément ?",
+    "options": [
+      "B",
+      "6",
+      "7",
+      "M"
+    ],
+    "reponse": "B",
+    "explication": "Mémorisez la suite et retrouvez l'élément demandé.",
+    "niveau": "difficile",
+    "proba_simple": 0.2,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 185,
+    "categorie": "rapidite_personnalite",
+    "question": "Quel élément est différent ?",
+    "options": [
+      "▲",
+      "▲",
+      "●",
+      "▲"
+    ],
+    "reponse": "●",
+    "explication": "Repérez l'élément unique qui ne correspond pas.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 186,
+    "categorie": "rapidite_personnalite",
+    "question": "Quel élément est différent ?",
+    "options": [
+      "▲",
+      "▲",
+      "●",
+      "▲"
+    ],
+    "reponse": "●",
+    "explication": "[Variante] Repérez l'élément unique qui ne correspond pas.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 187,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne ponctuel ?",
+    "options": [
+      "en retard",
+      "organisé",
+      "chaotique",
+      "désordonné"
+    ],
+    "reponse": "organisé",
+    "explication": "Une personne ponctuel possède généralement la qualité 'organisé'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 188,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne ponctuel ?",
+    "options": [
+      "en retard",
+      "organisé",
+      "chaotique",
+      "désordonné"
+    ],
+    "reponse": "organisé",
+    "explication": "[Variante] Une personne ponctuel possède généralement la qualité 'organisé'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 189,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne créatif ?",
+    "options": [
+      "conformiste",
+      "conventionnel",
+      "rigide",
+      "imaginatif"
+    ],
+    "reponse": "imaginatif",
+    "explication": "Une personne créatif possède généralement la qualité 'imaginatif'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 190,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne créatif ?",
+    "options": [
+      "conformiste",
+      "conventionnel",
+      "rigide",
+      "imaginatif"
+    ],
+    "reponse": "imaginatif",
+    "explication": "[Variante] Une personne créatif possède généralement la qualité 'imaginatif'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 191,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne patient ?",
+    "options": [
+      "impatient",
+      "calme",
+      "agité",
+      "nerveux"
+    ],
+    "reponse": "calme",
+    "explication": "Une personne patient possède généralement la qualité 'calme'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 192,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne patient ?",
+    "options": [
+      "impatient",
+      "calme",
+      "agité",
+      "nerveux"
+    ],
+    "reponse": "calme",
+    "explication": "[Variante] Une personne patient possède généralement la qualité 'calme'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 193,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne sociable ?",
+    "options": [
+      "introverti",
+      "timide",
+      "solitaire",
+      "extraverti"
+    ],
+    "reponse": "extraverti",
+    "explication": "Une personne sociable possède généralement la qualité 'extraverti'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 194,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne sociable ?",
+    "options": [
+      "introverti",
+      "timide",
+      "solitaire",
+      "extraverti"
+    ],
+    "reponse": "extraverti",
+    "explication": "[Variante] Une personne sociable possède généralement la qualité 'extraverti'.",
+    "niveau": "facile",
+    "proba_simple": 0.85,
+    "source": "Questions Optimisées (variante)",
+    "source_file": "questions_optimized.json"
+  },
+  {
+    "id": 195,
+    "categorie": "rapidite_personnalite",
+    "question": "Quel élément est différent parmi : ▲, ▲, ●, ▲ ?",
+    "options": [
+      "Premier ▲",
+      "Deuxième ▲",
+      "●",
+      "Troisième ▲"
+    ],
+    "reponse": "●",
+    "explication": "Parmi quatre éléments, trois sont des triangles (▲) et un est un cercle (●). L'élément différent est ●.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 196,
+    "categorie": "rapidite_personnalite",
+    "question": "Quel élément est différent parmi : ▲, ▲, ●, ▲ ?",
+    "options": [
+      "Premier ▲",
+      "Deuxième ▲",
+      "●",
+      "Troisième ▲"
+    ],
+    "reponse": "●",
+    "explication": "[Variante] Parmi quatre éléments, trois sont des triangles (▲) et un est un cercle (●). L'élément différent est ●.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 197,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne ponctuelle ?",
+    "options": [
+      "Organisée",
+      "Créative",
+      "Spontanée",
+      "Décontractée"
+    ],
+    "reponse": "Organisée",
+    "explication": "La ponctualité reflète un trait d'organisation et de respect des horaires.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 198,
+    "categorie": "rapidite_personnalite",
+    "question": "Quelle qualité décrit le mieux une personne ponctuelle ?",
+    "options": [
+      "Organisée",
+      "Créative",
+      "Spontanée",
+      "Décontractée"
+    ],
+    "reponse": "Organisée",
+    "explication": "[Variante] La ponctualité reflète un trait d'organisation et de respect des horaires.",
+    "niveau": "facile",
+    "proba_simple": 0.9,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 199,
+    "categorie": "rapidite_personnalite",
+    "question": "Dans un conflit, quelle approche est généralement la plus constructive ?",
+    "options": [
+      "Éviter le problème",
+      "Imposer sa solution",
+      "Chercher un compromis",
+      "Céder complètement"
+    ],
+    "reponse": "Chercher un compromis",
+    "explication": "La recherche de compromis permet une résolution équitable et constructive des conflits.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées",
+    "source_file": "questions_consolidees.json"
+  },
+  {
+    "id": 200,
+    "categorie": "rapidite_personnalite",
+    "question": "Dans un conflit, quelle approche est généralement la plus constructive ?",
+    "options": [
+      "Éviter le problème",
+      "Imposer sa solution",
+      "Chercher un compromis",
+      "Céder complètement"
+    ],
+    "reponse": "Chercher un compromis",
+    "explication": "[Variante] La recherche de compromis permet une résolution équitable et constructive des conflits.",
+    "niveau": "moyen",
+    "proba_simple": 0.7,
+    "source": "Questions Consolidées (variante)",
+    "source_file": "questions_consolidees.json"
+  }
+]

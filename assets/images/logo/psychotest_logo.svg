@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1565C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="crossGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0288D1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Brain outline -->
+  <path d="M100 30 
+           C120 30 135 40 145 55
+           C150 50 160 45 170 50
+           C180 55 185 65 180 75
+           C185 80 190 90 185 100
+           C190 110 185 120 175 125
+           C180 135 175 145 165 150
+           C170 160 160 165 150 160
+           C145 170 135 175 120 170
+           C110 175 95 175 85 170
+           C75 175 65 170 60 160
+           C50 165 40 160 35 150
+           C25 145 20 135 25 125
+           C15 120 10 110 15 100
+           C10 90 15 80 20 75
+           C15 65 20 55 30 50
+           C40 45 50 50 55 55
+           C65 40 80 30 100 30 Z" 
+        fill="url(#brainGradient)" 
+        stroke="url(#brainGradient)" 
+        stroke-width="6"
+        stroke-linejoin="round"/>
+  
+  <!-- Brain pattern lines -->
+  <path d="M70 60 Q80 70 90 60 T110 65" 
+        fill="none" 
+        stroke="url(#brainGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  <path d="M60 80 Q70 85 80 80 T100 85" 
+        fill="none" 
+        stroke="url(#brainGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  <path d="M50 100 Q60 105 70 100 T90 105" 
+        fill="none" 
+        stroke="url(#brainGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  <path d="M110 80 Q120 85 130 80 T150 85" 
+        fill="none" 
+        stroke="url(#brainGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  <path d="M120 100 Q130 105 140 100 T160 105" 
+        fill="none" 
+        stroke="url(#brainGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  
+  <!-- Medical cross (plus sign) -->
+  <g transform="translate(100, 100)">
+    <!-- Horizontal bar -->
+    <rect x="-25" y="-8" width="50" height="16" 
+          fill="url(#crossGradient)" 
+          rx="8" ry="8"/>
+    <!-- Vertical bar -->
+    <rect x="-8" y="-25" width="16" height="50" 
+          fill="url(#crossGradient)" 
+          rx="8" ry="8"/>
+  </g>
+  
+  <!-- Subtle shadow/glow effect -->
+  <circle cx="100" cy="100" r="80" 
+          fill="none" 
+          stroke="url(#brainGradient)" 
+          stroke-width="1" 
+          stroke-opacity="0.3"/>
+</svg>

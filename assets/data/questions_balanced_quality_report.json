@@ -1,0 +1,3143 @@
+{
+  "date_analysis": "2024-01-15",
+  "summary": {
+    "total_questions": 244,
+    "total_issues": 517,
+    "critical_issues": 1,
+    "high_issues": 208,
+    "medium_issues": 308,
+    "low_issues": 0,
+    "duplicates_removed": 308,
+    "questions_improved": 0
+  },
+  "distribution": {
+    "by_category": {
+      "raisonnement_logique": 10,
+      "aptitude_numerique": 20,
+      "aptitude_verbale": 21,
+      "raisonnement_spatial": 11,
+      "memoire_attention": 177,
+      "rapidite_personnalite": 5
+    },
+    "by_level": {
+      "facile": 94,
+      "moyen": 106,
+      "difficile": 44
+    }
+  },
+  "issues_by_type": {
+    "duplicate": [
+      {
+        "question_id": 1,
+        "description": "Question similaire à Q35 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 1,
+        "description": "Question similaire à Q224 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 1,
+        "description": "Question similaire à Q231 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 1,
+        "description": "Question similaire à Q238 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 1,
+        "description": "Question similaire à Q245 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q11 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q14 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q25 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q29 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q36 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q56 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 2,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 4,
+        "description": "Question similaire à Q8 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 4,
+        "description": "Question similaire à Q20 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 4,
+        "description": "Question similaire à Q27 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 4,
+        "description": "Question similaire à Q33 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 5,
+        "description": "Question similaire à Q95 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q25 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q38 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q53 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q56 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 7,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 8,
+        "description": "Question similaire à Q20 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 8,
+        "description": "Question similaire à Q27 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 8,
+        "description": "Question similaire à Q33 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 9,
+        "description": "Question similaire à Q28 (similarité: 0.93)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 10,
+        "description": "Question similaire à Q227 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 10,
+        "description": "Question similaire à Q234 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 10,
+        "description": "Question similaire à Q241 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 10,
+        "description": "Question similaire à Q248 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q14 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q25 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q32 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 11,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 13,
+        "description": "Question similaire à Q159 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 14,
+        "description": "Question similaire à Q18 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 14,
+        "description": "Question similaire à Q25 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 14,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 14,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 14,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q22 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q29 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q38 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 18,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 20,
+        "description": "Question similaire à Q27 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 20,
+        "description": "Question similaire à Q33 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 21,
+        "description": "Question similaire à Q158 (similarité: 0.93)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q29 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q38 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q46 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q53 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 22,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 25,
+        "description": "Question similaire à Q38 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 25,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 25,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 27,
+        "description": "Question similaire à Q33 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 28,
+        "description": "Question similaire à Q78 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 29,
+        "description": "Question similaire à Q36 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 29,
+        "description": "Question similaire à Q38 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 29,
+        "description": "Question similaire à Q56 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 29,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q36 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q46 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 32,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 35,
+        "description": "Question similaire à Q224 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 35,
+        "description": "Question similaire à Q231 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 35,
+        "description": "Question similaire à Q238 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 35,
+        "description": "Question similaire à Q245 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 36,
+        "description": "Question similaire à Q46 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 36,
+        "description": "Question similaire à Q56 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 36,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 36,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 38,
+        "description": "Question similaire à Q58 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 38,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 46,
+        "description": "Question similaire à Q53 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 46,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 46,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 46,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 51,
+        "description": "Question similaire à Q108 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 53,
+        "description": "Question similaire à Q56 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 53,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 53,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 53,
+        "description": "Question similaire à Q87 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 56,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 56,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 57,
+        "description": "Question similaire à Q204 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 58,
+        "description": "Question similaire à Q60 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 60,
+        "description": "Question similaire à Q65 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 62,
+        "description": "Question similaire à Q164 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 62,
+        "description": "Question similaire à Q210 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 63,
+        "description": "Question similaire à Q135 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 65,
+        "description": "Question similaire à Q71 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 67,
+        "description": "Question similaire à Q76 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 69,
+        "description": "Question similaire à Q208 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 71,
+        "description": "Question similaire à Q84 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 74,
+        "description": "Question similaire à Q129 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 76,
+        "description": "Question similaire à Q119 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 79,
+        "description": "Question similaire à Q201 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 80,
+        "description": "Question similaire à Q217 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 83,
+        "description": "Question similaire à Q192 (similarité: 0.93)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 86,
+        "description": "Question similaire à Q134 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 86,
+        "description": "Question similaire à Q204 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 88,
+        "description": "Question similaire à Q178 (similarité: 0.92)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 93,
+        "description": "Question similaire à Q209 (similarité: 0.93)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 97,
+        "description": "Question similaire à Q166 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 103,
+        "description": "Question similaire à Q185 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 105,
+        "description": "Question similaire à Q120 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 108,
+        "description": "Question similaire à Q174 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 108,
+        "description": "Question similaire à Q203 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 109,
+        "description": "Question similaire à Q123 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 112,
+        "description": "Question similaire à Q198 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 121,
+        "description": "Question similaire à Q183 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 121,
+        "description": "Question similaire à Q200 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 123,
+        "description": "Question similaire à Q187 (similarité: 0.92)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 129,
+        "description": "Question similaire à Q175 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 129,
+        "description": "Question similaire à Q186 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 134,
+        "description": "Question similaire à Q204 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 136,
+        "description": "Question similaire à Q220 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 156,
+        "description": "Question similaire à Q157 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 156,
+        "description": "Question similaire à Q186 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 157,
+        "description": "Question similaire à Q186 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 166,
+        "description": "Question similaire à Q214 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 170,
+        "description": "Question similaire à Q190 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 171,
+        "description": "Question similaire à Q206 (similarité: 0.85)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 174,
+        "description": "Question similaire à Q203 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 180,
+        "description": "Question similaire à Q216 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 183,
+        "description": "Question similaire à Q200 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 186,
+        "description": "Question similaire à Q211 (similarité: 0.86)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 224,
+        "description": "Question similaire à Q231 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 224,
+        "description": "Question similaire à Q238 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 224,
+        "description": "Question similaire à Q245 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 225,
+        "description": "Question similaire à Q232 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 225,
+        "description": "Question similaire à Q239 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 225,
+        "description": "Question similaire à Q246 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 226,
+        "description": "Question similaire à Q233 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 226,
+        "description": "Question similaire à Q240 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 226,
+        "description": "Question similaire à Q247 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 227,
+        "description": "Question similaire à Q234 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 227,
+        "description": "Question similaire à Q241 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 227,
+        "description": "Question similaire à Q248 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 228,
+        "description": "Question similaire à Q235 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 228,
+        "description": "Question similaire à Q242 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 228,
+        "description": "Question similaire à Q249 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 229,
+        "description": "Question similaire à Q236 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 229,
+        "description": "Question similaire à Q243 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 230,
+        "description": "Question similaire à Q237 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 230,
+        "description": "Question similaire à Q244 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 231,
+        "description": "Question similaire à Q238 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 231,
+        "description": "Question similaire à Q245 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 232,
+        "description": "Question similaire à Q239 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 232,
+        "description": "Question similaire à Q246 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 233,
+        "description": "Question similaire à Q240 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 233,
+        "description": "Question similaire à Q247 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 234,
+        "description": "Question similaire à Q241 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 234,
+        "description": "Question similaire à Q248 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 235,
+        "description": "Question similaire à Q242 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 235,
+        "description": "Question similaire à Q249 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 236,
+        "description": "Question similaire à Q243 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 237,
+        "description": "Question similaire à Q244 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 238,
+        "description": "Question similaire à Q245 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 239,
+        "description": "Question similaire à Q246 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 240,
+        "description": "Question similaire à Q247 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 241,
+        "description": "Question similaire à Q248 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 242,
+        "description": "Question similaire à Q249 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 250,
+        "description": "Question similaire à Q253 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 250,
+        "description": "Question similaire à Q256 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 250,
+        "description": "Question similaire à Q259 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q254 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q257 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q260 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q263 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q266 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q269 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 251,
+        "description": "Question similaire à Q272 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q255 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q258 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q261 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q264 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q267 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 252,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 253,
+        "description": "Question similaire à Q256 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 253,
+        "description": "Question similaire à Q259 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 253,
+        "description": "Question similaire à Q268 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 253,
+        "description": "Question similaire à Q271 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q257 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q260 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q263 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q266 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q269 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 254,
+        "description": "Question similaire à Q272 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q258 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q261 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q264 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q267 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 255,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 256,
+        "description": "Question similaire à Q259 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 257,
+        "description": "Question similaire à Q260 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 257,
+        "description": "Question similaire à Q263 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 257,
+        "description": "Question similaire à Q266 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 257,
+        "description": "Question similaire à Q269 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 257,
+        "description": "Question similaire à Q272 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 258,
+        "description": "Question similaire à Q261 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 258,
+        "description": "Question similaire à Q264 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 258,
+        "description": "Question similaire à Q267 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 258,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 258,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 259,
+        "description": "Question similaire à Q262 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 259,
+        "description": "Question similaire à Q265 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 259,
+        "description": "Question similaire à Q274 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 260,
+        "description": "Question similaire à Q263 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 260,
+        "description": "Question similaire à Q266 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 260,
+        "description": "Question similaire à Q269 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 260,
+        "description": "Question similaire à Q272 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 261,
+        "description": "Question similaire à Q264 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 261,
+        "description": "Question similaire à Q267 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 261,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 261,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 262,
+        "description": "Question similaire à Q265 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 262,
+        "description": "Question similaire à Q268 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 262,
+        "description": "Question similaire à Q271 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 262,
+        "description": "Question similaire à Q274 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 263,
+        "description": "Question similaire à Q266 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 263,
+        "description": "Question similaire à Q269 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 263,
+        "description": "Question similaire à Q272 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 264,
+        "description": "Question similaire à Q267 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 264,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 264,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 265,
+        "description": "Question similaire à Q268 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 265,
+        "description": "Question similaire à Q271 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 265,
+        "description": "Question similaire à Q274 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 266,
+        "description": "Question similaire à Q269 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 266,
+        "description": "Question similaire à Q272 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 267,
+        "description": "Question similaire à Q270 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 267,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 268,
+        "description": "Question similaire à Q271 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 268,
+        "description": "Question similaire à Q274 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 269,
+        "description": "Question similaire à Q272 (similarité: 0.83)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 270,
+        "description": "Question similaire à Q273 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 271,
+        "description": "Question similaire à Q274 (similarité: 0.87)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 277,
+        "description": "Question similaire à Q280 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 277,
+        "description": "Question similaire à Q283 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 277,
+        "description": "Question similaire à Q286 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 277,
+        "description": "Question similaire à Q289 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 277,
+        "description": "Question similaire à Q292 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 278,
+        "description": "Question similaire à Q290 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 279,
+        "description": "Question similaire à Q282 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 280,
+        "description": "Question similaire à Q283 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 280,
+        "description": "Question similaire à Q286 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 280,
+        "description": "Question similaire à Q289 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 280,
+        "description": "Question similaire à Q292 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 283,
+        "description": "Question similaire à Q286 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 283,
+        "description": "Question similaire à Q289 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 283,
+        "description": "Question similaire à Q292 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 285,
+        "description": "Question similaire à Q291 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 285,
+        "description": "Question similaire à Q294 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 286,
+        "description": "Question similaire à Q289 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 286,
+        "description": "Question similaire à Q292 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 289,
+        "description": "Question similaire à Q292 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 291,
+        "description": "Question similaire à Q294 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 295,
+        "description": "Question similaire à Q296 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 295,
+        "description": "Question similaire à Q298 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 295,
+        "description": "Question similaire à Q299 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 295,
+        "description": "Question similaire à Q305 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 295,
+        "description": "Question similaire à Q311 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 296,
+        "description": "Question similaire à Q298 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 296,
+        "description": "Question similaire à Q299 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 296,
+        "description": "Question similaire à Q305 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 296,
+        "description": "Question similaire à Q311 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 297,
+        "description": "Question similaire à Q302 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 297,
+        "description": "Question similaire à Q307 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 297,
+        "description": "Question similaire à Q308 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 298,
+        "description": "Question similaire à Q299 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 298,
+        "description": "Question similaire à Q305 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 298,
+        "description": "Question similaire à Q311 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 299,
+        "description": "Question similaire à Q305 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 299,
+        "description": "Question similaire à Q311 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 300,
+        "description": "Question similaire à Q303 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 300,
+        "description": "Question similaire à Q304 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 300,
+        "description": "Question similaire à Q309 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 300,
+        "description": "Question similaire à Q312 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 301,
+        "description": "Question similaire à Q306 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 301,
+        "description": "Question similaire à Q310 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 301,
+        "description": "Question similaire à Q313 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 302,
+        "description": "Question similaire à Q307 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 302,
+        "description": "Question similaire à Q308 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 303,
+        "description": "Question similaire à Q304 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 303,
+        "description": "Question similaire à Q309 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 303,
+        "description": "Question similaire à Q312 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 304,
+        "description": "Question similaire à Q309 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 304,
+        "description": "Question similaire à Q312 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 305,
+        "description": "Question similaire à Q311 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 306,
+        "description": "Question similaire à Q310 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 306,
+        "description": "Question similaire à Q313 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 307,
+        "description": "Question similaire à Q308 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 309,
+        "description": "Question similaire à Q312 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      },
+      {
+        "question_id": 310,
+        "description": "Question similaire à Q313 (similarité: 1.00)",
+        "severity": "medium",
+        "suggestion": "Conserver la meilleure version ou fusionner"
+      }
+    ],
+    "invalid_answer": [
+      {
+        "question_id": 261,
+        "description": "La réponse ne correspond à aucune option",
+        "severity": "critical",
+        "suggestion": "Corriger la réponse ou les options"
+      }
+    ],
+    "missing_image": [
+      {
+        "question_id": 5,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 9,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 13,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 16,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 21,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 24,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 28,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 31,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 34,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 37,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 39,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 40,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 42,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 43,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 45,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 47,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 48,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 49,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 51,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 52,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 54,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 55,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 57,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 59,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 61,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 62,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 63,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 64,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 66,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 67,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 68,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 69,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 70,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 72,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 73,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 74,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 75,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 76,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 77,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 78,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 79,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 80,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 81,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 82,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 83,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 85,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 86,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 88,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 89,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 90,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 91,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 92,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 93,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 94,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 95,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 96,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 97,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 98,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 99,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 100,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 101,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 102,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 103,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 104,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 105,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 106,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 107,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 108,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 109,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 110,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 111,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 112,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 113,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 114,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 115,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 116,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 117,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 118,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 119,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 120,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 121,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 122,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 123,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 124,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 125,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 126,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 127,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 128,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 129,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 130,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 131,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 132,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 133,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 134,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 135,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 136,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 137,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 138,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 139,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 140,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 141,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 142,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 143,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 144,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 145,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 146,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 147,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 148,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 149,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 150,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 151,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 152,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 153,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 154,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 155,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 156,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 157,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 158,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 159,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 160,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 161,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 162,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 163,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 164,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 165,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 166,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 167,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 168,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 169,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 170,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 171,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 172,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 173,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 174,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 175,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 176,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 177,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 178,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 179,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 180,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 181,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 182,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 183,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 184,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 185,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 186,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 187,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 188,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 189,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 190,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 191,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 192,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 193,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 194,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 195,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 196,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 197,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 198,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 199,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 200,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 201,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 202,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 203,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 204,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 205,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 206,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 207,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 208,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 209,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 210,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 211,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 212,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 213,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 214,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 215,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 216,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 217,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 218,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 219,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 220,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 221,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 222,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 223,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 250,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 251,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 252,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 253,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 254,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 255,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 256,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 257,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 258,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 259,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 260,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 261,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 262,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 263,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 264,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 265,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 266,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 267,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 268,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 269,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 270,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 271,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 272,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 273,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      },
+      {
+        "question_id": 274,
+        "description": "Question spatiale sans image",
+        "severity": "high",
+        "suggestion": "Ajouter une image explicative"
+      }
+    ]
+  },
+  "quality_metrics": {
+    "avg_explanation_length": 48.82377049180328,
+    "questions_with_images": 1,
+    "questions_with_good_explanations": 244
+  }
+}
