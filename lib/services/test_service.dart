@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/question.dart';
 import '../models/test_session.dart';
-import 'database_service.dart';
-import 'subscription_service.dart';
+import '../services/database_service.dart';
+import '../services/subscription_service.dart';
 
 class TestService {
   static final TestService _instance = TestService._internal();

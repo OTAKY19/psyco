@@ -104,3 +104,14 @@ lcov.info
 *.tmp
 *.temp
 .temporary/
+
+# Development and build scripts
+*.py
+build_*.sh
+*.md
+scripts/
+web/
+test/
+devtools_options.yaml
+env.json
+#*#
