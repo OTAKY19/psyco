@@ -14,7 +14,7 @@ class TestCardWidget extends StatelessWidget {
   final VoidCallback onDeleteProgress;
 
   const TestCardWidget({
-    Key? key,
+    super.key,
     required this.testData,
     required this.onTap,
     required this.onStartTest,
@@ -22,7 +22,7 @@ class TestCardWidget extends StatelessWidget {
     required this.onFavorite,
     required this.onRemove,
     required this.onDeleteProgress,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

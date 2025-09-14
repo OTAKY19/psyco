@@ -220,6 +220,22 @@ class TestResult {
     required this.completedAt,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'test_id': null,
+      'score': score,
+      'total_questions': totalQuestions,
+      'correct_answers': correctAnswers,
+      'time_taken': totalDuration.inSeconds,
+      'completed_at': completedAt.toIso8601String(),
+      'answers_data': json.encode({
+        'questionResults': questionResults.map((q) => q.toJson()).toList(),
+        'categoryResults': categoryResults.map((k, v) => MapEntry(k, v.toJson())),
+        'level': level,
+      }),
+    };
+  }
+
   factory TestResult.fromSession(TestSession session) {
     final questionResults = <QuestionResult>[];
     final categoryStats = <String, CategoryStats>{};
@@ -233,8 +249,11 @@ class TestResult {
       final isCorrect = userAnswer == question.reponse;
 
       if (userAnswer != null) {
-        if (isCorrect) correct++;
-        else incorrect++;
+        if (isCorrect) {
+          correct++;
+        } else {
+          incorrect++;
+        }
       }
 
       questionResults.add(QuestionResult(
@@ -305,6 +324,15 @@ class TestResult {
     final seconds = totalDuration.inSeconds % 60;
     return '${minutes}m ${seconds}s';
   }
+
+  // Computed fields for UI compatibility
+  DateTime get endTime => completedAt;
+  DateTime get startTime => completedAt.subtract(totalDuration);
+  bool get isCompleted => true;
+  String get testType => categoryResults.isEmpty ? 'mixte' : categoryResults.keys.first;
+  Duration get duration => totalDuration;
+  int get currentQuestionIndex => totalQuestions - unansweredQuestions;
+  List<String> get categories => categoryResults.keys.toList();
 
   Map<String, dynamic> toJson() {
     return {

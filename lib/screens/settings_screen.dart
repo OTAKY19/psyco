@@ -4,7 +4,7 @@ import '../services/auth_service.dart';
 import '../models/user.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -228,7 +228,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.person, color: theme.primaryColor),
+                Icon(Icons.person, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Informations personnelles',
@@ -341,7 +341,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.palette, color: theme.primaryColor),
+                Icon(Icons.palette, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Préférences d\'affichage',
@@ -424,7 +424,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.quiz, color: theme.primaryColor),
+                Icon(Icons.quiz, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Paramètres de test',
@@ -521,7 +521,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.notifications, color: theme.primaryColor),
+                Icon(Icons.notifications, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Notifications',
@@ -588,7 +588,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.info, color: theme.primaryColor),
+                Icon(Icons.info, color: theme.colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'À propos',

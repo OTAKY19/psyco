@@ -10,12 +10,12 @@ class PremiumSubscriptionWidget extends StatelessWidget {
   final VoidCallback onUpgradePressed;
 
   const PremiumSubscriptionWidget({
-    Key? key,
+    super.key,
     required this.isPremium,
     this.currentPlan,
     this.renewalDate,
     required this.onUpgradePressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

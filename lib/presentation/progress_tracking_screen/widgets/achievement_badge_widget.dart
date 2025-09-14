@@ -8,10 +8,10 @@ class AchievementBadgeWidget extends StatelessWidget {
   final bool isUnlocked;
 
   const AchievementBadgeWidget({
-    Key? key,
+    super.key,
     required this.achievement,
     required this.isUnlocked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

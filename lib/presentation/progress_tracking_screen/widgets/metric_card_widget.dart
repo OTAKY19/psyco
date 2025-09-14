@@ -12,14 +12,14 @@ class MetricCardWidget extends StatelessWidget {
   final VoidCallback? onTap;
 
   const MetricCardWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
     required this.subtitle,
     required this.iconName,
     required this.iconColor,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

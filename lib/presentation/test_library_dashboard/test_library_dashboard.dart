@@ -3,6 +3,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
 import '../../services/user_data_service.dart';
+import '../../services/activation_service.dart';
+import '../../widgets/enhanced_dashboard_widgets.dart';
 import './widgets/empty_state_widget.dart';
 import './widgets/featured_test_card_widget.dart';
 import './widgets/filter_bottom_sheet_widget.dart';
@@ -10,7 +12,7 @@ import './widgets/quick_stats_widget.dart';
 import './widgets/test_category_card_widget.dart';
 
 class TestLibraryDashboard extends StatefulWidget {
-  const TestLibraryDashboard({Key? key}) : super(key: key);
+  const TestLibraryDashboard({super.key});
 
   @override
   State<TestLibraryDashboard> createState() => _TestLibraryDashboardState();
@@ -23,7 +25,10 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
   final ScrollController _scrollController = ScrollController();
 
   bool _isSearching = false;
-  bool _isOffline = false;
+  final bool _isOffline = false;
+  bool _isDarkMode = false; // Nouveau : mode sombre
+  bool _isAppActivated = false; // État d'activation de l'app
+  String _sortBy = 'popularite'; // Tri par défaut
   Map<String, dynamic> _currentFilters = {
     'categories': <String>[],
     'difficulties': <String>[],
@@ -33,7 +38,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
   // Mock data for test categories
   final List<Map<String, dynamic>> _testCategories = [
     {
-      'id': 1,
+      'id': 'raisonnement_logique',
       'name': 'Tests de Logique',
       'description':
           'Développez votre raisonnement logique avec des séquences, analogies et déductions.',
@@ -42,11 +47,11 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'completionPercentage': 68,
       'isPremium': false,
       'isUnlocked': true,
-      'category': 'Logique',
+      'category': 'raisonnement_logique',
       'difficulty': 'Moyen',
     },
     {
-      'id': 2,
+      'id': 'aptitude_numerique',
       'name': 'Mathématiques',
       'description':
           'Maîtrisez les calculs mentaux, pourcentages et problèmes arithmétiques.',
@@ -55,11 +60,11 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'completionPercentage': 45,
       'isPremium': false,
       'isUnlocked': true,
-      'category': 'Mathématiques',
+      'category': 'aptitude_numerique',
       'difficulty': 'Facile',
     },
     {
-      'id': 3,
+      'id': 'aptitude_verbale',
       'name': 'Français et Orthographe',
       'description':
           'Perfectionnez votre maîtrise de la langue française et de l\'orthographe.',
@@ -68,11 +73,11 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'completionPercentage': 82,
       'isPremium': false,
       'isUnlocked': true,
-      'category': 'Français',
+      'category': 'aptitude_verbale',
       'difficulty': 'Moyen',
     },
     {
-      'id': 4,
+      'id': 'culture_generale', // Assuming 'culture_generale' is a valid category in your data or will be handled
       'name': 'Culture Générale',
       'description':
           'Enrichissez vos connaissances sur l\'histoire, géographie et actualités du Bénin.',
@@ -81,38 +86,51 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'completionPercentage': 23,
       'isPremium': true,
       'isUnlocked': false,
-      'category': 'Culture générale',
+      'category': 'culture_generale',
       'difficulty': 'Difficile',
     },
     {
-      'id': 5,
-      'name': 'Tests d\'Attention',
+      'id': 'memoire_attention',
+      'name': 'Tests d\'Attention et Mémoire',
       'description':
-          'Améliorez votre concentration et capacité d\'observation des détails.',
+          'Améliorez votre concentration, capacité d\'observation et mémoire.',
       'iconName': 'visibility',
-      'testCount': 18,
+      'testCount': 40, // Combined count
       'completionPercentage': 0,
       'isPremium': true,
       'isUnlocked': false,
-      'category': 'Attention',
+      'category': 'memoire_attention',
       'difficulty': 'Moyen',
     },
     {
-      'id': 6,
-      'name': 'Tests de Mémoire',
+      'id': 'raisonnement_spatial',
+      'name': 'Raisonnement Spatial',
       'description':
-          'Développez votre mémoire visuelle et auditive avec des exercices ciblés.',
-      'iconName': 'memory',
+          'Développez votre capacité à manipuler des formes et des espaces.',
+      'iconName': 'grid_view',
       'testCount': 22,
-      'completionPercentage': 91,
-      'isPremium': true,
+      'completionPercentage': 0,
+      'isPremium': false,
       'isUnlocked': true,
-      'category': 'Mémoire',
-      'difficulty': 'Difficile',
+      'category': 'raisonnement_spatial',
+      'difficulty': 'Moyen',
+    },
+    {
+      'id': 'rapidite_personnalite',
+      'name': 'Rapidité et Personnalité',
+      'description':
+          'Évaluez votre rapidité de traitement et vos traits de personnalité.',
+      'iconName': 'speed',
+      'testCount': 15,
+      'completionPercentage': 0,
+      'isPremium': false,
+      'isUnlocked': true,
+      'category': 'rapidite_personnalite',
+      'difficulty': 'Facile',
     },
   ];
 
-  // Mock data for featured tests
+  // Mock data for featured tests with enhanced features
   final List<Map<String, dynamic>> _featuredTests = [
     {
       'id': 1,
@@ -123,6 +141,14 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'questionCount': 30,
       'difficulty': 'Difficile',
       'category': 'Logique',
+      'rating': 4.8,
+      'attempts': 1250,
+      'successRate': 68.5,
+      'isNew': false,
+      'isPopular': true,
+      'tags': ['Logique', 'Avancé', 'Séquence'],
+      'estimatedTime': '45 min',
+      'points': 150,
     },
     {
       'id': 2,
@@ -133,6 +159,14 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'questionCount': 25,
       'difficulty': 'Moyen',
       'category': 'Mathématiques',
+      'rating': 4.6,
+      'attempts': 890,
+      'successRate': 72.3,
+      'isNew': true,
+      'isPopular': false,
+      'tags': ['Mathématiques', 'Rapidité', 'Mental'],
+      'estimatedTime': '20 min',
+      'points': 100,
     },
     {
       'id': 3,
@@ -143,6 +177,32 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       'questionCount': 20,
       'difficulty': 'Moyen',
       'category': 'Culture générale',
+      'rating': 4.9,
+      'attempts': 2100,
+      'successRate': 75.8,
+      'isNew': false,
+      'isPopular': true,
+      'tags': ['Culture', 'Bénin', 'Histoire'],
+      'estimatedTime': '30 min',
+      'points': 120,
+    },
+    {
+      'id': 4,
+      'title': 'Test de Mémoire Interactive',
+      'description':
+          'Développez votre mémoire avec des exercices visuels et auditifs interactifs.',
+      'duration': 25,
+      'questionCount': 15,
+      'difficulty': 'Facile',
+      'category': 'Mémoire',
+      'rating': 4.7,
+      'attempts': 650,
+      'successRate': 80.2,
+      'isNew': true,
+      'isPopular': false,
+      'tags': ['Mémoire', 'Interactif', 'Visuel'],
+      'estimatedTime': '25 min',
+      'points': 90,
     },
   ];
 
@@ -168,25 +228,37 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
   Future<void> _loadUserData() async {
     try {
       final userDataService = UserDataService();
-      
+      final activationService = ActivationService();
+
+      // Vérifier l'état d'activation de l'app
+      final isActivated = await activationService.isAppActivated();
+
       // Charger les statistiques utilisateur
       final progress = await userDataService.getUserProgress();
-      
+
       // Charger les progrès de catégories
       List<Map<String, dynamic>> updatedCategories = [];
       for (var category in _testCategories) {
         final categoryId = category['id'].toString();
         final savedProgress = await userDataService.getCategoryProgress(categoryId);
-        
+
         // Utiliser la progression sauvegardée si elle existe
         if (savedProgress > 0) {
           category = Map.from(category);
           category['completionPercentage'] = savedProgress.toInt();
         }
+
+        // Bloquer certaines catégories si l'app n'est pas activée
+        if (!isActivated && category['isPremium'] == true) {
+          category = Map.from(category);
+          category['isUnlocked'] = false;
+        }
+
         updatedCategories.add(category);
       }
-      
+
       setState(() {
+        _isAppActivated = isActivated;
         _userStats = {
           'testsCompleted': progress['testsCompleted'] ?? 0,
           'averageScore': progress['averageScore'] ?? 0.0,
@@ -196,11 +268,170 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
         _testCategories.addAll(updatedCategories);
         _filteredCategories = List.from(_testCategories);
       });
-      
+
+      // Vérifier si on doit afficher la popup d'activation
+      _checkActivationPrompt();
+
     } catch (e) {
       debugPrint('Error loading user data: $e');
       // Continuer avec les données par défaut en cas d\'erreur
     }
+  }
+
+  /// Vérifie si on doit afficher la popup d'activation
+  Future<void> _checkActivationPrompt() async {
+    try {
+      final activationService = ActivationService();
+      final isActivated = await activationService.isAppActivated();
+
+      // Si l'app n'est pas activée, afficher la popup d'activation
+      if (!isActivated && mounted) {
+        // Afficher la popup d'activation après un court délai
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted) {
+            _showActivationPrompt();
+          }
+        });
+      }
+    } catch (e) {
+      debugPrint('Error checking activation prompt: $e');
+    }
+  }
+
+  /// Affiche la popup d'activation
+  void _showActivationPrompt() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            CustomIconWidget(
+              iconName: 'school',
+              color: AppTheme.lightTheme.colorScheme.primary,
+              size: 6.w,
+            ),
+            SizedBox(width: 2.w),
+            Expanded(
+              child: Text(
+                'Bienvenue sur PsychoTest+ !',
+                style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.lightTheme.colorScheme.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Découvrez PsychoTest+, votre compagnon idéal pour réussir vos concours de la douane !',
+              style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(height: 2.h),
+            Container(
+              padding: EdgeInsets.all(3.w),
+              decoration: BoxDecoration(
+                color: AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '🎯 Version d\'essai gratuite :',
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.lightTheme.colorScheme.primary,
+                    ),
+                  ),
+                  SizedBox(height: 1.h),
+                  Text(
+                    '• Tests d\'entraînement de base\n• Questions de logique et mathématiques\n• Statistiques simples\n• Mode sombre/clair',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: 2.h),
+                  Text(
+                    '🔓 Activez pour accéder à TOUT :',
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.lightTheme.colorScheme.secondary,
+                    ),
+                  ),
+                  SizedBox(height: 1.h),
+                  Text(
+                    '• Examens blancs complets (60 questions)\n• Toutes les catégories de questions\n• Questions mémoire interactives\n• Statistiques avancées\n• Mode hors ligne\n• Mises à jour régulières',
+                    style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 2.h),
+            Container(
+              padding: EdgeInsets.all(2.w),
+              decoration: BoxDecoration(
+                color: AppTheme.lightTheme.colorScheme.secondary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: AppTheme.lightTheme.colorScheme.secondary.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.monetization_on,
+                    color: AppTheme.lightTheme.colorScheme.secondary,
+                    size: 5.w,
+                  ),
+                  SizedBox(width: 2.w),
+                  Expanded(
+                    child: Text(
+                      'Paiement unique : 2499 FCFA - Pas d\'abonnement !',
+                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.lightTheme.colorScheme.secondary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Marquer comme affiché et continuer en mode gratuit
+              final activationService = ActivationService();
+              activationService.markActivationPromptShown();
+            },
+            child: Text('Essayer gratuitement'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // Aller vers l'écran d'activation
+              Navigator.pushNamed(context, '/activation-screen');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.lightTheme.colorScheme.primary,
+            ),
+            child: Text('Activer maintenant'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -304,7 +535,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             ListTile(
               leading: CustomIconWidget(
                 iconName: 'favorite_border',
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
                 size: 6.w,
               ),
               title: Text('Marquer comme favori'),
@@ -316,7 +547,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             ListTile(
               leading: CustomIconWidget(
                 iconName: 'download',
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
                 size: 6.w,
               ),
               title: Text('Télécharger pour hors ligne'),
@@ -328,13 +559,20 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             ListTile(
               leading: CustomIconWidget(
                 iconName: 'info',
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
                 size: 6.w,
               ),
               title: Text('Voir les détails'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/test-category-screen');
+                Navigator.pushNamed(
+                  context,
+                  '/test-category-screen',
+                  arguments: {
+                    'categoryName': category['name'],
+                    'categoryId': category['id'].toString(),
+                  },
+                );
               },
             ),
             SizedBox(height: 2.h),
@@ -374,68 +612,46 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             ),
 
             // Search Bar
+            ModernSearchBarWidget(
+              controller: _searchController,
+              hintText: 'Rechercher des tests...',
+              onFilterTap: _showFilterBottomSheet,
+              onChanged: (value) {
+                setState(() {
+                  _isSearching = value.isNotEmpty;
+                });
+              },
+              showFilter: true,
+            ),
+
+            // Sort Bar - Nouvelle fonctionnalité
             Container(
-              padding: EdgeInsets.all(4.w),
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
               color: AppTheme.lightTheme.colorScheme.surface,
               child: Row(
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'Rechercher des tests...',
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.all(3.w),
-                          child: CustomIconWidget(
-                            iconName: 'search',
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
-                            size: 5.w,
-                          ),
-                        ),
-                        suffixIcon: _searchController.text.isNotEmpty
-                            ? IconButton(
-                                onPressed: () {
-                                  _searchController.clear();
-                                  setState(() {
-                                    _isSearching = false;
-                                  });
-                                },
-                                icon: CustomIconWidget(
-                                  iconName: 'clear',
-                                  color: AppTheme
-                                      .lightTheme.colorScheme.onSurfaceVariant,
-                                  size: 5.w,
-                                ),
-                              )
-                            : null,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                        fillColor: AppTheme.lightTheme.scaffoldBackgroundColor,
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          _isSearching = value.isNotEmpty;
-                        });
-                      },
+                  Text(
+                    'Trier par :',
+                    style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   SizedBox(width: 3.w),
-                  GestureDetector(
-                    onTap: _showFilterBottomSheet,
-                    child: Container(
-                      padding: EdgeInsets.all(3.w),
-                      decoration: BoxDecoration(
-                        color: AppTheme.lightTheme.primaryColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: CustomIconWidget(
-                        iconName: 'tune',
-                        color: Colors.white,
-                        size: 5.w,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          _buildSortChip('Popularité', 'popularite'),
+                          SizedBox(width: 2.w),
+                          _buildSortChip('Difficulté', 'difficulte'),
+                          SizedBox(width: 2.w),
+                          _buildSortChip('Durée', 'duree'),
+                          SizedBox(width: 2.w),
+                          _buildSortChip('Note', 'note'),
+                          SizedBox(width: 2.w),
+                          _buildSortChip('Nouveauté', 'nouveaute'),
+                        ],
                       ),
                     ),
                   ),
@@ -486,7 +702,16 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushNamed(context, '/test-taking-screen');
+          // Test aléatoire avec 15 questions de toutes catégories
+          Navigator.pushNamed(
+            context,
+            '/test-taking-screen',
+            arguments: {
+              'questionCount': 15,
+              'dbCategory': null, // Toutes les catégories
+              'duration': 30, // 30 minutes pour test aléatoire
+            },
+          );
         },
         icon: CustomIconWidget(
           iconName: 'shuffle',
@@ -500,7 +725,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: AppTheme.lightTheme.primaryColor,
+        backgroundColor: AppTheme.lightTheme.colorScheme.primary,
       ),
     );
   }
@@ -517,7 +742,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
             SizedBox(height: 2.h),
 
             // Quick Stats
-            QuickStatsWidget(stats: _userStats),
+            EnhancedQuickStatsWidget(stats: _userStats),
 
             SizedBox(height: 3.h),
 
@@ -540,10 +765,20 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
                 padding: EdgeInsets.symmetric(horizontal: 4.w),
                 itemCount: _featuredTests.length,
                 itemBuilder: (context, index) {
-                  return FeaturedTestCardWidget(
-                    test: _featuredTests[index],
+                  final featuredTest = _featuredTests[index];
+                  return EnhancedFeaturedTestCardWidget(
+                    test: featuredTest,
                     onTap: () {
-                      Navigator.pushNamed(context, '/test-taking-screen');
+                      // Navigation vers test avec configuration spécifique
+                      Navigator.pushNamed(
+                        context,
+                        '/test-taking-screen',
+                        arguments: {
+                          'questionCount': featuredTest['questionCount'] ?? 20,
+                          'dbCategory': null, // Tests recommandés = toutes catégories
+                          'duration': featuredTest['duration'] ?? 30,
+                        },
+                      );
                     },
                   );
                 },
@@ -572,7 +807,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
                       'Voir tout',
                       style:
                           AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
-                        color: AppTheme.lightTheme.primaryColor,
+                        color: AppTheme.lightTheme.colorScheme.primary,
                       ),
                     ),
                   ),
@@ -582,14 +817,21 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
 
             // Display first 3 categories
             ...(_filteredCategories.take(3).map(
-                  (category) => TestCategoryCardWidget(
+                  (category) => EnhancedTestCategoryCardWidget(
                     category: category,
                     onTap: () {
                       if (category['isPremium'] == true &&
                           category['isUnlocked'] != true) {
                         _showPremiumUpgradeDialog();
                       } else {
-                        Navigator.pushNamed(context, '/test-category-screen');
+                        Navigator.pushNamed(
+                          context,
+                          '/test-category-screen',
+                          arguments: {
+                            'categoryName': category['name'],
+                            'categoryId': category['id'].toString(),
+                          },
+                        );
                       }
                     },
                     onLongPress: () => _showCategoryContextMenu(category),
@@ -628,14 +870,21 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
         itemCount: _filteredCategories.length,
         itemBuilder: (context, index) {
           final category = _filteredCategories[index];
-          return TestCategoryCardWidget(
+          return EnhancedTestCategoryCardWidget(
             category: category,
             onTap: () {
               if (category['isPremium'] == true &&
                   category['isUnlocked'] != true) {
                 _showPremiumUpgradeDialog();
               } else {
-                Navigator.pushNamed(context, '/test-category-screen');
+                Navigator.pushNamed(
+                  context,
+                  '/test-category-screen',
+                  arguments: {
+                    'categoryName': category['name'],
+                    'categoryId': category['id'].toString(),
+                  },
+                );
               }
             },
             onLongPress: () => _showCategoryContextMenu(category),
@@ -652,7 +901,7 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
         children: [
           CustomIconWidget(
             iconName: 'analytics',
-            color: AppTheme.lightTheme.primaryColor,
+            color: AppTheme.lightTheme.colorScheme.primary,
             size: 20.w,
           ),
           SizedBox(height: 2.h),
@@ -682,39 +931,323 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
   }
 
   Widget _buildProfileTab() {
-    return Center(
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(4.w),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomIconWidget(
-            iconName: 'person',
-            color: AppTheme.lightTheme.primaryColor,
-            size: 20.w,
+          // Header
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  width: 25.w,
+                  height: 25.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        AppTheme.lightTheme.colorScheme.primary,
+                        AppTheme.lightTheme.colorScheme.secondary,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 15.w,
+                  ),
+                ),
+                SizedBox(height: 2.h),
+                Text(
+                  'Profil utilisateur',
+                  style: AppTheme.lightTheme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  'Gérez votre compte et vos préférences',
+                  style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 2.h),
+
+          SizedBox(height: 4.h),
+
+          // Paramètres Section
           Text(
-            'Profil utilisateur',
+            'Paramètres',
             style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 1.h),
-          Text(
-            'Gérez votre compte et vos préférences',
-            style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+
+          SizedBox(height: 2.h),
+
+          // Mode sombre
+          Container(
+            padding: EdgeInsets.all(4.w),
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CustomIconWidget(
+                      iconName: _isDarkMode ? 'dark_mode' : 'light_mode',
+                      color: AppTheme.lightTheme.colorScheme.primary,
+                      size: 6.w,
+                    ),
+                    SizedBox(width: 3.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Mode sombre',
+                          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          _isDarkMode ? 'Activé' : 'Désactivé',
+                          style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Switch(
+                  value: _isDarkMode,
+                  onChanged: (value) {
+                    setState(() {
+                      _isDarkMode = value;
+                    });
+                    // Ici on pourrait sauvegarder la préférence
+                    _saveThemePreference(value);
+                  },
+                  activeColor: AppTheme.lightTheme.colorScheme.primary,
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 3.h),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/user-profile-screen');
-            },
-            child: Text('Voir le profil'),
+
+          SizedBox(height: 2.h),
+
+          // Autres paramètres
+          Container(
+            padding: EdgeInsets.all(4.w),
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'notifications',
+                      color: AppTheme.lightTheme.colorScheme.primary,
+                      size: 6.w,
+                    ),
+                    SizedBox(width: 3.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Notifications',
+                          style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'Rappels et mises à jour',
+                          style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Switch(
+                  value: true, // Valeur par défaut
+                  onChanged: (value) {
+                    // Implémenter la logique de notifications
+                  },
+                  activeColor: AppTheme.lightTheme.colorScheme.primary,
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 4.h),
+
+          // Statistiques utilisateur
+          Text(
+            'Vos statistiques',
+            style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          SizedBox(height: 2.h),
+
+          // Stats Cards
+          Row(
+            children: [
+              Expanded(
+                child: _buildStatCard(
+                  'Tests terminés',
+                  _userStats['testsCompleted'].toString(),
+                  'quiz',
+                  AppTheme.lightTheme.colorScheme.primary,
+                ),
+              ),
+              SizedBox(width: 2.w),
+              Expanded(
+                child: _buildStatCard(
+                  'Score moyen',
+                  '${_userStats['averageScore']}%',
+                  'trending_up',
+                  AppTheme.lightTheme.colorScheme.secondary,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 2.h),
+
+          Row(
+            children: [
+              Expanded(
+                child: _buildStatCard(
+                  'Série actuelle',
+                  '${_userStats['studyStreak']} jours',
+                  'local_fire_department',
+                  AppTheme.accentLight,
+                ),
+              ),
+              SizedBox(width: 2.w),
+              Expanded(
+                child: _buildStatCard(
+                  'Temps total',
+                  '24h 30min',
+                  'schedule',
+                  AppTheme.lightTheme.colorScheme.tertiary,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 4.h),
+
+          // Actions
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/user-profile-screen');
+              },
+              icon: Icon(Icons.edit),
+              label: Text('Modifier le profil'),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 3.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(height: 2.h),
+
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                // Implémenter la déconnexion
+              },
+              icon: Icon(Icons.logout),
+              label: Text('Se déconnecter'),
+              style: OutlinedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 3.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(height: 4.h),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String title, String value, String iconName, Color color) {
+    return Container(
+      padding: EdgeInsets.all(3.w),
+      decoration: BoxDecoration(
+        color: AppTheme.lightTheme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.2),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          CustomIconWidget(
+            iconName: iconName,
+            color: color,
+            size: 8.w,
+          ),
+          SizedBox(height: 1.h),
+          Text(
+            value,
+            style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
+          ),
+          SizedBox(height: 0.5.h),
+          Text(
+            title,
+            style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
     );
+  }
+
+  void _saveThemePreference(bool isDark) {
+    // Ici on sauvegarderait la préférence dans SharedPreferences
+    // Pour l'instant, juste un print de debug
+    debugPrint('Theme preference saved: ${isDark ? 'Dark' : 'Light'}');
   }
 
   void _showPremiumUpgradeDialog() {
@@ -750,5 +1283,96 @@ class _TestLibraryDashboardState extends State<TestLibraryDashboard>
         ],
       ),
     );
+  }
+
+  // Nouvelle méthode pour les chips de tri
+  Widget _buildSortChip(String label, String sortType) {
+    final isSelected = _sortBy == sortType;
+    return FilterChip(
+      label: Text(
+        label,
+        style: TextStyle(
+          color: isSelected
+              ? Colors.white
+              : AppTheme.lightTheme.colorScheme.onSurface,
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+        ),
+      ),
+      selected: isSelected,
+      onSelected: (selected) {
+        if (selected) {
+          setState(() {
+            _sortBy = sortType;
+            _applySorting();
+          });
+        }
+      },
+      backgroundColor: AppTheme.lightTheme.colorScheme.surface,
+      selectedColor: AppTheme.lightTheme.colorScheme.primary,
+      checkmarkColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+          color: isSelected
+              ? AppTheme.lightTheme.colorScheme.primary
+              : AppTheme.lightTheme.colorScheme.outline.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+    );
+  }
+
+  // Nouvelle méthode pour appliquer le tri
+  void _applySorting() {
+    setState(() {
+      switch (_sortBy) {
+        case 'popularite':
+          _filteredCategories.sort((a, b) {
+            final aCompletion = a['completionPercentage'] as int;
+            final bCompletion = b['completionPercentage'] as int;
+            return bCompletion.compareTo(aCompletion); // Plus populaire en premier
+          });
+          break;
+        case 'difficulte':
+          _filteredCategories.sort((a, b) {
+            final difficultyOrder = {'Facile': 1, 'Moyen': 2, 'Difficile': 3};
+            final aDifficulty = difficultyOrder[a['difficulty']] ?? 2;
+            final bDifficulty = difficultyOrder[b['difficulty']] ?? 2;
+            return aDifficulty.compareTo(bDifficulty); // Facile vers Difficile
+          });
+          break;
+        case 'duree':
+          // Tri par nombre de tests (approximation de la durée)
+          _filteredCategories.sort((a, b) {
+            final aCount = a['testCount'] as int;
+            final bCount = b['testCount'] as int;
+            return aCount.compareTo(bCount); // Moins de tests en premier
+          });
+          break;
+        case 'note':
+          // Tri par taux de complétion (approximation de la note)
+          _filteredCategories.sort((a, b) {
+            final aCompletion = a['completionPercentage'] as int;
+            final bCompletion = b['completionPercentage'] as int;
+            return bCompletion.compareTo(aCompletion); // Meilleures notes en premier
+          });
+          break;
+        case 'nouveaute':
+          // Tri par ID (approximation de la nouveauté)
+          _filteredCategories.sort((a, b) {
+            final aId = a['id'].toString();
+            final bId = b['id'].toString();
+            return bId.compareTo(aId); // Plus récent en premier
+          });
+          break;
+        default:
+          // Tri par défaut : popularité
+          _filteredCategories.sort((a, b) {
+            final aCompletion = a['completionPercentage'] as int;
+            final bCompletion = b['completionPercentage'] as int;
+            return bCompletion.compareTo(aCompletion);
+          });
+      }
+    });
   }
 }

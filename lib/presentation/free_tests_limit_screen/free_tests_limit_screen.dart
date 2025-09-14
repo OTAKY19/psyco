@@ -125,7 +125,7 @@ class _FreeTestsLimitScreenState extends State<FreeTestsLimitScreen>
               color: Theme.of(context).colorScheme.errorContainer,
               boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).colorScheme.error.withOpacity(0.2),
+                  color: Theme.of(context).colorScheme.error.withValues(alpha: 0.2),
                   blurRadius: 20,
                   spreadRadius: 5,
                 ),
@@ -216,10 +216,10 @@ class _FreeTestsLimitScreenState extends State<FreeTestsLimitScreen>
     return Container(
       padding: EdgeInsets.all(2.h),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(2.h),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -255,7 +255,7 @@ class _FreeTestsLimitScreenState extends State<FreeTestsLimitScreen>
           SizedBox(height: 2.h),
           LinearProgressIndicator(
             value: testsUsed / testsTotal,
-            backgroundColor: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+            backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
             valueColor: AlwaysStoppedAnimation<Color>(
               Theme.of(context).colorScheme.error,
             ),
@@ -279,7 +279,7 @@ class _FreeTestsLimitScreenState extends State<FreeTestsLimitScreen>
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(1.5.h),
         border: Border.all(
-          color: color.withOpacity(0.2),
+          color: color.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -399,7 +399,7 @@ class _FreeTestsLimitScreenState extends State<FreeTestsLimitScreen>
                           Text(
                             benefit['description'] as String,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8),
+                              color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
                             ),
                           ),
                         ],

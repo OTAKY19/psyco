@@ -130,7 +130,7 @@ class IntegrationOnboardingStepWidget extends StatelessWidget {
           // Preferences list
           ...userPreferences!.entries.map((entry) {
             return _buildPreferenceItem(context, entry.key, entry.value);
-          }).toList(),
+          }),
         ],
       ),
     );

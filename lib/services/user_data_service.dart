@@ -1,12 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserDataService {
-  static const String _userProgressKey = 'user_progress';
-  static const String _userPreferencesKey = 'user_preferences';
   static const String _completedTestsKey = 'completed_tests';
   static const String _averageScoreKey = 'average_score';
   static const String _studyStreakKey = 'study_streak';
   static const String _lastSyncKey = 'last_sync';
+  static const String _totalStudyTimeKey = 'total_study_time';
+  static const String _lastStudyDateKey = 'last_study_date';
+  static const String _currentStreakKey = 'current_streak';
 
   // Singleton pattern
   static final UserDataService _instance = UserDataService._internal();
@@ -198,15 +199,222 @@ class UserDataService {
     }
   }
 
+  /// Enregistre un test terminé avec ses détails
+  Future<void> saveTestResult(Map<String, dynamic> testResult) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      // Créer un ID unique pour ce test
+      final testId = 'test_${DateTime.now().millisecondsSinceEpoch}';
+
+      // Sauvegarder les détails du test
+      await prefs.setString('test_result_$testId', testResult.toString());
+
+      // Mettre à jour les statistiques générales
+      final currentTests = prefs.getInt(_completedTestsKey) ?? 0;
+      await prefs.setInt(_completedTestsKey, currentTests + 1);
+
+      // Mettre à jour le score moyen
+      final currentAverage = prefs.getDouble(_averageScoreKey) ?? 0.0;
+      final newScore = testResult['score'] ?? 0.0;
+      final newAverage = ((currentAverage * currentTests) + newScore) / (currentTests + 1);
+      await prefs.setDouble(_averageScoreKey, newAverage);
+
+      // Mettre à jour la série d'étude
+      await _updateStudyStreak();
+
+      // Mettre à jour le temps total d'étude
+      final studyTime = (testResult['duration'] ?? 0) as int;
+      final currentTotalTime = prefs.getInt(_totalStudyTimeKey) ?? 0;
+      await prefs.setInt(_totalStudyTimeKey, currentTotalTime + studyTime);
+
+    } catch (e) {
+      throw Exception('Erreur lors de la sauvegarde du résultat: $e');
+    }
+  }
+
+  /// Récupère tous les résultats de tests
+  Future<List<Map<String, dynamic>>> getAllTestResults() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final keys = prefs.getKeys().where((key) => key.startsWith('test_result_'));
+
+      List<Map<String, dynamic>> results = [];
+      for (String key in keys) {
+        final resultString = prefs.getString(key);
+        if (resultString != null) {
+          // Ici on pourrait parser le JSON, mais pour simplifier on retourne une liste basique
+          results.add({
+            'id': key.replaceFirst('test_result_', ''),
+            'data': resultString,
+          });
+        }
+      }
+
+      return results;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  /// Met à jour la série d'étude
+  Future<void> _updateStudyStreak() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+
+      final lastStudyDateString = prefs.getString(_lastStudyDateKey);
+      final currentStreak = prefs.getInt(_currentStreakKey) ?? 0;
+
+      if (lastStudyDateString != null) {
+        final lastStudyDate = DateTime.parse(lastStudyDateString);
+        final lastStudyDay = DateTime(lastStudyDate.year, lastStudyDate.month, lastStudyDate.day);
+
+        if (lastStudyDay == today) {
+          // Déjà étudié aujourd'hui, ne rien changer
+          return;
+        } else if (lastStudyDay == today.subtract(const Duration(days: 1))) {
+          // Étudié hier, augmenter la série
+          await prefs.setInt(_currentStreakKey, currentStreak + 1);
+        } else {
+          // Série rompue, recommencer à 1
+          await prefs.setInt(_currentStreakKey, 1);
+        }
+      } else {
+        // Premier jour d'étude
+        await prefs.setInt(_currentStreakKey, 1);
+      }
+
+      // Mettre à jour la date du dernier jour d'étude
+      await prefs.setString(_lastStudyDateKey, today.toIso8601String());
+
+      // Mettre à jour la série maximale si nécessaire
+      final maxStreak = prefs.getInt(_studyStreakKey) ?? 0;
+      final newStreak = prefs.getInt(_currentStreakKey) ?? 0;
+      if (newStreak > maxStreak) {
+        await prefs.setInt(_studyStreakKey, newStreak);
+      }
+
+    } catch (e) {
+      // Ignore les erreurs de mise à jour de série
+    }
+  }
+
+  /// Récupère les statistiques détaillées de progression
+  Future<Map<String, dynamic>> getDetailedProgress() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      final basicProgress = await getUserProgress();
+      final totalStudyTime = prefs.getInt(_totalStudyTimeKey) ?? 0;
+      final currentStreak = prefs.getInt(_currentStreakKey) ?? 0;
+      final lastStudyDate = prefs.getString(_lastStudyDateKey);
+
+      // Calculer des statistiques supplémentaires
+      final testResults = await getAllTestResults();
+      final categoryProgress = await _getAllCategoryProgress();
+
+      return {
+        ...basicProgress,
+        'totalStudyTime': totalStudyTime,
+        'currentStreak': currentStreak,
+        'lastStudyDate': lastStudyDate,
+        'totalTestResults': testResults.length,
+        'categoryProgress': categoryProgress,
+        'studyTimeFormatted': _formatStudyTime(totalStudyTime),
+      };
+    } catch (e) {
+      return await getUserProgress();
+    }
+  }
+
+  /// Récupère les progrès de toutes les catégories
+  Future<Map<String, double>> _getAllCategoryProgress() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final keys = prefs.getKeys().where((key) => key.startsWith('category_progress_'));
+
+      Map<String, double> progress = {};
+      for (String key in keys) {
+        final categoryId = key.replaceFirst('category_progress_', '');
+        progress[categoryId] = prefs.getDouble(key) ?? 0.0;
+      }
+
+      return progress;
+    } catch (e) {
+      return {};
+    }
+  }
+
+  /// Formate le temps d'étude en format lisible
+  String _formatStudyTime(int totalSeconds) {
+    final hours = totalSeconds ~/ 3600;
+    final minutes = (totalSeconds % 3600) ~/ 60;
+
+    if (hours > 0) {
+      return '${hours}h ${minutes}min';
+    } else {
+      return '${minutes}min';
+    }
+  }
+
+  /// Enregistre une session d'étude
+  Future<void> saveStudySession(Map<String, dynamic> sessionData) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final sessionId = 'session_${DateTime.now().millisecondsSinceEpoch}';
+
+      // Sauvegarder les données de session
+      await prefs.setString('study_session_$sessionId', sessionData.toString());
+
+      // Mettre à jour les statistiques
+      final duration = (sessionData['duration'] ?? 0) as int;
+      final currentTotalTime = prefs.getInt(_totalStudyTimeKey) ?? 0;
+      await prefs.setInt(_totalStudyTimeKey, currentTotalTime + duration);
+
+      await _updateStudyStreak();
+
+    } catch (e) {
+      throw Exception('Erreur lors de la sauvegarde de la session: $e');
+    }
+  }
+
+  /// Récupère l'historique des sessions d'étude
+  Future<List<Map<String, dynamic>>> getStudySessionsHistory() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final keys = prefs.getKeys().where((key) => key.startsWith('study_session_'));
+
+      List<Map<String, dynamic>> sessions = [];
+      for (String key in keys) {
+        final sessionString = prefs.getString(key);
+        if (sessionString != null) {
+          sessions.add({
+            'id': key.replaceFirst('study_session_', ''),
+            'data': sessionString,
+          });
+        }
+      }
+
+      // Trier par date (ID contient le timestamp)
+      sessions.sort((a, b) => b['id'].compareTo(a['id']));
+
+      return sessions;
+    } catch (e) {
+      return [];
+    }
+  }
+
   /// Synchronise les données avec le serveur (simulation)
   Future<bool> syncWithServer() async {
     try {
       // Simulation d'une synchronisation avec le serveur
       await Future.delayed(const Duration(seconds: 2));
-      
+
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
-      
+
       return true;
     } catch (e) {
       return false;

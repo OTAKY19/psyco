@@ -11,13 +11,13 @@ class TestScreen extends StatefulWidget {
   final int? timeLimit;
 
   const TestScreen({
-    Key? key,
+    super.key,
     required this.testType,
     this.category,
     this.level,
     this.questionCount = 10,
     this.timeLimit,
-  }) : super(key: key);
+  });
 
   @override
   State<TestScreen> createState() => _TestScreenState();
@@ -249,7 +249,7 @@ class _TestScreenState extends State<TestScreen> {
                   ),
                 ),
               );
-            }).toList(),
+            }),
             
             const SizedBox(height: 20),
             
@@ -301,7 +301,7 @@ class _TestScreenState extends State<TestScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
-                    '\${minutes.toString().padLeft(2, '0')}:\${seconds.toString().padLeft(2, '0')}',
+                    '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -403,7 +403,7 @@ class _TestScreenState extends State<TestScreen> {
 class TestResultScreen extends StatelessWidget {
   final TestResult result;
 
-  const TestResultScreen({Key? key, required this.result}) : super(key: key);
+  const TestResultScreen({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {

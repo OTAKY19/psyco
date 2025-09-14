@@ -10,12 +10,12 @@ class SearchBarWidget extends StatefulWidget {
   final String initialValue;
 
   const SearchBarWidget({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.onChanged,
     required this.onClear,
     this.initialValue = '',
-  }) : super(key: key);
+  });
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();

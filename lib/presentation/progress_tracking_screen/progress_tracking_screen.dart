@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
 import '../../services/user_data_service.dart';
+import '../../services/test_service.dart';
 import './widgets/achievement_badge_widget.dart';
 import './widgets/activity_item_widget.dart';
 import './widgets/category_performance_widget.dart';
@@ -11,7 +12,7 @@ import './widgets/performance_chart_widget.dart';
 import './widgets/study_calendar_widget.dart';
 
 class ProgressTrackingScreen extends StatefulWidget {
-  const ProgressTrackingScreen({Key? key}) : super(key: key);
+  const ProgressTrackingScreen({super.key});
 
   @override
   State<ProgressTrackingScreen> createState() => _ProgressTrackingScreenState();
@@ -23,87 +24,53 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
   String _selectedDateRange = 'Cette semaine';
   bool _isRefreshing = false;
 
-  // Mock data
-  final List<Map<String, dynamic>> _metricsData = [
+  // Données réelles - seront mises à jour depuis UserDataService
+  List<Map<String, dynamic>> _metricsData = [
     {
       'title': 'Tests complétés',
-      'value': '47',
-      'subtitle': '+12 cette semaine',
+      'value': '0',
+      'subtitle': 'Commencez vos tests',
       'icon': 'quiz',
       'color': AppTheme.primaryLight,
     },
     {
       'title': 'Score moyen',
-      'value': '78%',
-      'subtitle': '+5% ce mois',
+      'value': '0%',
+      'subtitle': 'Pas encore de score',
       'icon': 'trending_up',
       'color': AppTheme.successLight,
     },
     {
       'title': 'Série d\'étude',
-      'value': '12 jours',
-      'subtitle': 'Record personnel',
+      'value': '0 jours',
+      'subtitle': 'Commencez votre série',
       'icon': 'local_fire_department',
       'color': AppTheme.warningLight,
     },
     {
       'title': 'Temps d\'étude',
-      'value': '24h 30m',
-      'subtitle': 'Ce mois-ci',
+      'value': '0h 0m',
+      'subtitle': 'Pas encore de temps',
       'icon': 'schedule',
       'color': AppTheme.secondaryLight,
     },
   ];
 
-  final List<Map<String, dynamic>> _performanceData = [
-    {'label': 'Lun', 'score': 65.0},
-    {'label': 'Mar', 'score': 72.0},
-    {'label': 'Mer', 'score': 68.0},
-    {'label': 'Jeu', 'score': 85.0},
-    {'label': 'Ven', 'score': 78.0},
-    {'label': 'Sam', 'score': 82.0},
-    {'label': 'Dim', 'score': 88.0},
+  // Données de performance - seront calculées depuis l'historique des tests
+  List<Map<String, dynamic>> _performanceData = [];
+
+  // Données de catégories - seront mises à jour depuis UserDataService
+  List<Map<String, dynamic>> _categoryData = [
+    {'category': 'Logique', 'score': 0.0},
+    {'category': 'Mémoire', 'score': 0.0},
+    {'category': 'Attention', 'score': 0.0},
+    {'category': 'Calcul', 'score': 0.0},
+    {'category': 'Spatial', 'score': 0.0},
+    {'category': 'Verbal', 'score': 0.0},
   ];
 
-  final List<Map<String, dynamic>> _categoryData = [
-    {'category': 'Logique', 'score': 85.0},
-    {'category': 'Mémoire', 'score': 72.0},
-    {'category': 'Attention', 'score': 78.0},
-    {'category': 'Calcul', 'score': 68.0},
-    {'category': 'Spatial', 'score': 75.0},
-    {'category': 'Verbal', 'score': 82.0},
-  ];
-
-  final List<Map<String, dynamic>> _recentActivities = [
-    {
-      'testName': 'Test de logique avancé',
-      'category': 'Logique',
-      'score': 85.0,
-      'date': DateTime.now().subtract(const Duration(hours: 2)),
-      'duration': '25 min',
-    },
-    {
-      'testName': 'Mémoire visuelle',
-      'category': 'Mémoire',
-      'score': 72.0,
-      'date': DateTime.now().subtract(const Duration(days: 1)),
-      'duration': '18 min',
-    },
-    {
-      'testName': 'Attention sélective',
-      'category': 'Attention',
-      'score': 78.0,
-      'date': DateTime.now().subtract(const Duration(days: 2)),
-      'duration': '22 min',
-    },
-    {
-      'testName': 'Calcul mental rapide',
-      'category': 'Calcul',
-      'score': 68.0,
-      'date': DateTime.now().subtract(const Duration(days: 3)),
-      'duration': '15 min',
-    },
-  ];
+  // Activités récentes - seront chargées depuis l'historique des tests
+  List<Map<String, dynamic>> _recentActivities = [];
 
   final List<Map<String, dynamic>> _achievements = [
     {
@@ -164,19 +131,35 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
       
       setState(() {
         // Mettre à jour les métriques avec les vraies données
-        _metricsData[0]['value'] = userProgress['testsCompleted'].toString();
-        _metricsData[1]['value'] = '${userProgress['averageScore'].toInt()}%';
-        _metricsData[2]['value'] = '${userProgress['studyStreak']} jours';
+        final testsCompleted = userProgress['testsCompleted'] as int;
+        final averageScore = userProgress['averageScore'] as double;
+        final studyStreak = userProgress['studyStreak'] as int;
         
-        // Calculer le temps d'étude (simulation basée sur les tests)
-        final totalMinutes = (userProgress['testsCompleted'] as int) * 20; // 20 min par test
+        _metricsData[0]['value'] = testsCompleted.toString();
+        _metricsData[0]['subtitle'] = testsCompleted > 0 ? '+${testsCompleted} au total' : 'Commencez vos tests';
+        
+        _metricsData[1]['value'] = '${averageScore.toInt()}%';
+        _metricsData[1]['subtitle'] = averageScore > 0 ? 'Score moyen' : 'Pas encore de score';
+        
+        _metricsData[2]['value'] = '$studyStreak jours';
+        _metricsData[2]['subtitle'] = studyStreak > 0 ? 'Série actuelle' : 'Commencez votre série';
+        
+        // Calculer le temps d'étude basé sur les tests réels
+        final totalMinutes = testsCompleted * 20; // 20 min par test en moyenne
         final hours = totalMinutes ~/ 60;
         final minutes = totalMinutes % 60;
         _metricsData[3]['value'] = '${hours}h ${minutes}m';
+        _metricsData[3]['subtitle'] = testsCompleted > 0 ? 'Temps total' : 'Pas encore de temps';
       });
       
       // Charger les progrès par catégorie
       await _loadCategoryProgress();
+      
+      // Charger les activités récentes
+      await _loadRecentActivities();
+      
+      // Charger les données de performance
+      await _loadPerformanceData();
       
     } catch (e) {
       debugPrint('Erreur lors du chargement des données: $e');
@@ -194,14 +177,84 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
         final categoryId = (i + 1).toString(); // ID basé sur l'index
         final progress = await userDataService.getCategoryProgress(categoryId);
         
-        if (progress > 0) {
-          setState(() {
-            _categoryData[i]['score'] = progress;
-          });
-        }
+        setState(() {
+          _categoryData[i]['score'] = progress;
+        });
       }
     } catch (e) {
       debugPrint('Erreur lors du chargement des catégories: $e');
+    }
+  }
+
+  /// Charge les activités récentes depuis l'historique des tests
+  Future<void> _loadRecentActivities() async {
+    try {
+      final testService = TestService();
+      final testHistory = await testService.getTestHistory();
+      
+      // Prendre les 10 derniers tests
+      final recentTests = testHistory.take(10).toList();
+      
+      setState(() {
+        _recentActivities = recentTests.map((test) {
+          // Calculer la durée moyenne (simulation basée sur le nombre de questions)
+          final durationMinutes = (test.totalQuestions * 1.5).round(); // 1.5 min par question
+          
+          return {
+            'testName': 'Test ${test.sessionId.substring(0, 8)}',
+            'category': 'Général', // Pour l'instant, on utilise une catégorie générale
+            'score': (test.correctAnswers / test.totalQuestions * 100).roundToDouble(),
+            'date': test.completedAt,
+            'duration': '${durationMinutes} min',
+          };
+        }).toList();
+      });
+    } catch (e) {
+      debugPrint('Erreur lors du chargement des activités récentes: $e');
+    }
+  }
+
+  /// Charge les données de performance pour le graphique
+  Future<void> _loadPerformanceData() async {
+    try {
+      final testService = TestService();
+      final testHistory = await testService.getTestHistory();
+      
+      if (testHistory.isEmpty) {
+        setState(() {
+          _performanceData = [];
+        });
+        return;
+      }
+      
+      // Grouper les tests par jour de la semaine
+      final Map<String, List<double>> weeklyScores = {};
+      final days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+      
+      for (final test in testHistory) {
+        final dayOfWeek = days[test.completedAt.weekday - 1];
+        final score = (test.correctAnswers / test.totalQuestions * 100);
+        
+        if (!weeklyScores.containsKey(dayOfWeek)) {
+          weeklyScores[dayOfWeek] = [];
+        }
+        weeklyScores[dayOfWeek]!.add(score);
+      }
+      
+      // Calculer la moyenne pour chaque jour
+      setState(() {
+        _performanceData = days.map((day) {
+          final scores = weeklyScores[day] ?? [];
+          final averageScore = scores.isEmpty ? 0.0 : scores.reduce((a, b) => a + b) / scores.length;
+          
+          return {
+            'label': day,
+            'score': averageScore,
+          };
+        }).toList();
+      });
+    } catch (e) {
+      debugPrint('Erreur lors du chargement des données de performance: $e');
     }
   }
 
@@ -213,8 +266,10 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
 
   Future<void> _refreshData() async {
     setState(() => _isRefreshing = true);
-    // Simulate data refresh
-    await Future.delayed(const Duration(seconds: 2));
+    
+    // Recharger toutes les données réelles
+    await _loadRealUserData();
+    
     setState(() => _isRefreshing = false);
   }
 
@@ -336,14 +391,16 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
       body: RefreshIndicator(
         onRefresh: _refreshData,
         color: AppTheme.lightTheme.colorScheme.primary,
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            _buildProgressTab(),
-            _buildActivityTab(),
-            _buildCalendarTab(),
-          ],
-        ),
+        child: _isRefreshing 
+            ? const Center(child: CircularProgressIndicator())
+            : TabBarView(
+                controller: _tabController,
+                children: [
+                  _buildProgressTab(),
+                  _buildActivityTab(),
+                  _buildCalendarTab(),
+                ],
+              ),
       ),
     );
   }

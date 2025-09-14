@@ -11,13 +11,13 @@ class EmptyStateWidget extends StatelessWidget {
   final String iconName;
 
   const EmptyStateWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     this.actionText,
     this.onAction,
     this.iconName = 'quiz',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

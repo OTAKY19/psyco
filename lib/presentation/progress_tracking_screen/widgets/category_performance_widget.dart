@@ -8,9 +8,9 @@ class CategoryPerformanceWidget extends StatelessWidget {
   final List<Map<String, dynamic>> categoryData;
 
   const CategoryPerformanceWidget({
-    Key? key,
+    super.key,
     required this.categoryData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -120,10 +120,11 @@ class CategoryPerformanceWidget extends StatelessWidget {
                     SizedBox(width: 2.w),
                     Text(
                       '${category['category']}: ${category['score'].toInt()}%',
-                      style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                         color:
                             AppTheme.lightTheme.colorScheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700, // Plus gras
+                        fontSize: 12.sp, // Plus grand
                       ),
                     ),
                   ],

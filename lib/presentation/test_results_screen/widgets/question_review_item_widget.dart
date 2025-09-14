@@ -9,11 +9,11 @@ class QuestionReviewItemWidget extends StatefulWidget {
   final VoidCallback? onBookmarkToggle;
 
   const QuestionReviewItemWidget({
-    Key? key,
+    super.key,
     required this.question,
     required this.questionNumber,
     this.onBookmarkToggle,
-  }) : super(key: key);
+  });
 
   @override
   State<QuestionReviewItemWidget> createState() =>

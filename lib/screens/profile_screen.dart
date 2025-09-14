@@ -6,7 +6,7 @@ import '../screens/settings_screen.dart';
 import '../screens/auth/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +88,8 @@ class ProfileScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
             colors: [
-              theme.primaryColor,
-              theme.primaryColor.withOpacity(0.8),
+              theme.colorScheme.primary,
+              theme.colorScheme.primary.withValues(alpha: 0.8),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -106,7 +106,7 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(40),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -144,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
               user.email,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white.withValues(alpha: 0.9),
               ),
             ),
             
@@ -154,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
+          color: Colors.blue,
         ),
       ),
     );
@@ -262,7 +262,7 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -314,7 +314,7 @@ class ProfileScreen extends StatelessWidget {
                 Text(
                   stats.levelTitle,
                   style: TextStyle(
-                    color: theme.primaryColor,
+                    color: theme.colorScheme.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -352,7 +352,7 @@ class ProfileScreen extends StatelessWidget {
                 LinearProgressIndicator(
                   value: stats.progressToNextLevel,
                   backgroundColor: Colors.grey[300],
-                  valueColor: AlwaysStoppedAnimation<Color>(theme.primaryColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                   minHeight: 8,
                 ),
                 
@@ -436,7 +436,7 @@ class ProfileScreen extends StatelessWidget {
                 entry.key, 
                 entry.value,
               );
-            }).toList(),
+            }),
           ],
         ),
       ),
@@ -488,7 +488,7 @@ class ProfileScreen extends StatelessWidget {
                   '${(categoryStats.accuracyRate * 100).toStringAsFixed(1)}%',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: theme.primaryColor,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -504,7 +504,7 @@ class ProfileScreen extends StatelessWidget {
                     widthFactor: categoryStats.accuracyRate,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: theme.primaryColor,
+                        color: theme.colorScheme.primary,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),

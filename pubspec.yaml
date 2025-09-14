@@ -16,6 +16,8 @@ dependencies:
   google_fonts: ^6.1.0 # Required for typography (replaces local fonts)
   shared_preferences: ^2.2.2 # Required for local data storage
   web: ^1.1.1
+  provider: ^6.1.2
+  intl: ^0.20.2
   
   # Feature dependencies - safe to modify
   cached_network_image: ^3.3.1
@@ -30,6 +32,8 @@ dependencies:
   permission_handler: ^12.0.1
   file_picker: ^10.3.2
   path_provider: ^2.1.5
+  path: ^1.9.0
+  shimmer: ^3.0.0  # Pour les animations de skeleton loading
   # vector_math: ^2.2.0  # SUPPRIMÉ - conflit avec Flutter SDK
   universal_html: ^2.2.4
   sqflite: ^2.3.0
@@ -37,7 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test: # CRITICAL: Required for Flutter project testing - DO NOT REMOVE
     sdk: flutter # CRITICAL: Required for Flutter project testing - DO NOT REMOVE
-  flutter_lints: ^6.0.0 # CRITICAL: Required for code quality - DO NOT REMOVE
+  flutter_lints: ^4.0.0 # CRITICAL: Required for code quality - DO NOT REMOVE
 
 flutter:
   uses-material-design: true # CRITICAL: Required for Material icon font - DO NOT REMOVE

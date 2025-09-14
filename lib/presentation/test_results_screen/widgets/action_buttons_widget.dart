@@ -12,13 +12,13 @@ class ActionButtonsWidget extends StatelessWidget {
   final VoidCallback? onGenerateCertificate;
 
   const ActionButtonsWidget({
-    Key? key,
+    super.key,
     required this.scorePercentage,
     required this.testName,
     this.onRetakeTest,
     this.onTrySimilarTests,
     this.onGenerateCertificate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

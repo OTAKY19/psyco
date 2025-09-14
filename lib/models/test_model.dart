@@ -34,6 +34,30 @@ class TestModel {
     this.metadata,
   });
 
+  /// Create TestModel from a database map (SQLite row)
+  factory TestModel.fromMap(Map<String, dynamic> map) {
+    return TestModel(
+      id: (map['id'] ?? '').toString(),
+      title: map['title']?.toString() ?? '',
+      description: map['description']?.toString() ?? '',
+      category: (map['category'] ?? map['category_id']?.toString() ?? ''),
+      duration: (map['duration'] is int)
+          ? map['duration'] as int
+          : int.tryParse(map['duration']?.toString() ?? '') ?? 0,
+      totalQuestions: (map['question_count'] is int)
+          ? map['question_count'] as int
+          : int.tryParse(map['question_count']?.toString() ?? '') ?? 0,
+      questions: const [],
+      difficulty: map['difficulty']?.toString() ?? 'moyen',
+      tags: const [],
+      createdAt: DateTime.tryParse(map['created_at']?.toString() ?? '') ?? DateTime.now(),
+      updatedAt: DateTime.now(),
+      isActive: (map['is_premium'] == null) ? true : (map['is_premium'] == 0),
+      imageUrl: map['image_url']?.toString(),
+      metadata: null,
+    );
+  }
+
   /// Create TestModel from JSON
   factory TestModel.fromJson(Map<String, dynamic> json) {
     return TestModel(

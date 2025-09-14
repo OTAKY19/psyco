@@ -29,7 +29,7 @@ class _IntegrationFlowScreenState extends State<IntegrationFlowScreen>
 
   int _currentStep = 0;
   bool _isAnimating = false;
-  Map<String, dynamic> _userPreferences = {};
+  final Map<String, dynamic> _userPreferences = {};
 
   final List<Map<String, dynamic>> _onboardingSteps = [
     {
@@ -164,12 +164,20 @@ class _IntegrationFlowScreenState extends State<IntegrationFlowScreen>
   void _nextStep() {
     if (_isAnimating) return;
 
-    HapticFeedback.selectionClick();
+    try {
+      HapticFeedback.selectionClick();
 
-    if (_currentStep < _onboardingSteps.length - 1) {
-      _animateToNextStep();
-    } else {
-      _completeOnboarding();
+      if (_currentStep < _onboardingSteps.length - 1) {
+        _animateToNextStep();
+      } else {
+        _completeOnboarding();
+      }
+    } catch (e) {
+      debugPrint('Erreur lors du passage à l\'étape suivante: $e');
+      // Réinitialiser l'état d'animation en cas d'erreur
+      setState(() {
+        _isAnimating = false;
+      });
     }
   }
 
@@ -181,26 +189,37 @@ class _IntegrationFlowScreenState extends State<IntegrationFlowScreen>
   }
 
   void _animateToNextStep() {
-    setState(() => _isAnimating = true);
+    try {
+      setState(() => _isAnimating = true);
 
-    _fadeAnimationController.reverse().then((_) {
-      setState(() {
-        _currentStep++;
-      });
+      _fadeAnimationController.reverse().then((_) {
+        setState(() {
+          _currentStep++;
+        });
 
-      _pageController
-          .animateToPage(
-        _currentStep,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      )
-          .then((_) {
-        _fadeAnimationController.forward();
-        _slideAnimationController.reset();
-        _slideAnimationController.forward();
+        _pageController
+            .animateToPage(
+          _currentStep,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        )
+            .then((_) {
+          _fadeAnimationController.forward();
+          _slideAnimationController.reset();
+          _slideAnimationController.forward();
+          setState(() => _isAnimating = false);
+        }).catchError((error) {
+          debugPrint('Erreur lors de l\'animation vers l\'étape suivante: $error');
+          setState(() => _isAnimating = false);
+        });
+      }).catchError((error) {
+        debugPrint('Erreur lors de l\'animation de fade: $error');
         setState(() => _isAnimating = false);
       });
-    });
+    } catch (e) {
+      debugPrint('Erreur dans _animateToNextStep: $e');
+      setState(() => _isAnimating = false);
+    }
   }
 
   void _animateToPreviousStep() {
@@ -306,7 +325,6 @@ class _IntegrationFlowScreenState extends State<IntegrationFlowScreen>
 
   @override
   Widget build(BuildContext context) {
-    final currentStepData = _onboardingSteps[_currentStep];
     final isLastStep = _currentStep == _onboardingSteps.length - 1;
     final isFirstStep = _currentStep == 0;
 
@@ -412,50 +430,89 @@ class _IntegrationFlowScreenState extends State<IntegrationFlowScreen>
   }
 
   Widget _buildStepContent(Map<String, dynamic> stepData) {
-    switch (stepData['type']) {
-      case 'permissions':
-        return IntegrationPermissionRequestWidget(
-          title: stepData['title'],
-          subtitle: stepData['subtitle'],
-          description: stepData['description'],
-          illustration: stepData['illustration'],
-          onPermissionResult: (granted) {
-            _updateUserPreferences('notificationsEnabled', granted);
-          },
-        );
+    try {
+      switch (stepData['type']) {
+        case 'permissions':
+          return IntegrationPermissionRequestWidget(
+            title: stepData['title'],
+            subtitle: stepData['subtitle'],
+            description: stepData['description'],
+            illustration: stepData['illustration'],
+            onPermissionResult: (granted) {
+              _updateUserPreferences('notificationsEnabled', granted);
+            },
+          );
 
-      case 'preferences':
-        return IntegrationPreferencesSetupWidget(
-          title: stepData['title'],
-          subtitle: stepData['subtitle'],
-          description: stepData['description'],
-          illustration: stepData['illustration'],
-          onPreferencesChanged: (preferences) {
-            _updateUserPreferences('studyPreferences', preferences);
-          },
-        );
+        case 'preferences':
+          return IntegrationPreferencesSetupWidget(
+            title: stepData['title'],
+            subtitle: stepData['subtitle'],
+            description: stepData['description'],
+            illustration: stepData['illustration'],
+            onPreferencesChanged: (preferences) {
+              _updateUserPreferences('studyPreferences', preferences);
+            },
+          );
 
-      case 'goals':
-        return IntegrationGoalSettingWidget(
-          title: stepData['title'],
-          subtitle: stepData['subtitle'],
-          description: stepData['description'],
-          illustration: stepData['illustration'],
-          onGoalSet: (goal) {
-            _updateUserPreferences('weeklyGoal', goal);
-          },
-        );
+        case 'goals':
+          return IntegrationGoalSettingWidget(
+            title: stepData['title'],
+            subtitle: stepData['subtitle'],
+            description: stepData['description'],
+            illustration: stepData['illustration'],
+            onGoalSet: (goal) {
+              _updateUserPreferences('weeklyGoal', goal);
+            },
+          );
 
-      default:
-        return IntegrationOnboardingStepWidget(
-          title: stepData['title'],
-          subtitle: stepData['subtitle'],
-          description: stepData['description'],
-          illustration: stepData['illustration'],
-          isCompletion: stepData['type'] == 'completion',
-          userPreferences:
-              stepData['type'] == 'completion' ? _userPreferences : null,
-        );
+        default:
+          return IntegrationOnboardingStepWidget(
+            title: stepData['title'],
+            subtitle: stepData['subtitle'],
+            description: stepData['description'],
+            illustration: stepData['illustration'],
+            isCompletion: stepData['type'] == 'completion',
+            userPreferences:
+                stepData['type'] == 'completion' ? _userPreferences : null,
+          );
+      }
+    } catch (e) {
+      // Gestion d'erreur pour les étapes qui ne se chargent pas
+      return Container(
+        padding: EdgeInsets.all(4.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 15.w,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            SizedBox(height: 2.h),
+            Text(
+              'Erreur de chargement',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+            SizedBox(height: 1.h),
+            Text(
+              'Impossible de charger cette étape. Veuillez réessayer.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 3.h),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  // Forcer le rechargement de l'étape
+                });
+              },
+              child: Text('Réessayer'),
+            ),
+          ],
+        ),
+      );
     }
   }
 

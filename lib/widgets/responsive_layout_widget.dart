@@ -7,27 +7,30 @@ class ResponsiveLayoutWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool avoidBottomOverflow;
   final double? minHeight;
+  final bool enableKeyboardAvoidance;
   
   const ResponsiveLayoutWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.padding,
     this.avoidBottomOverflow = true,
     this.minHeight,
-  }) : super(key: key);
+    this.enableKeyboardAvoidance = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final screenHeight = mediaQuery.size.height;
     final viewInsets = mediaQuery.viewInsets;
-    final availableHeight = screenHeight - viewInsets.bottom;
+    final keyboardHeight = viewInsets.bottom;
+    final availableHeight = screenHeight - keyboardHeight;
 
     Widget content = Container(
       width: double.infinity,
       constraints: BoxConstraints(
         minHeight: minHeight ?? 0,
-        maxHeight: avoidBottomOverflow ? availableHeight * 0.9 : double.infinity,
+        maxHeight: avoidBottomOverflow ? availableHeight * 0.95 : double.infinity,
       ),
       padding: padding ?? EdgeInsets.symmetric(
         horizontal: 4.w,
@@ -38,7 +41,7 @@ class ResponsiveLayoutWidget extends StatelessWidget {
 
     if (avoidBottomOverflow) {
       return SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: content,
       );
     }
@@ -57,14 +60,14 @@ class ResponsiveCardWidget extends StatelessWidget {
   final BorderRadius? borderRadius;
   
   const ResponsiveCardWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.margin,
     this.padding,
     this.backgroundColor,
     this.elevation,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +111,13 @@ class ResponsiveProgressWidget extends StatelessWidget {
   final double strokeWidth;
   
   const ResponsiveProgressWidget({
-    Key? key,
+    super.key,
     required this.percentage,
-    this.size = 12.0,
+    this.size = 16.0, // Taille par défaut augmentée
     this.progressColor,
     this.backgroundColor,
-    this.strokeWidth = 3.0,
-  }) : super(key: key);
+    this.strokeWidth = 4.0, // Stroke plus épais
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +128,7 @@ class ResponsiveProgressWidget extends StatelessWidget {
       width: size.w,
       height: size.w,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           // Progress Circle
           CircularProgressIndicator(
@@ -134,37 +138,120 @@ class ResponsiveProgressWidget extends StatelessWidget {
             valueColor: AlwaysStoppedAnimation<Color>(
               progressColor ?? (isCompleted 
                 ? Colors.green 
-                : Theme.of(context).primaryColor)
+                : Theme.of(context).colorScheme.primary)
             ),
             strokeWidth: strokeWidth,
           ),
           
-          // Percentage Text - Version optimisée
-          Center(
-            child: Container(
-              width: (size * 0.9).w, // Zone plus large
-              height: (size * 0.9).w,
-              alignment: Alignment.center,
-              child: FittedBox(
-                fit: BoxFit.contain, // Utilise tout l'espace disponible
-                child: Text(
-                  '${displayPercentage.toInt()}%',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800, // Plus gras
-                    fontSize: size > 15 ? 14.sp : size > 10 ? 12.sp : 10.sp, // Plus grand
-                    color: Theme.of(context).colorScheme.onSurface,
-                    letterSpacing: -0.3,
-                    height: 0.9, // Compacte verticalement
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.visible,
+          // Percentage Text - Version optimisée pour le centrage
+          Positioned.fill(
+            child: Center(
+              child: Text(
+                '${displayPercentage.toInt()}%',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900, // Très gras
+                  fontSize: size > 20 ? 16.sp : size > 15 ? 14.sp : 12.sp, // Plus grand
+                  color: Theme.of(context).colorScheme.onSurface,
+                  letterSpacing: -0.5,
+                  height: 1.0, // Hauteur de ligne normale
                 ),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.visible,
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Widget pour éviter les overflows de boutons
+class ResponsiveButtonWidget extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final double? maxWidth;
+  final bool wrapContent;
+  
+  const ResponsiveButtonWidget({
+    super.key,
+    required this.child,
+    this.margin,
+    this.padding,
+    this.maxWidth,
+    this.wrapContent = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final effectiveMaxWidth = maxWidth ?? screenWidth * 0.9;
+    
+    Widget button = Container(
+      margin: margin ?? EdgeInsets.symmetric(vertical: 1.h),
+      constraints: BoxConstraints(
+        maxWidth: effectiveMaxWidth,
+        minHeight: 6.h, // Hauteur minimale pour les boutons
+      ),
+      child: child,
+    );
+    
+    if (wrapContent) {
+      return IntrinsicWidth(
+        child: button,
+      );
+    }
+    
+    return button;
+  }
+}
+
+/// Widget pour les colonnes de boutons responsive
+class ResponsiveButtonRow extends StatelessWidget {
+  final List<Widget> children;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
+  final double spacing;
+  final bool wrapContent;
+  
+  const ResponsiveButtonRow({
+    super.key,
+    required this.children,
+    this.mainAxisAlignment = MainAxisAlignment.spaceEvenly,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.spacing = 8.0,
+    this.wrapContent = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (wrapContent) {
+      return Wrap(
+        spacing: spacing,
+        runSpacing: 1.h,
+        alignment: WrapAlignment.center,
+        children: children.map((child) => 
+          ResponsiveButtonWidget(
+            child: child,
+            wrapContent: true,
+          )
+        ).toList(),
+      );
+    }
+    
+    return Row(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      children: children.map((child) => 
+        Expanded(
+          child: ResponsiveButtonWidget(
+            child: child,
+            wrapContent: false,
+          ),
+        )
+      ).toList(),
     );
   }
 }

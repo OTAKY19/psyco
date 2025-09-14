@@ -10,7 +10,7 @@ import './widgets/settings_section_widget.dart';
 import './widgets/study_statistics_widget.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({Key? key}) : super(key: key);
+  const UserProfileScreen({super.key});
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -135,7 +135,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   title: 'Modifier le profil',
                   subtitle: 'Nom, email, photo de profil',
                   iconName: 'person',
-                  iconColor: AppTheme.lightTheme.primaryColor,
+                  iconColor: AppTheme.lightTheme.colorScheme.primary,
                   onTap: _onEditProfile,
                 ),
                 SettingsItem(
@@ -163,7 +163,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   title: 'Minuteur des tests',
                   subtitle: 'Activer/désactiver le chronomètre',
                   iconName: 'timer',
-                  iconColor: AppTheme.lightTheme.primaryColor,
+                  iconColor: AppTheme.lightTheme.colorScheme.primary,
                   isToggle: true,
                   toggleValue: _timerEnabled,
                   onToggleChanged: (value) {
@@ -203,7 +203,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   title: 'Téléchargements hors ligne',
                   subtitle: 'Télécharger les tests pour un accès hors ligne',
                   iconName: 'download',
-                  iconColor: AppTheme.lightTheme.primaryColor,
+                  iconColor: AppTheme.lightTheme.colorScheme.primary,
                   isToggle: true,
                   toggleValue: _offlineDownloadsEnabled,
                   onToggleChanged: (value) {
@@ -237,7 +237,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   title: 'Centre d\'aide',
                   subtitle: 'FAQ et guides d\'utilisation',
                   iconName: 'help',
-                  iconColor: AppTheme.lightTheme.primaryColor,
+                  iconColor: AppTheme.lightTheme.colorScheme.primary,
                   onTap: _onHelpCenter,
                 ),
                 SettingsItem(
@@ -272,7 +272,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   title: 'Télécharger tous les tests',
                   subtitle: 'Accès hors ligne complet',
                   iconName: 'cloud_download',
-                  iconColor: AppTheme.lightTheme.primaryColor,
+                  iconColor: AppTheme.lightTheme.colorScheme.primary,
                   onTap: _onDownloadAllTests,
                 ),
                 SettingsItem(
@@ -338,6 +338,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 
@@ -376,7 +377,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ListTile(
               leading: CustomIconWidget(
                 iconName: 'camera_alt',
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
                 size: 24,
               ),
               title: Text('Prendre une photo'),
@@ -632,11 +633,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               Text('Statut: Premium Actif ✅'),
               SizedBox(height: 1.h),
               Text('Plan: ${_getSubscriptionPlanName() ?? "Premium"}'),
-              if (_getSubscriptionDate() != null) ..[
+              if (_getSubscriptionDate() != null) ...[
                 SizedBox(height: 0.5.h),
                 Text('Activé le: ${_getSubscriptionDate()}'),
               ],
-              if (_subscriptionInfo!['transactionId'] != null) ..[
+              if (_subscriptionInfo!['transactionId'] != null) ...[
                 SizedBox(height: 0.5.h),
                 Text('Transaction: ${_subscriptionInfo!['transactionId']}'),
               ],
@@ -688,3 +689,5 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 }
+
+

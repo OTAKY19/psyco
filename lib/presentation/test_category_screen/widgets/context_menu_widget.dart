@@ -11,13 +11,13 @@ class ContextMenuWidget extends StatelessWidget {
   final VoidCallback onClose;
 
   const ContextMenuWidget({
-    Key? key,
+    super.key,
     required this.testData,
     required this.onShare,
     required this.onReport,
     required this.onViewSolutions,
     required this.onClose,
-  }) : super(key: key);
+  });
 
   static void show(
     BuildContext context, {

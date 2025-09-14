@@ -10,11 +10,11 @@ class ScoreHeaderWidget extends StatelessWidget {
   final Color gradeColor;
 
   const ScoreHeaderWidget({
-    Key? key,
+    super.key,
     required this.scorePercentage,
     required this.grade,
     required this.gradeColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

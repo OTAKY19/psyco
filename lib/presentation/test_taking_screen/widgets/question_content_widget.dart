@@ -175,7 +175,7 @@ class QuestionContentWidget extends StatelessWidget {
                 ),
               ),
             );
-          }).toList(),
+          }),
 
           SizedBox(height: 4.h), // Extra space for navigation buttons
         ],

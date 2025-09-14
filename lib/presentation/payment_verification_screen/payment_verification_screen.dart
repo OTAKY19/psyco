@@ -22,8 +22,8 @@ class _PaymentVerificationScreenState extends State<PaymentVerificationScreen> {
   String _selectedPlan = 'monthly';
   String _selectedPaymentMethod = 'card';
   bool _isProcessing = false;
-  bool _hasExistingSubscription = false;
-  int _trialDaysRemaining = 7;
+  final bool _hasExistingSubscription = false;
+  final int _trialDaysRemaining = 7;
 
   final _cardNumberController = TextEditingController();
   final _expiryController = TextEditingController();

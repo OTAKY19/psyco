@@ -6,13 +6,18 @@ import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
 import '../../theme/app_theme.dart';
+import '../../services/database_service.dart';
+import '../../models/question.dart';
 import './widgets/question_content_widget.dart';
+import './widgets/memory_question_widget.dart';
 import './widgets/question_grid_bottom_sheet.dart';
 import './widgets/question_header_widget.dart';
 import './widgets/question_navigation_widget.dart';
 
 class TestTakingScreen extends StatefulWidget {
-  const TestTakingScreen({super.key});
+  final Map<String, dynamic>? testData;
+
+  const TestTakingScreen({super.key, this.testData});
 
   @override
   State<TestTakingScreen> createState() => _TestTakingScreenState();
@@ -20,108 +25,13 @@ class TestTakingScreen extends StatefulWidget {
 
 class _TestTakingScreenState extends State<TestTakingScreen>
     with TickerProviderStateMixin {
-  // Test Data
-  final List<Map<String, dynamic>> testQuestions = [
-    {
-      "id": 1,
-      "question": "Quelle est la capitale du Bénin ?",
-      "options": ["Cotonou", "Porto-Novo", "Parakou", "Abomey"],
-      "correctAnswer": 1,
-      "category": "Géographie",
-      "difficulty": "Facile",
-      "image": null,
-    },
-    {
-      "id": 2,
-      "question":
-          "Si un train parcourt 120 km en 2 heures, quelle est sa vitesse moyenne ?",
-      "options": ["50 km/h", "60 km/h", "70 km/h", "80 km/h"],
-      "correctAnswer": 1,
-      "category": "Mathématiques",
-      "difficulty": "Moyen",
-      "image": null,
-    },
-    {
-      "id": 3,
-      "question": "Quel est le synonyme du mot 'perspicace' ?",
-      "options": ["Confus", "Clairvoyant", "Négligent", "Indifférent"],
-      "correctAnswer": 1,
-      "category": "Français",
-      "difficulty": "Moyen",
-      "image": null,
-    },
-    {
-      "id": 4,
-      "question":
-          "Dans une série logique : 2, 4, 8, 16, ?, quel est le nombre suivant ?",
-      "options": ["24", "32", "28", "20"],
-      "correctAnswer": 1,
-      "category": "Logique",
-      "difficulty": "Facile",
-      "image": null,
-    },
-    {
-      "id": 5,
-      "question": "Quelle est la fonction principale des douanes ?",
-      "options": [
-        "Contrôler la circulation routière",
-        "Percevoir les droits et taxes sur les marchandises",
-        "Gérer les hôpitaux publics",
-        "Organiser les élections"
-      ],
-      "correctAnswer": 1,
-      "category": "Douanes",
-      "difficulty": "Facile",
-      "image": null,
-    },
-    {
-      "id": 6,
-      "question": "Si A = 1, B = 2, C = 3, quelle est la valeur de 'DOUANE' ?",
-      "options": ["54", "58", "62", "66"],
-      "correctAnswer": 0,
-      "category": "Logique",
-      "difficulty": "Difficile",
-      "image": null,
-    },
-    {
-      "id": 7,
-      "question": "Quel pourcentage représente 15 sur 60 ?",
-      "options": ["20%", "25%", "30%", "35%"],
-      "correctAnswer": 1,
-      "category": "Mathématiques",
-      "difficulty": "Moyen",
-      "image": null,
-    },
-    {
-      "id": 8,
-      "question":
-          "Complétez la phrase : 'Il faut battre le fer pendant qu'il est...'",
-      "options": ["froid", "chaud", "rouge", "dur"],
-      "correctAnswer": 1,
-      "category": "Français",
-      "difficulty": "Facile",
-      "image": null,
-    },
-    {
-      "id": 9,
-      "question": "Quelle est la monnaie officielle du Bénin ?",
-      "options": ["Euro", "Dollar", "Franc CFA", "Naira"],
-      "correctAnswer": 2,
-      "category": "Géographie",
-      "difficulty": "Facile",
-      "image": null,
-    },
-    {
-      "id": 10,
-      "question":
-          "Dans une progression arithmétique : 5, 8, 11, 14, ?, quel est le terme suivant ?",
-      "options": ["16", "17", "18", "19"],
-      "correctAnswer": 1,
-      "category": "Mathématiques",
-      "difficulty": "Moyen",
-      "image": null,
-    },
-  ];
+  // Services
+  final DatabaseService _databaseService = DatabaseService();
+  
+  // Test Data - Chargé dynamiquement
+  List<Question> testQuestions = [];
+  bool _isLoading = true;
+  String? _error;
 
   // Test State
   int currentQuestionIndex = 0;
@@ -136,7 +46,7 @@ class _TestTakingScreenState extends State<TestTakingScreen>
   @override
   void initState() {
     super.initState();
-    _initializeTest();
+    _loadQuestions();
   }
 
   @override
@@ -147,7 +57,70 @@ class _TestTakingScreenState extends State<TestTakingScreen>
     super.dispose();
   }
 
+  Future<void> _loadQuestions() async {
+    try {
+      setState(() {
+        _isLoading = true;
+        _error = null;
+      });
+
+      List<Question> questions;
+
+      // Vérifier si des données de test spécifiques sont passées
+      if (widget.testData != null) {
+        final testData = widget.testData!;
+        final questionCount = testData['questionCount'] as int? ?? 15;
+        final dbCategory = testData['dbCategory'] as String?;
+        final duration = testData['duration'] as int? ?? 60; // minutes
+
+        print('🎯 Chargement test personnalisé:');
+        print('   - Nombre de questions: $questionCount');
+        print('   - Catégorie DB: $dbCategory');
+        print('   - Durée: $duration minutes');
+
+        // Charger les questions selon la configuration du test
+        if (dbCategory != null) {
+          questions = await _databaseService.getRandomQuestions(
+            limit: questionCount,
+            category: dbCategory,
+          );
+        } else {
+          questions = await _databaseService.getRandomQuestions(limit: questionCount);
+        }
+
+        // Configurer le timer selon la durée du test
+        remainingTimeInSeconds = duration * 60;
+      } else {
+        // Mode par défaut : charger 15 questions aléatoires
+        print('🎯 Chargement test par défaut: 15 questions aléatoires');
+        questions = await _databaseService.getRandomQuestions(limit: 15);
+      }
+
+      if (questions.isEmpty) {
+        throw Exception('Aucune question trouvée dans la base de données');
+      }
+
+      print('✅ ${questions.length} questions chargées');
+
+      setState(() {
+        testQuestions = questions;
+        _isLoading = false;
+      });
+
+      // Initialiser le test après le chargement des questions
+      _initializeTest();
+    } catch (e) {
+      print('❌ Erreur lors du chargement des questions: $e');
+      setState(() {
+        _error = 'Erreur lors du chargement des questions: $e';
+        _isLoading = false;
+      });
+    }
+  }
+
   void _initializeTest() {
+    if (testQuestions.isEmpty) return;
+
     // Start test timer
     testTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!isPaused && remainingTimeInSeconds > 0) {
@@ -200,12 +173,6 @@ class _TestTakingScreenState extends State<TestTakingScreen>
     }
   }
 
-  void _selectAnswer(int optionIndex) {
-    HapticFeedback.lightImpact();
-    setState(() {
-      selectedAnswers[currentQuestionIndex] = optionIndex;
-    });
-  }
 
   void _toggleMarkForReview() {
     HapticFeedback.lightImpact();
@@ -434,8 +401,8 @@ class _TestTakingScreenState extends State<TestTakingScreen>
     int correctAnswers = 0;
     for (int i = 0; i < testQuestions.length; i++) {
       final selectedAnswer = selectedAnswers[i];
-      final correctAnswer = testQuestions[i]['correctAnswer'] as int;
-      if (selectedAnswer == correctAnswer) {
+      final question = testQuestions[i];
+      if (selectedAnswer != null && question.options[selectedAnswer] == question.reponse) {
         correctAnswers++;
       }
     }
@@ -456,7 +423,79 @@ class _TestTakingScreenState extends State<TestTakingScreen>
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = testQuestions[currentQuestionIndex];
+    // Gestion des états de chargement et d'erreur
+    if (_isLoading) {
+      return Scaffold(
+        backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(
+                color: AppTheme.lightTheme.colorScheme.primary,
+              ),
+              SizedBox(height: 2.h),
+              Text(
+                'Chargement des questions...',
+                style: AppTheme.lightTheme.textTheme.bodyLarge,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (_error != null) {
+      return Scaffold(
+        backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(4.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  size: 15.w,
+                  color: AppTheme.lightTheme.colorScheme.error,
+                ),
+                SizedBox(height: 2.h),
+                Text(
+                  'Erreur de chargement',
+                  style: AppTheme.lightTheme.textTheme.headlineSmall?.copyWith(
+                    color: AppTheme.lightTheme.colorScheme.error,
+                  ),
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  _error!,
+                  style: AppTheme.lightTheme.textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 3.h),
+                ElevatedButton(
+                  onPressed: _loadQuestions,
+                  child: Text('Réessayer'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (testQuestions.isEmpty) {
+      return Scaffold(
+        backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
+        body: Center(
+          child: Text(
+            'Aucune question disponible',
+            style: AppTheme.lightTheme.textTheme.headlineSmall,
+          ),
+        ),
+      );
+    }
+
 
     return Scaffold(
       backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
@@ -484,18 +523,49 @@ class _TestTakingScreenState extends State<TestTakingScreen>
               itemCount: testQuestions.length,
               itemBuilder: (context, index) {
                 final question = testQuestions[index];
-                return QuestionContentWidget(
-                  questionText: question['question'] as String,
-                  options: (question['options'] as List).cast<String>(),
-                  selectedOption: selectedAnswers[index],
-                  onOptionSelected: (optionIndex) {
-                    setState(() {
-                      selectedAnswers[index] = optionIndex;
-                    });
-                    HapticFeedback.lightImpact();
-                  },
-                  questionImage: question['image'] as String?,
-                );
+
+                // Check if this is a memory question
+                final isMemoryQuestion = question.question.contains('Retenez cette suite') ||
+                                        question.question.contains('Mémorisez cette suite');
+
+                if (isMemoryQuestion) {
+                  // Extract memory sequence from question text
+                  final sequenceMatch = RegExp(r'Reten.*suite\s*:\s*([^.]+)').firstMatch(question.question);
+                  final memorySequence = sequenceMatch?.group(1)?.trim() ?? '';
+
+                  // Extract the actual question part
+                  final questionMatch = RegExp(r'Quel.*était.*élément').firstMatch(question.question);
+                  final actualQuestion = questionMatch != null
+                      ? question.question.substring(questionMatch.start)
+                      : 'Quel était l\'élément demandé ?';
+
+                  return MemoryQuestionWidget(
+                    memorySequence: memorySequence,
+                    questionText: actualQuestion,
+                    options: question.options,
+                    selectedOption: selectedAnswers[index],
+                    onOptionSelected: (optionIndex) {
+                      setState(() {
+                        selectedAnswers[index] = optionIndex;
+                      });
+                      HapticFeedback.lightImpact();
+                    },
+                    displayDuration: 8, // 8 seconds to memorize
+                  );
+                } else {
+                  return QuestionContentWidget(
+                    questionText: question.question,
+                    options: question.options,
+                    selectedOption: selectedAnswers[index],
+                    onOptionSelected: (optionIndex) {
+                      setState(() {
+                        selectedAnswers[index] = optionIndex;
+                      });
+                      HapticFeedback.lightImpact();
+                    },
+                    questionImage: question.imagePath,
+                  );
+                }
               },
             ),
           ),

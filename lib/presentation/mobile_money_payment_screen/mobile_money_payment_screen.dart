@@ -108,12 +108,13 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     try {
       // Nettoyer le numéro de téléphone
       final phoneNumber = _phoneController.text.replaceAll(RegExp(r'[^\d]'), '');
-      
+
       // Traiter le paiement
       final result = await _subscriptionService.processMobileMoneyPayment(
+        amount: SubscriptionService.premiumPrice.toDouble(),
         phoneNumber: phoneNumber,
         paymentMethod: _selectedPaymentMethod!,
-        amount: SubscriptionService.premiumPrice,
+        description: 'Paiement MTN Mobile Money',
       );
       
       if (result['success'] == true) {
@@ -328,12 +329,12 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
                   border: Border.all(
                     color: isSelected 
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                        : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
                     width: isSelected ? 2 : 1,
                   ),
                   boxShadow: isSelected ? [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
                       blurRadius: 8,
                       spreadRadius: 2,
                     ),
@@ -463,7 +464,7 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
                 color: Theme.of(context).colorScheme.secondaryContainer,
                 borderRadius: BorderRadius.circular(1.5.h),
                 border: Border.all(
-                  color: Color(selectedMethod['color']).withOpacity(0.3),
+                  color: Color(selectedMethod['color']).withValues(alpha: 0.3),
                 ),
               ),
               child: Column(
@@ -499,7 +500,7 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
                     '• Gardez votre téléphone à proximité\n'
                     '• Vous recevrez une notification de confirmation',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.8),
+                      color: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
@@ -550,7 +551,7 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     return Container(
       padding: EdgeInsets.all(2.h),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(1.5.h),
       ),
       child: Column(

@@ -8,10 +8,10 @@ class FeaturedTestCardWidget extends StatelessWidget {
   final VoidCallback onTap;
 
   const FeaturedTestCardWidget({
-    Key? key,
+    super.key,
     required this.test,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +29,14 @@ class FeaturedTestCardWidget extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppTheme.lightTheme.primaryColor,
+              AppTheme.lightTheme.colorScheme.primary,
               AppTheme.lightTheme.colorScheme.secondary,
             ],
           ),
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: AppTheme.lightTheme.primaryColor.withValues(alpha: 0.3),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),

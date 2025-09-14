@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
+import 'dart:math' as math;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/question.dart';
 import '../models/test_session.dart';
 import '../services/database_service.dart';
 import '../services/subscription_service.dart';
+import '../services/user_data_service.dart';
 
 class TestService {
   static final TestService _instance = TestService._internal();
@@ -234,6 +235,9 @@ class TestService {
     _currentSession = null;
     
     _sessionController.add(completedSession);
+    
+    // Vérifier si l'utilisateur a atteint la limite de tests gratuits
+    await _checkFreeTestLimit();
     
     return result;
   }
@@ -470,6 +474,9 @@ class TestService {
     }
     
     await prefs.setStringList('test_results', existingResults);
+    
+    // Mettre à jour les statistiques utilisateur
+    await _updateUserStatistics(result);
   }
 
   Future<List<TestResult>> getTestHistory() async {
@@ -560,8 +567,7 @@ class TestService {
 
   String _generateSessionId() {
     final now = DateTime.now();
-    final random = Random().nextInt(10000);
-    return '${now.millisecondsSinceEpoch}_\$random';
+    return '${now.millisecondsSinceEpoch}';
   }
 
   void dispose() {
@@ -569,6 +575,157 @@ class TestService {
     _sessionController.close();
     _timerController.close();
     _questionTimerController.close();
+  }
+
+  // Vérifier la limite de tests gratuits et afficher le prompt si nécessaire
+  Future<void> _checkFreeTestLimit() async {
+    try {
+      final isPremium = await _subscriptionService.isPremiumUser();
+      if (isPremium) return; // Pas de vérification pour les utilisateurs premium
+      
+      final remainingTests = await _subscriptionService.getRemainingFreeTests();
+      
+      // Si l'utilisateur a utilisé ses 2 tests gratuits, on peut déclencher une action
+      // (par exemple, afficher une notification ou un flag pour l'UI)
+      if (remainingTests <= 0) {
+        print('[TestService] Utilisateur a atteint la limite de tests gratuits');
+        // Le prompt sera affiché par l'écran de résultats
+      }
+    } catch (e) {
+      print('[TestService] Erreur lors de la vérification des tests gratuits: $e');
+    }
+  }
+
+  /// Met à jour les statistiques utilisateur après un test
+  Future<void> _updateUserStatistics(TestResult result) async {
+    try {
+      final userDataService = UserDataService();
+      
+      // Calculer le score en pourcentage
+      final scorePercentage = result.totalQuestions > 0 
+          ? (result.correctAnswers / result.totalQuestions) * 100 
+          : 0.0;
+      
+      // Mettre à jour le nombre de tests complétés
+      final currentProgress = await userDataService.getUserProgress();
+      final newTestsCompleted = (currentProgress['testsCompleted'] as int) + 1;
+      
+      // Calculer le nouveau score moyen
+      final currentAverage = currentProgress['averageScore'] as double;
+      final totalTests = newTestsCompleted;
+      final newAverage = totalTests > 1 
+          ? ((currentAverage * (totalTests - 1)) + scorePercentage) / totalTests
+          : scorePercentage;
+      
+      // Calculer la série d'étude (simulation basée sur les tests récents)
+      final studyStreak = await _calculateStudyStreak();
+      
+      // Sauvegarder les statistiques générales
+      await userDataService.saveUserProgress({
+        'testsCompleted': newTestsCompleted,
+        'averageScore': newAverage,
+        'studyStreak': studyStreak,
+      });
+      
+      // Mettre à jour les progrès par catégorie
+      await _updateCategoryProgress(result, scorePercentage);
+      
+    } catch (e) {
+      print('Erreur lors de la mise à jour des statistiques: $e');
+    }
+  }
+
+  /// Met à jour les progrès par catégorie
+  Future<void> _updateCategoryProgress(TestResult result, double overallScore) async {
+    try {
+      final userDataService = UserDataService();
+      
+      // Mettre à jour chaque catégorie basée sur les résultats
+      for (final categoryResult in result.categoryResults.values) {
+        final categoryId = _getCategoryIdFromName(categoryResult.category);
+        if (categoryId != null) {
+          // Calculer le score de cette catégorie
+          final categoryScore = categoryResult.totalQuestions > 0 
+              ? (categoryResult.correctAnswers / categoryResult.totalQuestions) * 100 
+              : 0.0;
+          
+          // Obtenir le progrès actuel de cette catégorie
+          final currentProgress = await userDataService.getCategoryProgress(categoryId);
+          
+          // Calculer le nouveau progrès (moyenne pondérée)
+          final newProgress = _calculateWeightedProgress(currentProgress, categoryScore);
+          
+          // Sauvegarder le nouveau progrès
+          await userDataService.updateCategoryProgress(categoryId, newProgress);
+        }
+      }
+    } catch (e) {
+      print('Erreur lors de la mise à jour des progrès de catégorie: $e');
+    }
+  }
+
+  /// Calcule un progrès pondéré basé sur l'historique
+  double _calculateWeightedProgress(double currentProgress, double newScore) {
+    // Si c'est le premier test, utiliser directement le score
+    if (currentProgress == 0.0) {
+      return newScore;
+    }
+    
+    // Sinon, calculer une moyenne pondérée (70% historique, 30% nouveau score)
+    return (currentProgress * 0.7) + (newScore * 0.3);
+  }
+
+  /// Convertit le nom de catégorie en ID
+  String? _getCategoryIdFromName(String categoryName) {
+    final categoryMap = {
+      'Logique': '1',
+      'Mémoire': '2', 
+      'Attention': '3',
+      'Calcul': '4',
+      'Spatial': '5',
+      'Verbal': '6',
+    };
+    return categoryMap[categoryName];
+  }
+
+  /// Calcule la série d'étude basée sur les tests récents
+  Future<int> _calculateStudyStreak() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final resultStrings = prefs.getStringList('test_results') ?? [];
+      
+      if (resultStrings.isEmpty) return 0;
+      
+      // Analyser les dates des tests pour calculer la série
+      final now = DateTime.now();
+      int streak = 0;
+      
+      // Vérifier les 30 derniers jours
+      for (int i = 0; i < 30; i++) {
+        final checkDate = now.subtract(Duration(days: i));
+        final hasTestOnDate = resultStrings.any((resultString) {
+          try {
+            final resultMap = json.decode(resultString);
+            final testDate = DateTime.parse(resultMap['completedAt']);
+            return testDate.year == checkDate.year &&
+                   testDate.month == checkDate.month &&
+                   testDate.day == checkDate.day;
+          } catch (e) {
+            return false;
+          }
+        });
+        
+        if (hasTestOnDate) {
+          streak++;
+        } else if (i > 0) { // Ne pas casser la série le jour même
+          break;
+        }
+      }
+      
+      return streak;
+    } catch (e) {
+      return 0;
+    }
   }
 }
 

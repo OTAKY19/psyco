@@ -9,10 +9,10 @@ class AnimatedProgressRingWidget extends StatefulWidget {
   final Color color;
 
   const AnimatedProgressRingWidget({
-    Key? key,
+    super.key,
     required this.percentage,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedProgressRingWidget> createState() =>
@@ -49,7 +49,7 @@ class _AnimatedProgressRingWidgetState extends State<AnimatedProgressRingWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 40.w,
       height: 40.w,
       child: AnimatedBuilder(

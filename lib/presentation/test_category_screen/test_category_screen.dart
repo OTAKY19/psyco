@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../services/user_data_service.dart';
+import '../../services/database_service.dart';
 import './widgets/context_menu_widget.dart';
 import './widgets/empty_state_widget.dart';
 import './widgets/filter_chips_widget.dart';
@@ -13,7 +13,14 @@ import './widgets/sort_bottom_sheet_widget.dart';
 import './widgets/test_card_widget.dart';
 
 class TestCategoryScreen extends StatefulWidget {
-  const TestCategoryScreen({Key? key}) : super(key: key);
+  final String? categoryName;
+  final String? categoryId;
+  
+  const TestCategoryScreen({
+    super.key,
+    this.categoryName,
+    this.categoryId,
+  });
 
   @override
   State<TestCategoryScreen> createState() => _TestCategoryScreenState();
@@ -22,125 +29,220 @@ class TestCategoryScreen extends StatefulWidget {
 class _TestCategoryScreenState extends State<TestCategoryScreen> {
   String _searchQuery = '';
   String _currentSortOption = 'alphabetical';
-  List<Map<String, dynamic>> _activeFilters = [];
-  bool _isLoading = false;
+  final List<Map<String, dynamic>> _activeFilters = [];
+  bool _isLoading = true;
   bool _isRefreshing = false;
-  String _categoryTitle = 'Tests Psychotechniques';
+  
+  // Service de base de données
+  final DatabaseService _databaseService = DatabaseService();
+  
+  // Titre dynamique basé sur la catégorie
+  String get _categoryTitle => widget.categoryName ?? 'Tests Psychotechniques';
 
-  // Mock test data
-  final List<Map<String, dynamic>> _allTests = [
-    {
-      "id": 1,
-      "title": "Test de Logique Verbale",
-      "description":
-          "Évaluation des capacités de raisonnement verbal et de compréhension linguistique",
-      "difficulty": 3,
-      "duration": 45,
-      "iconName": "psychology",
-      "isPremium": false,
-      "isDownloaded": true,
-      "isCompleted": true,
-      "attemptCount": 2,
-      "bestScore": 85.5,
-      "category": "Logique",
-      "questionCount": 30,
-      "type": "Verbal"
-    },
-    {
-      "id": 2,
-      "title": "Test de Raisonnement Numérique",
-      "description":
-          "Évaluation des compétences mathématiques et de calcul mental",
-      "difficulty": 4,
-      "duration": 60,
-      "iconName": "calculate",
-      "isPremium": true,
-      "isDownloaded": false,
-      "isCompleted": false,
-      "attemptCount": 0,
-      "bestScore": 0.0,
-      "category": "Mathématiques",
-      "questionCount": 25,
-      "type": "Numérique"
-    },
-    {
-      "id": 3,
-      "title": "Test de Perception Spatiale",
-      "description":
-          "Évaluation de la capacité à visualiser et manipuler des objets dans l'espace",
-      "difficulty": 2,
-      "duration": 30,
-      "iconName": "view_in_ar",
-      "isPremium": false,
-      "isDownloaded": true,
-      "isCompleted": false,
-      "attemptCount": 1,
-      "bestScore": 72.0,
-      "category": "Spatial",
-      "questionCount": 20,
-      "type": "Visuel"
-    },
-    {
-      "id": 4,
-      "title": "Test de Mémoire de Travail",
-      "description":
-          "Évaluation de la capacité à retenir et manipuler l'information temporairement",
-      "difficulty": 3,
-      "duration": 40,
-      "iconName": "memory",
-      "isPremium": false,
-      "isDownloaded": false,
-      "isCompleted": true,
-      "attemptCount": 3,
-      "bestScore": 91.2,
-      "category": "Mémoire",
-      "questionCount": 35,
-      "type": "Cognitif"
-    },
-    {
-      "id": 5,
-      "title": "Test d'Attention Soutenue",
-      "description":
-          "Évaluation de la capacité à maintenir l'attention sur une période prolongée",
-      "difficulty": 1,
-      "duration": 25,
-      "iconName": "visibility",
-      "isPremium": true,
-      "isDownloaded": false,
-      "isCompleted": false,
-      "attemptCount": 0,
-      "bestScore": 0.0,
-      "category": "Attention",
-      "questionCount": 40,
-      "type": "Cognitif"
-    },
-    {
-      "id": 6,
-      "title": "Test de Flexibilité Cognitive",
-      "description":
-          "Évaluation de la capacité à s'adapter aux changements de règles",
-      "difficulty": 5,
-      "duration": 50,
-      "iconName": "psychology_alt",
-      "isPremium": true,
-      "isDownloaded": true,
-      "isCompleted": false,
-      "attemptCount": 1,
-      "bestScore": 68.7,
-      "category": "Flexibilité",
-      "questionCount": 28,
-      "type": "Exécutif"
-    }
-  ];
+  // Mapping des noms affichés vers les catégories de la base de données
+  final Map<String, String> _displayToDbMapping = {
+    'Tests de Logique': 'raisonnement_logique',
+    'Mathématiques': 'aptitude_numerique',
+    'Français et Orthographe': 'aptitude_verbale',
+    'Raisonnement Spatial': 'raisonnement_spatial',
+    'Tests d\'Attention et Mémoire': 'memoire_attention',
+    'Rapidité et Personnalité': 'rapidite_personnalite',
+    'Culture Générale': 'culture_generale',
+  };
 
-  List<Map<String, dynamic>> _filteredTests = [];
+  // Mapping des catégories de la base de données vers les noms affichés
+  final Map<String, String> _categoryMapping = {
+    'raisonnement_logique': 'Tests de Logique',
+    'aptitude_numerique': 'Mathématiques',
+    'aptitude_verbale': 'Français et Orthographe',
+    'raisonnement_spatial': 'Raisonnement Spatial',
+    'memoire_attention': 'Tests d\'Attention et Mémoire',
+    'rapidite_personnalite': 'Rapidité et Personnalité',
+    'culture_generale': 'Culture Générale',
+  };
+
+  // Tests générés dynamiquement basés sur la banque de questions
+  List<Map<String, dynamic>> _allTests = [];
 
   @override
   void initState() {
     super.initState();
-    _filteredTests = List.from(_allTests);
-    _applySorting();
+    _loadTestsFromDatabase();
   }
+
+  /// Charge les tests depuis la base de données basés sur la catégorie
+  Future<void> _loadTestsFromDatabase() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      print('🔍 Chargement des tests pour la catégorie: ${widget.categoryName}');
+
+      // Obtenir la catégorie de la base de données correspondante
+      String? dbCategory;
+      if (widget.categoryName != null) {
+        // Utiliser le mapping direct pour trouver la catégorie DB
+        dbCategory = _displayToDbMapping[widget.categoryName];
+        print('📋 Mapping "${widget.categoryName}" -> "$dbCategory"');
+        if (dbCategory == null) {
+          // Si aucune correspondance n'est trouvée, utiliser categoryId si disponible
+          dbCategory = widget.categoryId;
+          print('⚠️ Aucune correspondance trouvée pour: ${widget.categoryName}, utilisation de categoryId: $dbCategory');
+        }
+      } else if (widget.categoryId != null) {
+        dbCategory = widget.categoryId;
+        print('📋 Utilisation directe de categoryId: $dbCategory');
+      }
+
+      // Obtenir le nombre de questions par catégorie
+      Map<String, int> questionCounts;
+      if (dbCategory != null) {
+        // Une catégorie spécifique
+        print('🔍 Recherche des questions pour la catégorie: $dbCategory');
+        final questions = await _databaseService.getQuestionsByCategory(dbCategory);
+        questionCounts = {dbCategory: questions.length};
+        print('📊 Questions trouvées pour $dbCategory: ${questions.length}');
+      } else {
+        // Toutes les catégories
+        print('🔍 Chargement de toutes les catégories');
+        questionCounts = await _databaseService.getQuestionCountByCategory();
+        print('📊 Comptage par catégorie: $questionCounts');
+      }
+
+      // Générer les tests dynamiquement
+      _allTests = await _generateTestsFromQuestions(questionCounts);
+      print('🎯 Tests générés: ${_allTests.length}');
+
+      // Appliquer les filtres et la recherche après avoir chargé les tests
+      _applyFiltersAndSearch();
+      print('✅ Tests filtrés: ${_filteredTests.length}');
+
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e, stackTrace) {
+      print('❌ Erreur lors du chargement des tests: $e');
+      print('📋 Stack trace: $stackTrace');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  /// Génère des tests dynamiquement basés sur le nombre de questions disponibles
+  Future<List<Map<String, dynamic>>> _generateTestsFromQuestions(Map<String, int> questionCounts) async {
+    List<Map<String, dynamic>> tests = [];
+    int testId = 1;
+
+    for (final entry in questionCounts.entries) {
+      final dbCategory = entry.key;
+      final questionCount = entry.value;
+      final displayCategory = _categoryMapping[dbCategory] ?? dbCategory;
+
+      if (questionCount == 0) continue;
+
+      // Générer différents types de tests selon le nombre de questions disponibles
+      final testConfigurations = _getTestConfigurations(questionCount);
+
+      for (final config in testConfigurations) {
+        tests.add({
+          "id": testId++,
+          "title": config['title'],
+          "description": config['description'],
+          "difficulty": config['difficulty'],
+          "duration": config['duration'],
+          "iconName": config['iconName'],
+          "isPremium": config['isPremium'],
+          "isDownloaded": false,
+          "isCompleted": false,
+          "attemptCount": 0,
+          "bestScore": 0.0,
+          "category": displayCategory,
+          "questionCount": config['questionCount'],
+          "type": "Cognitif",
+          "dbCategory": dbCategory, // Pour référence lors du test
+        });
+      }
+    }
+
+    return tests;
+  }
+
+  /// Génère des configurations de tests basées sur le nombre de questions disponibles
+  List<Map<String, dynamic>> _getTestConfigurations(int totalQuestions) {
+    List<Map<String, dynamic>> configurations = [];
+
+    if (totalQuestions >= 10) {
+      // Test court (10 questions)
+      configurations.add({
+        'title': 'Test Court',
+        'description': 'Test rapide avec 10 questions',
+        'difficulty': 2,
+        'duration': 15,
+        'iconName': 'timer',
+        'isPremium': false,
+        'questionCount': 10,
+      });
+    }
+
+    if (totalQuestions >= 20) {
+      // Test standard (20 questions)
+      configurations.add({
+        'title': 'Test Standard',
+        'description': 'Test complet avec 20 questions',
+        'difficulty': 3,
+        'duration': 30,
+        'iconName': 'quiz',
+        'isPremium': false,
+        'questionCount': 20,
+      });
+    }
+
+    if (totalQuestions >= 30) {
+      // Test long (30 questions)
+      configurations.add({
+        'title': 'Test Long',
+        'description': 'Test approfondi avec 30 questions',
+        'difficulty': 4,
+        'duration': 45,
+        'iconName': 'school',
+        'isPremium': true,
+        'questionCount': 30,
+      });
+    }
+
+    if (totalQuestions >= 50) {
+      // Test marathon (50 questions)
+      configurations.add({
+        'title': 'Test Marathon',
+        'description': 'Test complet avec 50 questions',
+        'difficulty': 5,
+        'duration': 60,
+        'iconName': 'emoji_events',
+        'isPremium': true,
+        'questionCount': 50,
+      });
+    }
+
+    // Test personnalisé avec toutes les questions disponibles
+    if (totalQuestions > 0) {
+      configurations.add({
+        'title': 'Test Complet',
+        'description': 'Test avec toutes les $totalQuestions questions disponibles',
+        'difficulty': 3,
+        'duration': (totalQuestions * 1.2).round(), // 1.2 min par question
+        'iconName': 'all_inclusive',
+        'isPremium': totalQuestions > 40,
+        'questionCount': totalQuestions,
+      });
+    }
+
+    return configurations;
+  }
+
+  // Tests filtrés pour l'affichage
+  List<Map<String, dynamic>> _filteredTests = [];
 
   void _onSearchChanged(String query) {
     setState(() {
@@ -287,8 +389,8 @@ class _TestCategoryScreenState extends State<TestCategoryScreen> {
       _isRefreshing = true;
     });
 
-    // Simulate network refresh
-    await Future.delayed(const Duration(seconds: 2));
+    // Recharger les tests depuis la base de données
+    await _loadTestsFromDatabase();
 
     setState(() {
       _isRefreshing = false;
@@ -556,8 +658,12 @@ class _TestCategoryScreenState extends State<TestCategoryScreen> {
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         color: AppTheme.lightTheme.colorScheme.primary,
-        child: Column(
-          children: [
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : _isRefreshing 
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    children: [
             // Search bar
             SearchBarWidget(
               hintText: 'Rechercher un test...',

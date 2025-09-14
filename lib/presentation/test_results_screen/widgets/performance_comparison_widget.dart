@@ -9,11 +9,11 @@ class PerformanceComparisonWidget extends StatelessWidget {
   final List<Map<String, dynamic>> recentAttempts;
 
   const PerformanceComparisonWidget({
-    Key? key,
+    super.key,
     required this.currentScore,
     required this.previousScore,
     required this.recentAttempts,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +142,7 @@ class PerformanceComparisonWidget extends StatelessWidget {
                   ),
             ),
             SizedBox(height: 2.h),
-            Container(
+            SizedBox(
               height: 15.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,

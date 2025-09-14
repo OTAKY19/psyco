@@ -8,10 +8,10 @@ class SettingsSectionWidget extends StatelessWidget {
   final List<SettingsItem> items;
 
   const SettingsSectionWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.items,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SettingsSectionWidget extends StatelessWidget {
               title,
               style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
               ),
             ),
           ),
@@ -98,7 +98,7 @@ class SettingsSectionWidget extends StatelessWidget {
           ? Switch(
               value: item.toggleValue ?? false,
               onChanged: item.onToggleChanged,
-              activeColor: AppTheme.lightTheme.primaryColor,
+              activeColor: AppTheme.lightTheme.colorScheme.primary,
             )
           : Row(
               mainAxisSize: MainAxisSize.min,

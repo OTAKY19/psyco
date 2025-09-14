@@ -108,7 +108,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
       final transactionId = _paymentData!['transactionId'];
       
       // Vérifier le statut du paiement
-      final statusResult = await _subscriptionService.checkPaymentStatus(transactionId);
+      final statusResult = await _subscriptionService.checkPaymentStatus(transactionId!);
       
       switch (statusResult['status']) {
         case 'completed':
@@ -159,7 +159,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     try {
       final success = await _subscriptionService.activatePremiumAccount(
         transactionId: _paymentData!['transactionId'],
-        paymentMethod: _paymentData!['paymentMethod'],
+        amount: _paymentData!['amount']?.toDouble() ?? SubscriptionService.premiumPrice,
       );
       
       if (success) {
@@ -336,7 +336,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
                   color: Theme.of(context).colorScheme.primaryContainer,
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
                       blurRadius: 20,
                       spreadRadius: 5,
                     ),
@@ -369,7 +369,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
         ),
         SizedBox(height: 2.h),
         LinearProgressIndicator(
-          backgroundColor: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
           valueColor: AlwaysStoppedAnimation<Color>(
             Theme.of(context).colorScheme.primary,
           ),
@@ -401,7 +401,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
                   color: Theme.of(context).colorScheme.tertiaryContainer,
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.tertiary.withOpacity(0.3),
+                      color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
                       blurRadius: 20,
                       spreadRadius: 5,
                     ),
@@ -434,7 +434,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
               Container(
                 padding: EdgeInsets.all(2.h),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.5),
+                  color: Theme.of(context).colorScheme.tertiaryContainer.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(1.5.h),
                 ),
                 child: Column(
@@ -474,7 +474,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
             color: Theme.of(context).colorScheme.errorContainer,
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.error.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.error.withValues(alpha: 0.3),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
@@ -518,7 +518,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
             color: Theme.of(context).colorScheme.secondaryContainer,
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
@@ -555,7 +555,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     return Container(
       padding: EdgeInsets.all(2.h),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(1.5.h),
       ),
       child: Column(
@@ -689,7 +689,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     return Container(
       padding: EdgeInsets.all(2.h),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(1.5.h),
       ),
       child: Column(

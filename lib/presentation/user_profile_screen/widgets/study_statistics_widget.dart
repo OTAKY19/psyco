@@ -9,11 +9,11 @@ class StudyStatisticsWidget extends StatelessWidget {
   final int currentStreak;
 
   const StudyStatisticsWidget({
-    Key? key,
+    super.key,
     required this.totalTests,
     required this.averageScore,
     required this.currentStreak,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class StudyStatisticsWidget extends StatelessWidget {
             children: [
               CustomIconWidget(
                 iconName: 'analytics',
-                color: AppTheme.lightTheme.primaryColor,
+                color: AppTheme.lightTheme.colorScheme.primary,
                 size: 20,
               ),
               SizedBox(width: 2.w),
@@ -59,7 +59,7 @@ class StudyStatisticsWidget extends StatelessWidget {
                   'Tests complétés',
                   totalTests.toString(),
                   'quiz',
-                  AppTheme.lightTheme.primaryColor,
+                  AppTheme.lightTheme.colorScheme.primary,
                 ),
               ),
               SizedBox(width: 3.w),

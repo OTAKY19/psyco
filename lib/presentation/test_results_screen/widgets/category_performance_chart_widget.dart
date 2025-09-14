@@ -9,9 +9,9 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
   final List<Map<String, dynamic>> categoryData;
 
   const CategoryPerformanceChartWidget({
-    Key? key,
+    super.key,
     required this.categoryData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                 ),
           ),
           SizedBox(height: 3.h),
-          Container(
+          SizedBox(
             height: 30.h,
             child: BarChart(
               BarChartData(

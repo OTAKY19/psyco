@@ -9,10 +9,10 @@ class StudyCalendarWidget extends StatefulWidget {
   final Function(DateTime) onDaySelected;
 
   const StudyCalendarWidget({
-    Key? key,
+    super.key,
     required this.studyData,
     required this.onDaySelected,
-  }) : super(key: key);
+  });
 
   @override
   State<StudyCalendarWidget> createState() => _StudyCalendarWidgetState();
@@ -30,10 +30,12 @@ class _StudyCalendarWidgetState extends State<StudyCalendarWidget> {
 
   Color _getActivityColor(int testsCompleted) {
     if (testsCompleted == 0) return Colors.transparent;
-    if (testsCompleted <= 2)
+    if (testsCompleted <= 2) {
       return AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.3);
-    if (testsCompleted <= 4)
+    }
+    if (testsCompleted <= 4) {
       return AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.6);
+    }
     return AppTheme.lightTheme.colorScheme.primary;
   }
 

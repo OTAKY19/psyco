@@ -9,10 +9,10 @@ class PerformanceChartWidget extends StatefulWidget {
   final String title;
 
   const PerformanceChartWidget({
-    Key? key,
+    super.key,
     required this.chartData,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   State<PerformanceChartWidget> createState() => _PerformanceChartWidgetState();

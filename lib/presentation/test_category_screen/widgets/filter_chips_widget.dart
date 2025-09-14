@@ -8,10 +8,10 @@ class FilterChipsWidget extends StatelessWidget {
   final ValueChanged<String> onRemoveFilter;
 
   const FilterChipsWidget({
-    Key? key,
+    super.key,
     required this.activeFilters,
     required this.onRemoveFilter,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

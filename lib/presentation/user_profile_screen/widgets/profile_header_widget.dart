@@ -12,14 +12,14 @@ class ProfileHeaderWidget extends StatelessWidget {
   final VoidCallback onAvatarTap;
 
   const ProfileHeaderWidget({
-    Key? key,
+    super.key,
     required this.userName,
     required this.userEmail,
     required this.isPremium,
     required this.avatarUrl,
     required this.onEditPressed,
     required this.onAvatarTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                 onPressed: onEditPressed,
                 icon: CustomIconWidget(
                   iconName: 'edit',
-                  color: AppTheme.lightTheme.primaryColor,
+                  color: AppTheme.lightTheme.colorScheme.primary,
                   size: 20,
                 ),
               ),
@@ -92,7 +92,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                     width: 6.w,
                     height: 6.w,
                     decoration: BoxDecoration(
-                      color: AppTheme.lightTheme.primaryColor,
+                      color: AppTheme.lightTheme.colorScheme.primary,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: AppTheme.lightTheme.colorScheme.surface,

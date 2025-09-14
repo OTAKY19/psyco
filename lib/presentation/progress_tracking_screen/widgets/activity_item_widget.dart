@@ -10,12 +10,12 @@ class ActivityItemWidget extends StatelessWidget {
   final VoidCallback? onShare;
 
   const ActivityItemWidget({
-    Key? key,
+    super.key,
     required this.activity,
     this.onRetake,
     this.onViewDetails,
     this.onShare,
-  }) : super(key: key);
+  });
 
   Color _getScoreColor(double score) {
     if (score >= 80) return AppTheme.successLight;

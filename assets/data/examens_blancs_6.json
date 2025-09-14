@@ -1,0 +1,4094 @@
+{
+  "examen_1": [
+    {
+      "id": 1001,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1002,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1003,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1004,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1005,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1006,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1007,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1008,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1009,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1010,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1011,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1012,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1013,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1014,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1015,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1016,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1017,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1018,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1019,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1020,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1021,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1022,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1023,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1024,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1025,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1026,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1027,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1028,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1029,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1030,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1031,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 17x + 25 = 195.",
+      "options": [
+        "10",
+        "11",
+        "9",
+        "12"
+      ],
+      "reponse": "10",
+      "explication": "On isole x : 17x = 170 → x = 10.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1032,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 36x + 35 = 359.",
+      "options": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "reponse": "9",
+      "explication": "On isole x : 36x = 324 → x = 9.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1033,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 32x + 43 = 171.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 32x = 128 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1034,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 14x + 39 = 123.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 14x = 84 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1035,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 16x + 17 = 113.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 16x = 96 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1036,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1037,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1038,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1039,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1040,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ],
+  "examen_2": [
+    {
+      "id": 1041,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1042,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1043,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1044,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1045,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1046,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1047,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1048,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1049,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1050,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1051,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1052,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1053,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1054,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1055,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1056,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1057,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1058,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1059,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1060,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1061,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1062,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1063,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1064,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1065,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1066,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1067,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1068,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1069,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1070,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1071,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 22x + 30 = 140.",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "7"
+      ],
+      "reponse": "5",
+      "explication": "On isole x : 22x = 110 → x = 5.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1072,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 50x + 30 = 380.",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "9"
+      ],
+      "reponse": "7",
+      "explication": "On isole x : 50x = 350 → x = 7.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1073,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 30x + 19 = 289.",
+      "options": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "reponse": "9",
+      "explication": "On isole x : 30x = 270 → x = 9.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1074,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 50x + 21 = 221.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 50x = 200 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1075,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 27x + 41 = 230.",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "9"
+      ],
+      "reponse": "7",
+      "explication": "On isole x : 27x = 189 → x = 7.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1076,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1077,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1078,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1079,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1080,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ],
+  "examen_3": [
+    {
+      "id": 1081,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1082,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1083,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1084,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1085,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1086,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1087,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1088,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1089,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1090,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1091,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1092,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1093,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1094,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1095,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1096,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1097,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1098,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1099,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1100,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1101,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1102,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1103,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1104,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1105,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1106,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1107,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1108,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1109,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1110,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1111,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 15x + 44 = 134.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 15x = 90 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1112,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 29x + 17 = 249.",
+      "options": [
+        "8",
+        "9",
+        "7",
+        "10"
+      ],
+      "reponse": "8",
+      "explication": "On isole x : 29x = 232 → x = 8.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1113,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 32x + 17 = 113.",
+      "options": [
+        "3",
+        "4",
+        "2",
+        "5"
+      ],
+      "reponse": "3",
+      "explication": "On isole x : 32x = 96 → x = 3.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1114,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 44x + 17 = 237.",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "7"
+      ],
+      "reponse": "5",
+      "explication": "On isole x : 44x = 220 → x = 5.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1115,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 35x + 46 = 186.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 35x = 140 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1116,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1117,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1118,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1119,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1120,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ],
+  "examen_4": [
+    {
+      "id": 1121,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1122,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1123,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1124,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1125,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1126,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1127,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1128,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1129,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1130,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1131,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1132,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1133,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1134,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1135,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1136,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1137,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1138,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1139,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1140,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1141,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1142,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1143,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1144,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1145,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1146,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1147,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1148,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1149,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1150,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1151,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1152,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1153,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1154,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1155,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1156,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1157,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1158,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1159,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1160,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    }
+  ],
+  "examen_5": [
+    {
+      "id": 1161,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1162,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1163,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1164,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1165,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1166,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1167,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1168,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1169,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1170,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1171,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1172,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1173,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1174,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1175,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1176,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1177,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1178,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1179,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1180,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1181,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1182,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1183,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1184,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1185,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1186,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1187,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1188,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1189,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1190,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1191,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1192,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1193,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1194,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1195,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1196,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1197,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1198,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1199,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1200,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    }
+  ],
+  "examen_6": [
+    {
+      "id": 1201,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1202,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1203,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1204,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1205,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1206,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1207,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1208,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1209,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1210,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain possède trois capitales officielles ?",
+      "options": [
+        "Afrique du Sud",
+        "Nigeria",
+        "Kenya",
+        "Tanzanie"
+      ],
+      "reponse": "Afrique du Sud",
+      "explication": "L'Afrique du Sud a Pretoria, Le Cap et Bloemfontein comme capitales.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1211,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1212,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1213,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1214,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1215,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1216,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1217,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1218,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1219,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1220,
+      "categorie": "droit_douane",
+      "question": "Quel est le but de l'Accord de Kyoto révisé dans le domaine douanier ?",
+      "options": [
+        "Simplifier et harmoniser les procédures",
+        "Augmenter les taxes",
+        "Supprimer les frontières",
+        "Créer une monnaie unique"
+      ],
+      "reponse": "Simplifier et harmoniser les procédures",
+      "explication": "L'accord vise la simplification et harmonisation des procédures douanières.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1221,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1222,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1223,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1224,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1225,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1226,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1227,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1228,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1229,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1230,
+      "categorie": "francais",
+      "question": "Identifiez la figure de style dans : 'Cette obscure clarté qui tombe des étoiles'.",
+      "options": [
+        "Oxymore",
+        "Métaphore",
+        "Hyperbole",
+        "Allitération"
+      ],
+      "reponse": "Oxymore",
+      "explication": "Association de termes contradictoires : 'obscure clarté'.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1231,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1232,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1233,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1234,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1235,
+      "categorie": "mathematiques",
+      "question": "Calculez la probabilité d'obtenir un nombre pair en lançant un dé équilibré.",
+      "options": [
+        "1/6",
+        "1/2",
+        "2/3",
+        "5/6"
+      ],
+      "reponse": "1/2",
+      "explication": "Il y a 3 nombres pairs sur 6 faces, soit 1/2.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1236,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1237,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1238,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1239,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    },
+    {
+      "id": 1240,
+      "categorie": "logique",
+      "question": "Quelle figure complète la série : ■, ▲, ●, ■, ▲, ?",
+      "options": [
+        "●",
+        "▲",
+        "■",
+        "♦"
+      ],
+      "reponse": "●",
+      "explication": "La série alterne carré, triangle, cercle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": true,
+      "image": "images_examens/logique_seq.png"
+    }
+  ]
+}

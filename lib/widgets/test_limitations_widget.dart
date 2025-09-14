@@ -84,7 +84,7 @@ class _TestLimitationsWidgetState extends State<TestLimitationsWidget> {
         borderRadius: BorderRadius.circular(1.5.h),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha:0.1),
             blurRadius: 8,
             spreadRadius: 2,
           ),
@@ -119,7 +119,7 @@ class _TestLimitationsWidgetState extends State<TestLimitationsWidget> {
                 Text(
                   'Tests illimités • Accès complet',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8),
+                    color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha:0.8),
                   ),
                 ),
               ],
@@ -147,12 +147,12 @@ class _TestLimitationsWidgetState extends State<TestLimitationsWidget> {
         borderRadius: BorderRadius.circular(1.5.h),
         border: Border.all(
           color: freeTestsRemaining > 0 
-              ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-              : Theme.of(context).colorScheme.error.withOpacity(0.3),
+              ? Theme.of(context).colorScheme.primary.withValues(alpha:0.3)
+              : Theme.of(context).colorScheme.error.withValues(alpha:0.3),
         ),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.shadow.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha:0.1),
             blurRadius: 8,
             spreadRadius: 2,
           ),
@@ -167,8 +167,8 @@ class _TestLimitationsWidgetState extends State<TestLimitationsWidget> {
                 padding: EdgeInsets.all(1.h),
                 decoration: BoxDecoration(
                   color: freeTestsRemaining > 0 
-                      ? Theme.of(context).colorScheme.primary.withOpacity(0.1)
-                      : Theme.of(context).colorScheme.error.withOpacity(0.1),
+                      ? Theme.of(context).colorScheme.primary.withValues(alpha:0.1)
+                      : Theme.of(context).colorScheme.error.withValues(alpha:0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -230,7 +230,7 @@ class _TestLimitationsWidgetState extends State<TestLimitationsWidget> {
             borderRadius: BorderRadius.circular(0.5.h),
             child: LinearProgressIndicator(
               value: freeTestsUsed / totalFreeTests,
-              backgroundColor: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+              backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha:0.2),
               valueColor: AlwaysStoppedAnimation<Color>(
                 freeTestsRemaining > 0 
                     ? Theme.of(context).colorScheme.primary
@@ -358,12 +358,12 @@ class CompactTestLimitationsWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: freeTestsRemaining > 0 
                     ? Theme.of(context).colorScheme.surface
-                    : Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
+                    : Theme.of(context).colorScheme.errorContainer.withValues(alpha:0.3),
                 borderRadius: BorderRadius.circular(2.h),
                 border: Border.all(
                   color: freeTestsRemaining > 0 
-                      ? Theme.of(context).colorScheme.primary.withOpacity(0.3)
-                      : Theme.of(context).colorScheme.error.withOpacity(0.5),
+                      ? Theme.of(context).colorScheme.primary.withValues(alpha:0.3)
+                      : Theme.of(context).colorScheme.error.withValues(alpha:0.5),
                 ),
               ),
               child: Row(

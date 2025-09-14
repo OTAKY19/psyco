@@ -7,9 +7,9 @@ class QuickStatsWidget extends StatelessWidget {
   final Map<String, dynamic> stats;
 
   const QuickStatsWidget({
-    Key? key,
+    super.key,
     required this.stats,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class QuickStatsWidget extends StatelessWidget {
                   icon: 'trending_up',
                   value: '${averageScore.toInt()}%',
                   label: 'Score\nmoyen',
-                  color: AppTheme.lightTheme.primaryColor,
+                  color: AppTheme.lightTheme.colorScheme.primary,
                 ),
               ),
               Container(

@@ -10,12 +10,12 @@ class PerformanceBreakdownWidget extends StatelessWidget {
   final int totalQuestions;
 
   const PerformanceBreakdownWidget({
-    Key? key,
+    super.key,
     required this.correctAnswers,
     required this.incorrectAnswers,
     required this.skippedAnswers,
     required this.totalQuestions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../models/question_model.dart';
 import '../models/test_model.dart';
-import '../models/test_result_model.dart';
+import '../models/test_session.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();

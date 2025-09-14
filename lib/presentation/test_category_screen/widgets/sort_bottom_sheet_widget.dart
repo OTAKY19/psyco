@@ -8,10 +8,10 @@ class SortBottomSheetWidget extends StatelessWidget {
   final ValueChanged<String> onSortChanged;
 
   const SortBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.currentSortOption,
     required this.onSortChanged,
-  }) : super(key: key);
+  });
 
   static void show(
     BuildContext context, {

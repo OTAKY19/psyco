@@ -9,10 +9,10 @@ class FilterBottomSheetWidget extends StatefulWidget {
   final Function(Map<String, dynamic>) onFiltersChanged;
 
   const FilterBottomSheetWidget({
-    Key? key,
+    super.key,
     required this.currentFilters,
     required this.onFiltersChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<FilterBottomSheetWidget> createState() =>
@@ -80,7 +80,7 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                   child: Text(
                     'Réinitialiser',
                     style: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
-                      color: AppTheme.lightTheme.primaryColor,
+                      color: AppTheme.lightTheme.colorScheme.primary,
                     ),
                   ),
                 ),
@@ -207,16 +207,16 @@ class _FilterBottomSheetWidgetState extends State<FilterBottomSheetWidget> {
                 onChanged(newSelected);
               },
               selectedColor:
-                  AppTheme.lightTheme.primaryColor.withValues(alpha: 0.2),
-              checkmarkColor: AppTheme.lightTheme.primaryColor,
+                  AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.2),
+              checkmarkColor: AppTheme.lightTheme.colorScheme.primary,
               labelStyle: AppTheme.lightTheme.textTheme.labelMedium?.copyWith(
                 color: isSelected
-                    ? AppTheme.lightTheme.primaryColor
+                    ? AppTheme.lightTheme.colorScheme.primary
                     : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
               ),
               side: BorderSide(
                 color: isSelected
-                    ? AppTheme.lightTheme.primaryColor
+                    ? AppTheme.lightTheme.colorScheme.primary
                     : AppTheme.lightTheme.colorScheme.outline
                         .withValues(alpha: 0.5),
               ),

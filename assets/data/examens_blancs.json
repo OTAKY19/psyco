@@ -1,0 +1,2048 @@
+{
+  "examen_1": [
+    {
+      "id": 1001,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1002,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1003,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1004,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1005,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1006,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1007,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1008,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1009,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1010,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1011,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1012,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1013,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1014,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1015,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1016,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1017,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1018,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1019,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1020,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1021,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1022,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1023,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1024,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1025,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1026,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1027,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1028,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1029,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1030,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1031,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 17x + 25 = 195.",
+      "options": [
+        "10",
+        "11",
+        "9",
+        "12"
+      ],
+      "reponse": "10",
+      "explication": "On isole x : 17x = 170 → x = 10.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1032,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 36x + 35 = 359.",
+      "options": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "reponse": "9",
+      "explication": "On isole x : 36x = 324 → x = 9.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1033,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 32x + 43 = 171.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 32x = 128 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1034,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 14x + 39 = 123.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 14x = 84 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1035,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 16x + 17 = 113.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 16x = 96 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1036,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1037,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1038,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1039,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1040,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ],
+  "examen_2": [
+    {
+      "id": 1041,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1042,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1043,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1044,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1045,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1046,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1047,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1048,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1049,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1050,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1051,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1052,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1053,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1054,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1055,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1056,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1057,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1058,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1059,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1060,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1061,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1062,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1063,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1064,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1065,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1066,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1067,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1068,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1069,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1070,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1071,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 22x + 30 = 140.",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "7"
+      ],
+      "reponse": "5",
+      "explication": "On isole x : 22x = 110 → x = 5.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1072,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 50x + 30 = 380.",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "9"
+      ],
+      "reponse": "7",
+      "explication": "On isole x : 50x = 350 → x = 7.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1073,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 30x + 19 = 289.",
+      "options": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "reponse": "9",
+      "explication": "On isole x : 30x = 270 → x = 9.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1074,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 50x + 21 = 221.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 50x = 200 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1075,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 27x + 41 = 230.",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "9"
+      ],
+      "reponse": "7",
+      "explication": "On isole x : 27x = 189 → x = 7.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1076,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1077,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1078,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1079,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1080,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ],
+  "examen_3": [
+    {
+      "id": 1081,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1082,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1083,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1084,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1085,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1086,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1087,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1088,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1089,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1090,
+      "categorie": "culture_generale",
+      "question": "Quel pays africain a été le dernier à obtenir son indépendance ?",
+      "options": [
+        "Namibie",
+        "Erythrée",
+        "Soudan du Sud",
+        "Zimbabwe"
+      ],
+      "reponse": "Soudan du Sud",
+      "explication": "Le Soudan du Sud est devenu indépendant en 2011.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1091,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1092,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1093,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1094,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1095,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1096,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1097,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1098,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1099,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1100,
+      "categorie": "droit_douane",
+      "question": "Selon le Code des douanes de l'UEMOA, quel est le délai légal pour conserver les documents relatifs à une importation ?",
+      "options": [
+        "1 an",
+        "3 ans",
+        "5 ans",
+        "10 ans"
+      ],
+      "reponse": "5 ans",
+      "explication": "Les documents doivent être conservés 5 ans pour contrôle.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1101,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1102,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1103,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1104,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1105,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1106,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1107,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1108,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1109,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1110,
+      "categorie": "francais",
+      "question": "Quelle est la faute dans cette phrase : 'Les enfant jouent dans la cours.' ?",
+      "options": [
+        "Enfant",
+        "Jouent",
+        "Cours",
+        "Aucune"
+      ],
+      "reponse": "Cours",
+      "explication": "'Cours' doit être 'cour' (sans s).",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1111,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 15x + 44 = 134.",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "8"
+      ],
+      "reponse": "6",
+      "explication": "On isole x : 15x = 90 → x = 6.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1112,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 29x + 17 = 249.",
+      "options": [
+        "8",
+        "9",
+        "7",
+        "10"
+      ],
+      "reponse": "8",
+      "explication": "On isole x : 29x = 232 → x = 8.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1113,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 32x + 17 = 113.",
+      "options": [
+        "3",
+        "4",
+        "2",
+        "5"
+      ],
+      "reponse": "3",
+      "explication": "On isole x : 32x = 96 → x = 3.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1114,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 44x + 17 = 237.",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "7"
+      ],
+      "reponse": "5",
+      "explication": "On isole x : 44x = 220 → x = 5.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1115,
+      "categorie": "mathematiques",
+      "question": "Résolvez l'équation : 35x + 46 = 186.",
+      "options": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "reponse": "4",
+      "explication": "On isole x : 35x = 140 → x = 4.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1116,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1117,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1118,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1119,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    },
+    {
+      "id": 1120,
+      "categorie": "logique",
+      "question": "Complétez la suite : A, C, F, J, O, ?",
+      "options": [
+        "Q",
+        "S",
+        "T",
+        "U"
+      ],
+      "reponse": "U",
+      "explication": "Les lettres avancent de +2, +3, +4, +5... → U.",
+      "niveau": "difficile",
+      "proba_simple": 0.2,
+      "image_required": false,
+      "image": null
+    }
+  ]
+}

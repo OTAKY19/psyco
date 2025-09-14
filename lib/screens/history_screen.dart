@@ -5,7 +5,7 @@ import '../models/test_session.dart';
 import 'package:intl/intl.dart';
 
 class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+  const HistoryScreen({super.key});
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();
@@ -141,8 +141,8 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(0.8),
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
               ],
             ),
             borderRadius: BorderRadius.circular(12),
@@ -158,7 +158,7 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
               ),
               _buildQuickStat(
                 'Score moyen',
-                _getAverageScore().toStringAsFixed(1) + '%',
+                '${_getAverageScore().toStringAsFixed(1)}%',
                 Icons.trending_up,
               ),
             ],
@@ -240,8 +240,8 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: isCompleted 
-                          ? Colors.green.withOpacity(0.1)
-                          : Colors.orange.withOpacity(0.1),
+                          ? Colors.green.withValues(alpha: 0.1)
+                          : Colors.orange.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
@@ -278,8 +278,8 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: isCompleted 
-                          ? Colors.green.withOpacity(0.1)
-                          : Colors.orange.withOpacity(0.1),
+                          ? Colors.green.withValues(alpha: 0.1)
+                          : Colors.orange.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -344,7 +344,7 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
                     LinearProgressIndicator(
                       value: (result.currentQuestionIndex + 1) / result.totalQuestions,
                       backgroundColor: Colors.grey[300],
-                      valueColor: AlwaysStoppedAnimation<Color>(theme.primaryColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
                     ),
                   ],
                 ),
@@ -402,7 +402,7 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
         Text(
           label,
           style: TextStyle(
-            color: Colors.white.withOpacity(0.9),
+            color: Colors.white.withValues(alpha: 0.9),
             fontSize: 12,
           ),
         ),
@@ -516,7 +516,7 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -602,7 +602,7 @@ class _HistoryScreenState extends State<HistoryScreen> with TickerProviderStateM
                   ],
                 ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

@@ -11,13 +11,13 @@ class EmptyStateWidget extends StatelessWidget {
   final String? imagePath;
 
   const EmptyStateWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.buttonText,
     required this.onButtonPressed,
     this.imagePath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,12 @@ class EmptyStateWidget extends StatelessWidget {
                 height: 40.w,
                 decoration: BoxDecoration(
                   color:
-                      AppTheme.lightTheme.primaryColor.withValues(alpha: 0.1),
+                      AppTheme.lightTheme.colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20.w),
                 ),
                 child: CustomIconWidget(
                   iconName: 'school',
-                  color: AppTheme.lightTheme.primaryColor,
+                  color: AppTheme.lightTheme.colorScheme.primary,
                   size: 20.w,
                 ),
               ),
