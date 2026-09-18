@@ -27,10 +27,11 @@ class UserStateService extends ChangeNotifier {
   }
 
   bool _hasLifetimeAccess = false; // État local pour l'accès à vie
+  late final Future<void> _initFuture;
 
   // Initialisation de l'état
   UserStateService() {
-    _loadLifetimeAccessStatus();
+    _initFuture = _loadLifetimeAccessStatus();
   }
 
   Future<void> _loadLifetimeAccessStatus() async {
@@ -68,6 +69,7 @@ class UserStateService extends ChangeNotifier {
 
   // Méthodes de compatibilité pour les autres parties du code
   Future<bool> isActivated() async {
+    await _initFuture;
     return hasLifetimeAccess;
   }
 
@@ -120,6 +122,7 @@ class UserStateService extends ChangeNotifier {
 
   // Logique des résultats progressifs
   Future<int> calculateVisibleResultsCount() async {
+    await _initFuture;
     final hasCompletedDemo = await this.hasCompletedDemo();
     final demoStartTime = await getDemoStartTime();
 
@@ -174,6 +177,7 @@ class UserStateService extends ChangeNotifier {
 
   // Obtenir l'état complet de l'utilisateur
   Future<UserState> getUserState() async {
+    await _initFuture;
     return UserState(
       hasCompletedDemo: await hasCompletedDemo(),
       hasLifetimeAccess: hasLifetimeAccess, // Utilise le nouvel état
