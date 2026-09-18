@@ -5,6 +5,18 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/api_config.dart';
 
+/// Catégorisation du retour de vérification au reprise (ET8).
+enum ResumeVerification {
+  /// Aucune transaction en attente stockée.
+  none,
+  /// Transaction attestée → accès activé (grant idempotent).
+  granted,
+  /// Transaction expirée (30 min) → nettoyée, inviter à repayer.
+  expired,
+  /// Transaction toujours en vol (ni attestée ni expirée).
+  inFlight,
+}
+
 /// Service pour la gestion du paiement unique de 3000 FCFA
 class OneTimePurchaseService {
   static final OneTimePurchaseService _instance =
@@ -20,6 +32,12 @@ class OneTimePurchaseService {
 
   /// Durée de validité d'une transaction en attente (vérification manuelle)
   static const Duration pendingTimeout = Duration(minutes: 30);
+
+  /// Durée du short-poll de confirmation après attestation (ET8).
+  static const Duration shortPollTimeout = Duration(seconds: 60);
+
+  /// Intervalle entre deux vérifications du short-poll (ET8).
+  static const Duration shortPollInterval = Duration(seconds: 3);
 
   // Cache du statut premium
   bool? _cachedPremiumStatus;
@@ -263,6 +281,9 @@ class OneTimePurchaseService {
     }
   }
 
+  /// Code USSD public pour ré-attacher un CTA en vol après app death (ET8).
+  String ussdCodeFor(String provider) => _generateUssdCode(provider);
+
   /// Génère un ID de transaction unique
   String _generateTransactionId() {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
@@ -346,6 +367,77 @@ class OneTimePurchaseService {
     if (pending == null) return false;
     if (pending['id'] != transactionId) return false;
     return pending['status'] == 'attested';
+  }
+
+  // ===========================================
+  // VERIFY-ON-RESUME + SHORT-POLL (ET8)
+  // ===========================================
+
+  /// Re-vérifie l'intent au retour/reprise de l'app. Ne crée jamais un
+  /// nouvel intent et ne ré-atteste rien : il lit uniquement la transaction
+  /// en attente persistée, la grants si attestée, la marque expirée sinon.
+  ///
+  /// App death mid-confirmation → le CTA se ré-attache à l'écran grâce à la
+  /// transaction stockée (getPendingTransaction) ; cette méthode débloque
+  /// dans le meilleur cas (attestation déjà faite) et ne double jamais.
+  Future<ResumeVerification> verifyOnResume() async {
+    final pending = await getPendingTransaction();
+
+    // Aucune transaction stockée : soit pas de paiement, soit une
+    // transaction expirée déjà nettoyée (flag posé par getPendingTransaction).
+    if (pending == null) {
+      final prefs = await SharedPreferences.getInstance();
+      final wasExpired = prefs.getBool('pending_expired') ?? false;
+      if (wasExpired) await prefs.remove('pending_expired');
+      return wasExpired ? ResumeVerification.expired : ResumeVerification.none;
+    }
+
+    final transactionId = pending['id'] as String?;
+    if (transactionId == null) {
+      await clearPendingTransaction();
+      return ResumeVerification.expired;
+    }
+
+    // Déjà attestée avant le kill/reprise → grant idempotent.
+    if (pending['status'] == 'attested') {
+      final result = await confirmPayment(transactionId);
+      return result['success'] == true
+          ? ResumeVerification.granted
+          : ResumeVerification.inFlight;
+    }
+
+    // Non attestée : soit toujours en vol, soit expirée (nettoyage + flag).
+    if (isTransactionExpired(pending['created_at'] as String?)) {
+      await clearPendingTransaction();
+      await _markExpired();
+      return ResumeVerification.expired;
+    }
+
+    return ResumeVerification.inFlight;
+  }
+
+  /// Short-poll de confirmation après attestation / retour-return :
+  /// interroge [verifyOnResume] toutes les [shortPollInterval] pendant
+  /// [shortPollTimeout] au maximum. Stoppe dès qu'une décision terminale
+  /// (granted / expired / none) est atteinte. Idempotent : ne crée rien.
+  Future<ResumeVerification> shortPollVerification({
+    Duration timeout = shortPollTimeout,
+    Duration interval = shortPollInterval,
+  }) async {
+    final deadline = DateTime.now().add(timeout);
+    while (true) {
+      final state = await verifyOnResume();
+      if (state != ResumeVerification.inFlight) return state;
+      if (DateTime.now().isAfter(deadline)) return ResumeVerification.inFlight;
+      await Future.delayed(interval);
+    }
+  }
+
+  /// Marque la transaction expirée (flag lu par confirmPayment pour le
+  /// message dédié PAYMENT_EXPIRED).
+  Future<void> _markExpired() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('pending_expired', true);
   }
 
   /// Active l'accès premium
@@ -465,6 +557,10 @@ class OneTimePurchaseService {
       debugPrint('❌ Erreur réinitialisation: $e');
     }
   }
+
+  /// Remet le cache de statut à zéro entre scénarios de test (ET8).
+  /// Ne touche pas aux prefs. Idempotent.
+  void resetCachedStatusForTest() => _cachedPremiumStatus = null;
 
   /// Méthode de compatibilité pour l'ancien code
   Future<PaymentResult> purchaseFullAccess(

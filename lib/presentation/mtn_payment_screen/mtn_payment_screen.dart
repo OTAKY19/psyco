@@ -7,6 +7,7 @@ import '../../design/app_colors.dart';
 import '../../design/app_radii.dart';
 import '../../design/app_spacing.dart';
 import '../../design/app_text_styles.dart';
+import '../../services/auth_service.dart';
 import '../../services/one_time_purchase_service.dart';
 
 const Color _mtnYellow = Color(0xFFFFC107);
@@ -30,7 +31,8 @@ class MtnPaymentScreen extends StatefulWidget {
   State<MtnPaymentScreen> createState() => _MtnPaymentScreenState();
 }
 
-class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
+class _MtnPaymentScreenState extends State<MtnPaymentScreen>
+    with WidgetsBindingObserver {
   final TextEditingController _phoneController = TextEditingController();
 
   bool _isLoading = false;
@@ -42,9 +44,86 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
   final OneTimePurchaseService _purchaseService = OneTimePurchaseService();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _reAttachInFlightCta();
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _phoneController.dispose();
     super.dispose();
+  }
+
+  /// App death mid-paiement → le CTA se ré-attache à partir de la
+  /// transaction persistée (ET8). Ne crée jamais un nouvel intent.
+  Future<void> _reAttachInFlightCta() async {
+    final pending = await _purchaseService.getPendingTransaction();
+    if (!mounted || pending == null) return;
+
+    final txnId = pending['id'] as String?;
+    final provider = pending['provider'] as String? ?? 'mtn';
+    if (txnId == null) return;
+
+    // Transaction expirée : la reprise la signalera (verifyOnResume).
+    if (OneTimePurchaseService.isTransactionExpired(
+        pending['created_at'] as String?)) {
+      return;
+    }
+
+    setState(() {
+      _isPaymentInitiated = true;
+      _transactionId = txnId;
+      _ussdCode = _purchaseService.ussdCodeFor(provider);
+      _step = 3;
+    });
+  }
+
+  /// Retour d'app (résumption) : re-vérifie l'intent (ET8). Un 429 ou une
+  /// attestation absente laisse le CTA en vol ; une attestation déjà posée
+  /// avant le kill débloque immédiatement (grant idempotent).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_verifyOnResume());
+    }
+  }
+
+  Future<void> _verifyOnResume() async {
+    final result = await _purchaseService.verifyOnResume();
+    if (!mounted) return;
+
+    switch (result) {
+      case ResumeVerification.granted:
+        setState(() {
+          _paymentResult = {
+            'success': true,
+            'transactionId': _transactionId,
+            'method': 'mobile_money',
+            'status': 'completed',
+            'message': 'Paiement confirmé. Accès premium activé.',
+          };
+          _isLoading = false;
+        });
+        widget.onPaymentSuccess?.call(_paymentResult!);
+      case ResumeVerification.expired:
+        setState(() {
+          _paymentResult = {
+            'success': false,
+            'message': 'La transaction a expiré. Veuillez repayer.',
+          };
+          _isLoading = false;
+          _isPaymentInitiated = false;
+          _transactionId = null;
+          _ussdCode = null;
+          _step = 1;
+        });
+      case ResumeVerification.inFlight:
+      case ResumeVerification.none:
+        break;
+    }
   }
 
   @override
@@ -642,6 +721,19 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
     });
 
     try {
+      // ET7 : sign-in anon au premier contact paywall (fail-open si le rail
+      // Supabase n'est pas configuré au build). Ne bloque jamais le flux.
+      final anon = await AuthService().ensureAnonSession();
+      if (anon.rateLimited && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(anon.error ?? 'Trop de tentatives.'),
+            backgroundColor: _mtnYellow,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+
       // Chemin canonique : montant offre unique 3000 FCFA (OneTimePurchaseService).
       final phoneNumber =
           _phoneController.text.replaceAll(RegExp(r'[^\d]'), '');

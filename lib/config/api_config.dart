@@ -289,6 +289,24 @@ class ApiConfig {
   };
 
   // ===========================================
+  // SUPABASE (rail paiement anon, ET7)
+  // ===========================================
+
+  /// URL du projet Supabase (edge functions payments). Vide = rail non
+  /// configuré → le flux legacy local reste le défaut (fail-open).
+  static const String supabaseUrl = String.fromEnvironment(
+      'SUPABASE_URL', defaultValue: '');
+
+  /// Publishable key / anon key du projet Supabase.
+  static const String supabaseAnonKey = String.fromEnvironment(
+      'SUPABASE_ANON_KEY', defaultValue: '');
+
+  /// Le rail paiement Supabase n'est actif que si les deux clefs sont définies
+  /// au build (--dart-define). Sinon, l'app conserve son mock local.
+  static bool get isSupabaseRailEnabled =>
+      supabaseUrl.isNotEmpty && supabaseAnonKey.isNotEmpty;
+
+  // ===========================================
   // MÉTHODES UTILITAIRES
   // ===========================================
 
