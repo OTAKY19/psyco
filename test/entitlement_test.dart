@@ -79,6 +79,64 @@ void main() {
     });
   });
 
+  group('EntitlementService — essai legacy & refresh', () {
+    test('essai activé non utilisé et < 7 jours ⇒ premium', () async {
+      final start =
+          DateTime.now().subtract(const Duration(days: 3)).toIso8601String();
+      SharedPreferences.setMockInitialValues({
+        'app_activated': true,
+        'subscription_type': 'trial',
+        'trial_start': start,
+      });
+      final status = await EntitlementService().getStatus();
+      expect(status.hasActiveSubscription, isTrue);
+      expect(status.isPremium, isTrue);
+    });
+
+    test('essai utilisé ou expiré ⇒ pas premium', () async {
+      SharedPreferences.setMockInitialValues({
+        'app_activated': true,
+        'subscription_type': 'trial',
+        'trial_used': true,
+      });
+      expect((await EntitlementService().getStatus()).isPremium, isFalse);
+
+      final old =
+          DateTime.now().subtract(const Duration(days: 8)).toIso8601String();
+      SharedPreferences.setMockInitialValues({
+        'app_activated': true,
+        'subscription_type': 'trial',
+        'trial_start': old,
+      });
+      expect((await EntitlementService().getStatus()).isPremium, isFalse);
+    });
+
+    test(
+        'activation legacy (app_activated + premium sans expiry) ⇒ premium ; '
+        'refresh() backfill + isPremium()', () async {
+      SharedPreferences.setMockInitialValues({
+        'app_activated': true,
+        'subscription_type': 'premium',
+      });
+      final status = await EntitlementService().getStatus();
+      expect(status.hasActiveSubscription, isTrue);
+      expect(status.isPremium, isTrue);
+
+      // Premium sans expiry ni activation legacy ⇒ inactif (pas de bypass).
+      SharedPreferences.setMockInitialValues({'subscription_type': 'premium'});
+      expect(
+          (await EntitlementService().getStatus()).hasActiveSubscription,
+          isFalse);
+
+      // refresh() = lecture + backfill du drapeau superset.
+      SharedPreferences.setMockInitialValues({'has_premium_access': true});
+      await EntitlementService().refresh();
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('has_lifetime_access'), isTrue);
+      expect(await EntitlementService().isPremium(), isTrue);
+    });
+  });
+
   group('Results paywall CTA (mur de résultats)', () {
     Future<void> pumpResults(WidgetTester tester) async {
       await tester.pumpWidget(
