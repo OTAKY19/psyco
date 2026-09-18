@@ -672,7 +672,8 @@ export async function redeemActivationCode(
   await checkRateLimit("redeem_activation_code", student.id, 10, 60);
 
   const result = await redeemActivationCodeForUser(student.id, code);
-  if (!result) {
+  const status = result?.status ?? "not_found";
+  if (!result || status !== "redeemed") {
     throw new HttpError(400, "Code invalide ou deja utilise");
   }
 
@@ -680,7 +681,7 @@ export async function redeemActivationCode(
     ok: true,
     activationCodeId: result.activation_code_id ?? null,
     productSku: result.product_sku ?? null,
-    status: result.status ?? "granted",
+    status,
     premium: true,
     premium_until: normalizeTimestamp(result.premium_until) ?? null,
   });

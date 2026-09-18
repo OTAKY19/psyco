@@ -69,13 +69,20 @@ begin
     return;
   end if;
 
-  -- Code déjà utilisé : on ressort le grant existant (idempotence côté utilisateur).
+  -- Code déjà utilisé : idempotence pour le MÊME utilisateur uniquement.
+  -- Un autre utilisateur verra 'already_used' (aucun grant divulgué).
   if v_row.status = 'redeemed' then
     select g.id, g.ends_at
     into v_grant_id, v_premium_until
     from user_access_grants g
     where g.activation_code_id = v_row.id
+      and g.auth_user_id = p_auth_user_id
     limit 1;
+
+    if v_grant_id is null then
+      return query select v_row.id, 'premium_lifetime', 'already_used', null::timestamptz;
+      return;
+    end if;
 
     return query select v_row.id, 'premium_lifetime', 'redeemed', v_premium_until;
     return;
@@ -134,7 +141,8 @@ begin
     starts_at,
     ends_at,
     granted_at,
-    activation_code_id
+    activation_code_id,
+    environment
   )
   values (
     p_auth_user_id,
@@ -144,7 +152,8 @@ begin
     now(),
     v_premium_until,
     now(),
-    v_row.id
+    v_row.id,
+    v_row.environment
   )
   on conflict (activation_code_id) where activation_code_id is not null
   do update
