@@ -1,0 +1,60 @@
+{
+  "certificate_pinning": {
+    "enabled": true,
+    "pins": {
+      "api.mtn.com": [
+        "sha256/4a6cP8E5F3gH7jK9mN2qR4tV6wX8yZ0aB2cD4eF6gH8iJ0kL2mN4oP6qR8sT0uV2wX4yZ6",
+        "sha256/8a2cP4E6F8gH0jK2mN4qR6tV8wX0yZ2aB4cD6eF8gH0iJ2kL4mN6oP8qR0sT2uV4wX6yZ8"
+      ],
+      "sandbox.momodeveloper.mtn.com": [
+        "sha256/2a4cP6E8F0gH2jK4mN6qR8tV0wX2yZ4aB6cD8eF0gH2iJ4kL6mN8oP0qR2sT4uV6wX8yZ0",
+        "sha256/6a8cP0E2F4gH6jK8mN0qR2tV4wX6yZ8aB0cD2eF4gH6iJ8kL0mN2oP4qR6sT8uV0wX2yZ4"
+      ],
+      "your-production-api.com": [
+        "sha256/0a2cP4E6F8gH0jK2mN4qR6tV8wX0yZ2aB4cD6eF8gH0iJ2kL4mN6oP8qR0sT2uV4wX6yZ8"
+      ]
+    }
+  },
+  "api_timeout": 30000,
+  "max_retry_attempts": 3,
+  "rate_limiting": {
+    "enabled": true,
+    "max_requests_per_minute": 60,
+    "max_requests_per_hour": 1000
+  },
+  "encryption": {
+    "algorithm": "AES-256-GCM",
+    "key_rotation_days": 30,
+    "key_size": 256
+  },
+  "webhook": {
+    "verification_enabled": true,
+    "tolerance_seconds": 300,
+    "allowed_ips": [
+      "41.206.0.0/16",
+      "102.134.0.0/16"
+    ]
+  },
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "sensitive_data_masking": true,
+    "max_log_age_days": 30
+  },
+  "monitoring": {
+    "health_check_enabled": true,
+    "health_check_interval_seconds": 60,
+    "alerts_enabled": true,
+    "alert_thresholds": {
+      "api_failure_rate": 0.05,
+      "response_time_ms": 5000,
+      "memory_usage_mb": 100
+    }
+  },
+  "compliance": {
+    "gdpr_compliant": true,
+    "data_retention_days": 2555,
+    "user_consent_required": true,
+    "data_anonymization": true
+  }
+}

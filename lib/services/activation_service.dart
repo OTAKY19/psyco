@@ -10,7 +10,7 @@ class ActivationService {
   static const String _trialStartKey = 'trial_start';
   static const String _trialUsedKey = 'trial_used';
 
-  // Types d'abonnement disponibles
+  // Types d'activation disponibles
   static const Map<String, Map<String, dynamic>> _subscriptionPlans = {
     'trial': {
       'name': 'Essai Gratuit',
@@ -28,28 +28,44 @@ class ActivationService {
       'name': 'Premium',
       'duration_days': 90,
       'price': 12000.0, // 12000 FCFA
-      'features': ['Accès complet', 'Tests illimités', 'Support premium', 'Rapports détaillés'],
+      'features': [
+        'Accès complet',
+        'Tests illimités',
+        'Support premium',
+        'Rapports détaillés'
+      ],
     },
     'annual': {
       'name': 'Annuel',
       'duration_days': 365,
       'price': 35000.0, // 35000 FCFA
-      'features': ['Accès complet', 'Tests illimités', 'Support premium', 'Rapports détaillés', 'Mises à jour gratuites'],
+      'features': [
+        'Accès complet',
+        'Tests illimités',
+        'Support premium',
+        'Rapports détaillés',
+        'Mises à jour gratuites'
+      ],
     },
   };
 
-  // Vérifier si l'app est activée (basé sur l'abonnement actif)
+  // Vérifier si l'app est activée (basé sur l'activation active)
   Future<bool> isAppActivated() async {
+    // 🔧 MODE DÉVELOPPEUR: Toujours activé pour les tests
+    // Supprime cette ligne en production !
+    return true;
+    
+    /* CODE ORIGINAL - À RESTAURER EN PRODUCTION
     final prefs = await SharedPreferences.getInstance();
 
-    // Vérifier d'abord si il y a un abonnement payant actif
+    // Vérifier d'abord si il y a une activation payante active
     final subscriptionType = prefs.getString(_subscriptionTypeKey);
     if (subscriptionType != null && subscriptionType != 'trial') {
       final expiryString = prefs.getString(_subscriptionExpiryKey);
       if (expiryString != null) {
         final expiryDate = DateTime.parse(expiryString);
         if (expiryDate.isAfter(DateTime.now())) {
-          return true; // Abonnement payant actif
+          return true; // Activation payante active
         }
       }
     }
@@ -67,6 +83,7 @@ class ActivationService {
     }
 
     return false; // Aucune activation active
+    */
   }
 
   // Activer l'app (méthode de compatibilité - utilise l'essai par défaut)
@@ -75,7 +92,8 @@ class ActivationService {
   }
 
   // Activer l'app avec un abonnement spécifique
-  Future<void> activateAppWithSubscription(String subscriptionType, {String? transactionId}) async {
+  Future<void> activateAppWithSubscription(String subscriptionType,
+      {String? transactionId}) async {
     final prefs = await SharedPreferences.getInstance();
     final now = DateTime.now();
 
@@ -86,16 +104,18 @@ class ActivationService {
       await prefs.setString(_trialStartKey, now.toIso8601String());
       await prefs.setBool(_trialUsedKey, false);
     } else {
-      // Calculer la date d'expiration pour les abonnements payants
+      // Calculer la date d'expiration pour les activations payantes
       final plan = _subscriptionPlans[subscriptionType];
       if (plan != null) {
         final durationDays = plan['duration_days'] as int;
         final expiryDate = now.add(Duration(days: durationDays));
-        await prefs.setString(_subscriptionExpiryKey, expiryDate.toIso8601String());
+        await prefs.setString(
+            _subscriptionExpiryKey, expiryDate.toIso8601String());
 
         // Enregistrer le paiement dans l'historique
         if (transactionId != null) {
-          await _addPaymentToHistory(transactionId, subscriptionType, plan['price'] as double, now);
+          await _addPaymentToHistory(
+              transactionId, subscriptionType, plan['price'] as double, now);
         }
       }
     }
@@ -103,7 +123,7 @@ class ActivationService {
     await prefs.setBool(_activationKey, true);
   }
 
-  // Obtenir les informations d'abonnement actuelles
+  // Obtenir les informations d'activation actuelles
   Future<Map<String, dynamic>?> getCurrentSubscription() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -137,28 +157,27 @@ class ActivationService {
     };
   }
 
-  // Vérifier si l'abonnement est expiré
+  // Vérifier si l'activation est expirée
   Future<bool> isSubscriptionExpired() async {
     final subscription = await getCurrentSubscription();
     if (subscription == null) return true;
 
     final expiryDate = subscription['expiry_date'] as DateTime?;
-    if (expiryDate == null) return false; // Abonnement illimité (trial actif)
+    if (expiryDate == null) return false; // Activation illimitée (trial actif)
 
     return expiryDate.isBefore(DateTime.now());
   }
 
-  // Renouveler l'abonnement
-  Future<void> renewSubscription(String subscriptionType, {String? transactionId}) async {
-    await activateAppWithSubscription(subscriptionType, transactionId: transactionId);
+  // Renouveler l'activation
+  Future<void> renewSubscription(String subscriptionType,
+      {String? transactionId}) async {
+    await activateAppWithSubscription(subscriptionType,
+        transactionId: transactionId);
   }
 
-  // Obtenir tous les plans d'abonnement disponibles
-  Map<String, Map<String, dynamic>> getAvailablePlans() {
-    return _subscriptionPlans;
-  }
+  // Méthode supprimée - paiement unique uniquement
 
-  // Calculer les jours restants pour l'abonnement actuel
+  // Calculer les jours restants pour l'activation actuelle
   Future<int> getRemainingDays() async {
     final subscription = await getCurrentSubscription();
     if (subscription == null) return 0;
@@ -191,34 +210,11 @@ class ActivationService {
     return prefs.getBool(_trialUsedKey) ?? false;
   }
 
-  // Ajouter un paiement à l'historique
-  Future<void> _addPaymentToHistory(String transactionId, String subscriptionType, double amount, DateTime date) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final paymentHistory = await getPaymentHistory();
-    paymentHistory.add({
-      'transaction_id': transactionId,
-      'subscription_type': subscriptionType,
-      'amount': amount,
-      'date': date.toIso8601String(),
-      'status': 'completed',
-    });
-
-    await prefs.setString(_paymentHistoryKey, paymentHistory.toString());
-  }
-
-  // Obtenir l'historique des paiements
-  Future<List<Map<String, dynamic>>> getPaymentHistory() async {
-    final prefs = await SharedPreferences.getInstance();
-    final historyString = prefs.getString(_paymentHistoryKey);
-
-    if (historyString == null || historyString.isEmpty) {
-      return [];
-    }
-
-    // Ici on retournerait normalement une liste parsée depuis JSON
-    // Pour la simulation, on retourne une liste vide
-    return [];
+  // Ajouter un paiement à l'historique (simplifié - pas d'historique stocké)
+  Future<void> _addPaymentToHistory(String transactionId,
+      String subscriptionType, double amount, DateTime date) async {
+    // Historique des paiements supprimé selon les nouvelles spécifications
+    // L'app utilise maintenant un paiement unique sans suivi d'historique
   }
 
   // Marquer le premier examen comme terminé

@@ -115,3 +115,4 @@ test/
 devtools_options.yaml
 env.json
 #*#
+*.keystore

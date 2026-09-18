@@ -1,9 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
+import '../../../design/app_colors.dart';
+import '../../../design/app_radii.dart';
+import '../../../design/app_spacing.dart';
+import '../../../design/app_text_styles.dart';
 
 class CategoryPerformanceChartWidget extends StatelessWidget {
   final List<Map<String, dynamic>> categoryData;
@@ -16,31 +17,22 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: const EdgeInsets.all(AppSpacing.cardPadding),
       decoration: BoxDecoration(
-        color: AppTheme.lightTheme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color:
-                AppTheme.lightTheme.colorScheme.shadow.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Performance par Catégorie',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+            style: AppTextStyles.titleMedium,
           ),
-          SizedBox(height: 3.h),
+          const SizedBox(height: AppSpacing.lg),
           SizedBox(
-            height: 30.h,
+            height: 220,
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
@@ -51,10 +43,9 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
                       return BarTooltipItem(
                         '${categoryData[group.x.toInt()]["name"]}\n${rod.toY.toInt()}%',
-                        Theme.of(context).textTheme.bodySmall!.copyWith(
-                              color: AppTheme
-                                  .lightTheme.colorScheme.onInverseSurface,
-                            ),
+                        AppTextStyles.bodySmall.copyWith(
+                          color: AppColors.onPrimary,
+                        ),
                       );
                     },
                   ),
@@ -73,22 +64,19 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                       getTitlesWidget: (double value, TitleMeta meta) {
                         if (value.toInt() < categoryData.length) {
                           return Padding(
-                            padding: EdgeInsets.only(top: 1.h),
+                            padding: const EdgeInsets.only(top: AppSpacing.sm),
                             child: Text(
                               categoryData[value.toInt()]["name"],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    fontSize: 10.sp,
-                                  ),
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.textMuted,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           );
                         }
                         return const Text('');
                       },
-                      reservedSize: 8.h,
+                      reservedSize: 40,
                     ),
                   ),
                   leftTitles: AxisTitles(
@@ -98,21 +86,19 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                       getTitlesWidget: (double value, TitleMeta meta) {
                         return Text(
                           '${value.toInt()}%',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 10.sp,
-                                  ),
+                          style: AppTextStyles.caption.copyWith(
+                            color: AppColors.textMuted,
+                          ),
                         );
                       },
-                      reservedSize: 10.w,
+                      reservedSize: 40,
                     ),
                   ),
                 ),
                 borderData: FlBorderData(
                   show: true,
                   border: Border.all(
-                    color: AppTheme.lightTheme.colorScheme.outline
-                        .withValues(alpha: 0.3),
+                    color: AppColors.borderLight.withValues(alpha: 0.5),
                     width: 1,
                   ),
                 ),
@@ -121,13 +107,13 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                   final data = entry.value;
                   final percentage = (data["score"] as double);
 
-                  Color barColor = AppTheme.primaryLight;
+                  Color barColor = AppColors.primaryLight;
                   if (percentage >= 80) {
-                    barColor = AppTheme.successLight;
+                    barColor = AppColors.success;
                   } else if (percentage >= 60) {
-                    barColor = AppTheme.warningLight;
+                    barColor = AppColors.warning;
                   } else {
-                    barColor = AppTheme.errorLight;
+                    barColor = AppColors.error;
                   }
 
                   return BarChartGroupData(
@@ -136,8 +122,8 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                       BarChartRodData(
                         toY: percentage,
                         color: barColor,
-                        width: 6.w,
-                        borderRadius: BorderRadius.circular(4),
+                        width: 32,
+                        borderRadius: BorderRadius.circular(AppRadii.xs),
                       ),
                     ],
                   );
@@ -147,9 +133,8 @@ class CategoryPerformanceChartWidget extends StatelessWidget {
                   drawVerticalLine: false,
                   horizontalInterval: 25,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(
-                      color: AppTheme.lightTheme.colorScheme.outline
-                          .withValues(alpha: 0.2),
+                    return const FlLine(
+                      color: AppColors.borderLight,
                       strokeWidth: 1,
                     );
                   },

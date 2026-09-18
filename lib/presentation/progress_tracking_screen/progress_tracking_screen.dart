@@ -1,15 +1,16 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../core/app_export.dart';
-import '../../services/user_data_service.dart';
+import '../../design/app_colors.dart';
+import '../../design/app_radii.dart';
+import '../../design/app_shadows.dart';
+import '../../design/app_spacing.dart';
+import '../../design/app_text_styles.dart';
+import '../../router/app_routes.dart';
 import '../../services/test_service.dart';
-import './widgets/achievement_badge_widget.dart';
-import './widgets/activity_item_widget.dart';
-import './widgets/category_performance_widget.dart';
-import './widgets/metric_card_widget.dart';
-import './widgets/performance_chart_widget.dart';
-import './widgets/study_calendar_widget.dart';
+import '../../services/user_data_service.dart';
+
 
 class ProgressTrackingScreen extends StatefulWidget {
   const ProgressTrackingScreen({super.key});
@@ -21,46 +22,18 @@ class ProgressTrackingScreen extends StatefulWidget {
 class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  String _selectedDateRange = 'Cette semaine';
   bool _isRefreshing = false;
 
-  // Données réelles - seront mises à jour depuis UserDataService
-  List<Map<String, dynamic>> _metricsData = [
-    {
-      'title': 'Tests complétés',
-      'value': '0',
-      'subtitle': 'Commencez vos tests',
-      'icon': 'quiz',
-      'color': AppTheme.primaryLight,
-    },
-    {
-      'title': 'Score moyen',
-      'value': '0%',
-      'subtitle': 'Pas encore de score',
-      'icon': 'trending_up',
-      'color': AppTheme.successLight,
-    },
-    {
-      'title': 'Série d\'étude',
-      'value': '0 jours',
-      'subtitle': 'Commencez votre série',
-      'icon': 'local_fire_department',
-      'color': AppTheme.warningLight,
-    },
-    {
-      'title': 'Temps d\'étude',
-      'value': '0h 0m',
-      'subtitle': 'Pas encore de temps',
-      'icon': 'schedule',
-      'color': AppTheme.secondaryLight,
-    },
-  ];
+  // Metrics
+  int _totalTests = 0;
+  double _averageScore = 0;
+  int _currentStreak = 0;
 
-  // Données de performance - seront calculées depuis l'historique des tests
+  // Performance chart data
   List<Map<String, dynamic>> _performanceData = [];
 
-  // Données de catégories - seront mises à jour depuis UserDataService
-  List<Map<String, dynamic>> _categoryData = [
+  // Category data
+  final List<Map<String, dynamic>> _categoryData = [
     {'category': 'Logique', 'score': 0.0},
     {'category': 'Mémoire', 'score': 0.0},
     {'category': 'Attention', 'score': 0.0},
@@ -69,50 +42,11 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
     {'category': 'Verbal', 'score': 0.0},
   ];
 
-  // Activités récentes - seront chargées depuis l'historique des tests
+  // Recent activities
   List<Map<String, dynamic>> _recentActivities = [];
 
-  final List<Map<String, dynamic>> _achievements = [
-    {
-      'title': 'Premier test',
-      'description': 'Complétez votre premier test',
-      'icon': 'star',
-      'progress': 100.0,
-      'unlocked': true,
-    },
-    {
-      'title': 'Série de 7',
-      'description': 'Étudiez 7 jours consécutifs',
-      'icon': 'local_fire_department',
-      'progress': 85.0,
-      'unlocked': false,
-    },
-    {
-      'title': 'Expert logique',
-      'description': 'Obtenez 90% en logique',
-      'icon': 'psychology',
-      'progress': 75.0,
-      'unlocked': false,
-    },
-    {
-      'title': '50 tests',
-      'description': 'Complétez 50 tests',
-      'icon': 'emoji_events',
-      'progress': 94.0,
-      'unlocked': false,
-    },
-  ];
-
-  final Map<DateTime, int> _studyCalendarData = {
-    DateTime(2025, 1, 1): 3,
-    DateTime(2025, 1, 2): 2,
-    DateTime(2025, 1, 3): 5,
-    DateTime(2025, 1, 4): 1,
-    DateTime(2025, 1, 6): 4,
-    DateTime(2025, 1, 7): 2,
-    DateTime(2025, 1, 8): 3,
-    DateTime(2025, 1, 9): 6,
-  };
+  // Calendar data
+  final Map<DateTime, int> _studyCalendarData = {};
 
   @override
   void initState() {
@@ -121,91 +55,53 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
     _loadRealUserData();
   }
 
-  /// Charge les vraies données utilisateur depuis UserDataService
   Future<void> _loadRealUserData() async {
     try {
       final userDataService = UserDataService();
-      
-      // Charger les statistiques réelles
       final userProgress = await userDataService.getUserProgress();
-      
+
       setState(() {
-        // Mettre à jour les métriques avec les vraies données
-        final testsCompleted = userProgress['testsCompleted'] as int;
-        final averageScore = userProgress['averageScore'] as double;
-        final studyStreak = userProgress['studyStreak'] as int;
-        
-        _metricsData[0]['value'] = testsCompleted.toString();
-        _metricsData[0]['subtitle'] = testsCompleted > 0 ? '+${testsCompleted} au total' : 'Commencez vos tests';
-        
-        _metricsData[1]['value'] = '${averageScore.toInt()}%';
-        _metricsData[1]['subtitle'] = averageScore > 0 ? 'Score moyen' : 'Pas encore de score';
-        
-        _metricsData[2]['value'] = '$studyStreak jours';
-        _metricsData[2]['subtitle'] = studyStreak > 0 ? 'Série actuelle' : 'Commencez votre série';
-        
-        // Calculer le temps d'étude basé sur les tests réels
-        final totalMinutes = testsCompleted * 20; // 20 min par test en moyenne
-        final hours = totalMinutes ~/ 60;
-        final minutes = totalMinutes % 60;
-        _metricsData[3]['value'] = '${hours}h ${minutes}m';
-        _metricsData[3]['subtitle'] = testsCompleted > 0 ? 'Temps total' : 'Pas encore de temps';
+        _totalTests = userProgress['testsCompleted'] as int;
+        _averageScore = userProgress['averageScore'] as double;
+        _currentStreak = userProgress['studyStreak'] as int;
       });
-      
-      // Charger les progrès par catégorie
+
       await _loadCategoryProgress();
-      
-      // Charger les activités récentes
       await _loadRecentActivities();
-      
-      // Charger les données de performance
       await _loadPerformanceData();
-      
     } catch (e) {
       debugPrint('Erreur lors du chargement des données: $e');
-      // Garder les données par défaut en cas d'erreur
     }
   }
-  
-  /// Charge les progrès réels par catégorie
+
   Future<void> _loadCategoryProgress() async {
     try {
       final userDataService = UserDataService();
-      
-      // Mettre à jour avec les vraies données
       for (int i = 0; i < _categoryData.length; i++) {
-        final categoryId = (i + 1).toString(); // ID basé sur l'index
+        final categoryId = (i + 1).toString();
         final progress = await userDataService.getCategoryProgress(categoryId);
-        
-        setState(() {
-          _categoryData[i]['score'] = progress;
-        });
+        setState(() => _categoryData[i]['score'] = progress);
       }
     } catch (e) {
       debugPrint('Erreur lors du chargement des catégories: $e');
     }
   }
 
-  /// Charge les activités récentes depuis l'historique des tests
   Future<void> _loadRecentActivities() async {
     try {
       final testService = TestService();
       final testHistory = await testService.getTestHistory();
-      
-      // Prendre les 10 derniers tests
       final recentTests = testHistory.take(10).toList();
-      
+
       setState(() {
         _recentActivities = recentTests.map((test) {
-          // Calculer la durée moyenne (simulation basée sur le nombre de questions)
-          final durationMinutes = (test.totalQuestions * 1.5).round(); // 1.5 min par question
-          
+          final durationMinutes = (test['totalQuestions'] * 1.5).round();
           return {
-            'testName': 'Test ${test.sessionId.substring(0, 8)}',
-            'category': 'Général', // Pour l'instant, on utilise une catégorie générale
-            'score': (test.correctAnswers / test.totalQuestions * 100).roundToDouble(),
-            'date': test.completedAt,
-            'duration': '${durationMinutes} min',
+            'testName': 'Test ${test['sessionId'].substring(0, 8)}',
+            'category': 'Général',
+            'score': (test['correctAnswers'] / test['totalQuestions'] * 100).roundToDouble(),
+            'date': test['completedAt'],
+            'duration': '$durationMinutes min',
           };
         }).toList();
       });
@@ -214,43 +110,32 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
     }
   }
 
-  /// Charge les données de performance pour le graphique
   Future<void> _loadPerformanceData() async {
     try {
       final testService = TestService();
       final testHistory = await testService.getTestHistory();
-      
+
       if (testHistory.isEmpty) {
-        setState(() {
-          _performanceData = [];
-        });
+        setState(() => _performanceData = []);
         return;
       }
-      
-      // Grouper les tests par jour de la semaine
+
       final Map<String, List<double>> weeklyScores = {};
       final days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-      
+
       for (final test in testHistory) {
-        final dayOfWeek = days[test.completedAt.weekday - 1];
-        final score = (test.correctAnswers / test.totalQuestions * 100);
-        
-        if (!weeklyScores.containsKey(dayOfWeek)) {
-          weeklyScores[dayOfWeek] = [];
-        }
-        weeklyScores[dayOfWeek]!.add(score);
+        final dayOfWeek = days[test['completedAt'].weekday - 1];
+        final score = (test['correctAnswers'] / test['totalQuestions'] * 100);
+        weeklyScores.putIfAbsent(dayOfWeek, () => []).add(score);
       }
-      
-      // Calculer la moyenne pour chaque jour
+
       setState(() {
         _performanceData = days.map((day) {
           final scores = weeklyScores[day] ?? [];
-          final averageScore = scores.isEmpty ? 0.0 : scores.reduce((a, b) => a + b) / scores.length;
-          
-          return {
-            'label': day,
-            'score': averageScore,
-          };
+          final avg = scores.isEmpty
+              ? 0.0
+              : scores.reduce((a, b) => a + b) / scores.length;
+          return {'label': day, 'score': avg};
         }).toList();
       });
     } catch (e) {
@@ -266,123 +151,42 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
 
   Future<void> _refreshData() async {
     setState(() => _isRefreshing = true);
-    
-    // Recharger toutes les données réelles
     await _loadRealUserData();
-    
     setState(() => _isRefreshing = false);
-  }
-
-  void _showDateRangeSelector() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppTheme.lightTheme.colorScheme.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: EdgeInsets.all(4.w),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 12.w,
-              height: 0.5.h,
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.outline,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            SizedBox(height: 3.h),
-            Text(
-              'Sélectionner la période',
-              style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 3.h),
-            ...[
-              'Cette semaine',
-              'Ce mois',
-              'Ces 3 mois',
-              'Cette année',
-              'Tout le temps'
-            ].map((range) => ListTile(
-                  title: Text(range),
-                  trailing: _selectedDateRange == range
-                      ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.lightTheme.colorScheme.primary,
-                          size: 5.w,
-                        )
-                      : null,
-                  onTap: () {
-                    setState(() => _selectedDateRange = range);
-                    Navigator.pop(context);
-                  },
-                )),
-            SizedBox(height: 2.h),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _exportReport() {
-    // Simulate PDF export
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Rapport exporté avec succès'),
-        backgroundColor: AppTheme.successLight,
-        duration: const Duration(seconds: 2),
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppTheme.lightTheme.appBarTheme.backgroundColor,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: CustomIconWidget(
-            iconName: 'arrow_back',
-            color: AppTheme.lightTheme.colorScheme.onSurface,
-            size: 6.w,
-          ),
+          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24),
         ),
         title: Text(
           'Suivi des progrès',
-          style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: AppTheme.lightTheme.colorScheme.onSurface,
-          ),
+          style: AppTextStyles.titleLarge.copyWith(color: AppColors.textPrimary),
         ),
         actions: [
           IconButton(
-            onPressed: _showDateRangeSelector,
-            icon: CustomIconWidget(
-              iconName: 'date_range',
-              color: AppTheme.lightTheme.colorScheme.primary,
-              size: 6.w,
-            ),
-          ),
-          IconButton(
-            onPressed: _exportReport,
-            icon: CustomIconWidget(
-              iconName: 'file_download',
-              color: AppTheme.lightTheme.colorScheme.primary,
-              size: 6.w,
-            ),
+            onPressed: () {},
+            icon: const Icon(Icons.file_download_outlined, color: AppColors.primary, size: 24),
           ),
         ],
         bottom: TabBar(
           controller: _tabController,
+          labelColor: AppColors.primary,
+          unselectedLabelColor: AppColors.textMuted,
+          indicatorColor: AppColors.primary,
+          labelStyle: AppTextStyles.labelLarge,
+          unselectedLabelStyle: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.w400),
           tabs: const [
-            Tab(text: 'Progrès'),
+            Tab(text: 'Progression'),
             Tab(text: 'Activité'),
             Tab(text: 'Calendrier'),
           ],
@@ -390,123 +194,469 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
       ),
       body: RefreshIndicator(
         onRefresh: _refreshData,
-        color: AppTheme.lightTheme.colorScheme.primary,
-        child: _isRefreshing 
-            ? const Center(child: CircularProgressIndicator())
+        color: AppColors.primary,
+        child: _isRefreshing
+            ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
             : TabBarView(
                 controller: _tabController,
                 children: [
-                  _buildProgressTab(),
-                  _buildActivityTab(),
-                  _buildCalendarTab(),
+                  _buildProgressTab(screenWidth),
+                  _buildActivityTab(screenWidth),
+                  _buildCalendarTab(screenWidth),
                 ],
               ),
       ),
     );
   }
 
-  Widget _buildProgressTab() {
+  // ═══════════════════════════════════════════
+  //  TAB 1 — Progression
+  // ═══════════════════════════════════════════
+
+  Widget _buildProgressTab(double screenWidth) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
-      padding: EdgeInsets.all(4.w),
+      padding: AppSpacing.pagePadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Date range selector
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-            decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  _selectedDateRange,
-                  style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: AppTheme.lightTheme.colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                CustomIconWidget(
-                  iconName: 'keyboard_arrow_down',
-                  color: AppTheme.lightTheme.colorScheme.onPrimaryContainer,
-                  size: 5.w,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 3.h),
-
-          // Metrics cards
-          SizedBox(
-            height: 20.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _metricsData.length,
-              itemBuilder: (context, index) {
-                final metric = _metricsData[index];
-                return MetricCardWidget(
-                  title: metric['title'],
-                  value: metric['value'],
-                  subtitle: metric['subtitle'],
-                  iconName: metric['icon'],
-                  iconColor: metric['color'],
-                  onTap: () {
-                    // Navigate to detailed view
-                  },
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 4.h),
-
           // Performance chart
-          PerformanceChartWidget(
-            chartData: _performanceData,
-            title: 'Évolution des scores',
-          ),
-          SizedBox(height: 4.h),
+          _buildPerformanceChart(screenWidth),
+          const SizedBox(height: AppSpacing.xxl),
 
-          // Category performance
-          CategoryPerformanceWidget(
-            categoryData: _categoryData,
-          ),
-          SizedBox(height: 4.h),
+          // Category breakdown
+          _buildCategoryBreakdown(screenWidth),
+          const SizedBox(height: AppSpacing.xxl),
 
-          // Achievements
-          Text(
-            'Réalisations',
-            style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: AppTheme.lightTheme.colorScheme.onSurface,
-            ),
-          ),
-          SizedBox(height: 2.h),
+          // Overall score
+          _buildOverallScore(screenWidth),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPerformanceChart(double screenWidth) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Évolution des scores', style: AppTextStyles.titleMedium),
+          const SizedBox(height: AppSpacing.xl),
           SizedBox(
-            height: 25.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _achievements.length,
-              itemBuilder: (context, index) {
-                final achievement = _achievements[index];
-                return AchievementBadgeWidget(
-                  achievement: achievement,
-                  isUnlocked: achievement['unlocked'] as bool,
-                );
-              },
-            ),
+            height: 200,
+            child: _performanceData.isEmpty
+                ? Center(
+                    child: Text(
+                      'Pas encore de données',
+                      style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
+                    ),
+                  )
+                : LineChart(
+                    LineChartData(
+                      gridData: FlGridData(
+                        show: true,
+                        drawVerticalLine: false,
+                        horizontalInterval: 25,
+                        getDrawingHorizontalLine: (value) => const FlLine(
+                          color: AppColors.borderLight,
+                          strokeWidth: 1,
+                        ),
+                      ),
+                      titlesData: FlTitlesData(
+                        leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 24,
+                            getTitlesWidget: (value, meta) {
+                              final idx = value.toInt();
+                              if (idx < 0 || idx >= _performanceData.length) {
+                                return const SizedBox.shrink();
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.only(top: AppSpacing.xs),
+                                child: Text(
+                                  _performanceData[idx]['label'] as String,
+                                  style: AppTextStyles.caption,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      borderData: FlBorderData(show: false),
+                      minX: 0,
+                      maxX: 6,
+                      minY: 0,
+                      maxY: 100,
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: _performanceData.asMap().entries.map((e) {
+                            return FlSpot(
+                              e.key.toDouble(),
+                              (e.value['score'] as double).clamp(0, 100),
+                            );
+                          }).toList(),
+                          isCurved: true,
+                          color: AppColors.primary,
+                          barWidth: 3,
+                          isStrokeCapRound: true,
+                          dotData: FlDotData(
+                            show: true,
+                            getDotPainter: (spot, percent, bar, index) => FlDotCirclePainter(
+                              radius: 4,
+                              color: AppColors.primary,
+                              strokeColor: AppColors.surface,
+                              strokeWidth: 2,
+                            ),
+                          ),
+                          belowBarData: BarAreaData(
+                            show: true,
+                            color: AppColors.primary.withValues(alpha: 0.08),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildActivityTab() {
+  Widget _buildCategoryBreakdown(double screenWidth) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Performance par catégorie', style: AppTextStyles.titleMedium),
+          const SizedBox(height: AppSpacing.lg),
+          ..._categoryData.map((cat) {
+            final score = (cat['score'] as double).clamp(0.0, 100.0);
+            final color = _categoryColor(score);
+            return Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.md),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        cat['category'] as String,
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        '${score.round()}%',
+                        style: AppTextStyles.bodySmall.copyWith(color: color),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(AppRadii.xs),
+                    child: LinearProgressIndicator(
+                      value: score / 100,
+                      minHeight: 8,
+                      backgroundColor: AppColors.surfaceDim,
+                      valueColor: AlwaysStoppedAnimation<Color>(color),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Color _categoryColor(double score) {
+    if (score >= 80) return AppColors.success;
+    if (score >= 60) return AppColors.primary;
+    if (score >= 40) return AppColors.accent;
+    return AppColors.error;
+  }
+
+  Widget _buildOverallScore(double screenWidth) {
+    final score = _averageScore.clamp(0.0, 100.0).toDouble();
+    final color = _categoryColor(score);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
+      child: Column(
+        children: [
+          Text('Score global', style: AppTextStyles.titleMedium),
+          const SizedBox(height: AppSpacing.lg),
+          SizedBox(
+            width: 120,
+            height: 120,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                CircularProgressIndicator(
+                  value: score / 100,
+                  strokeWidth: 10,
+                  backgroundColor: AppColors.surfaceDim,
+                  valueColor: AlwaysStoppedAnimation<Color>(color),
+                ),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '${score.round()}%',
+                        style: AppTextStyles.displayMedium.copyWith(color: color),
+                      ),
+                      Text(
+                        'moyen',
+                        style: AppTextStyles.caption,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _ScoreStat(label: 'Tests', value: '$_totalTests', color: AppColors.primary),
+              _ScoreStat(label: 'Série', value: '$_currentStreak j', color: AppColors.accent),
+              _ScoreStat(
+                label: 'Niveau',
+                value: _levelLabel(score),
+                color: color,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _levelLabel(double score) {
+    if (score >= 80) return 'Expert';
+    if (score >= 60) return 'Avancé';
+    if (score >= 40) return 'Moyen';
+    return 'Débutant';
+  }
+
+  // ═══════════════════════════════════════════
+  //  TAB 2 — Activité
+  // ═══════════════════════════════════════════
+
+  Widget _buildActivityTab(double screenWidth) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
-      padding: EdgeInsets.all(4.w),
+      padding: AppSpacing.pagePadding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Activité récente', style: AppTextStyles.titleLarge),
+          const SizedBox(height: AppSpacing.lg),
+          if (_recentActivities.isEmpty)
+            _buildEmptyState(screenWidth)
+          else
+            ..._recentActivities.map((activity) => _buildActivityCard(activity)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActivityCard(Map<String, dynamic> activity) {
+    final score = (activity['score'] as double).round();
+    final date = activity['date'] as DateTime;
+    final timeAgo = _formatTimeAgo(date);
+    final color = _categoryColor(score.toDouble());
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.cardSm,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(AppRadii.iconContainer),
+            ),
+            child: Icon(Icons.quiz, color: color, size: 24),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  activity['testName'] as String,
+                  style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: AppSpacing.xxs),
+                Row(
+                  children: [
+                    Text(
+                      activity['category'] as String,
+                      style: AppTextStyles.caption,
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Text('·', style: AppTextStyles.caption),
+                    const SizedBox(width: AppSpacing.sm),
+                    Text(
+                      activity['duration'] as String,
+                      style: AppTextStyles.caption,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm,
+                  vertical: AppSpacing.xxs,
+                ),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(AppRadii.pill),
+                ),
+                child: Text(
+                  '$score%',
+                  style: AppTextStyles.labelMedium.copyWith(color: color),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xxs),
+              Text(timeAgo, style: AppTextStyles.caption),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatTimeAgo(DateTime date) {
+    final diff = DateTime.now().difference(date);
+    if (diff.inMinutes < 60) return 'Il y a ${diff.inMinutes}m';
+    if (diff.inHours < 24) return 'Il y a ${diff.inHours}h';
+    if (diff.inDays < 7) return 'Il y a ${diff.inDays}j';
+    return '${date.day}/${date.month}';
+  }
+
+  Widget _buildEmptyState(double screenWidth) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSpacing.massive,
+        horizontal: AppSpacing.xxl,
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.xxl),
+            decoration: const BoxDecoration(
+              color: AppColors.primaryContainer,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.quiz, color: AppColors.primary, size: 48),
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          Text(
+            'Aucune activité récente',
+            style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondary),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            'Commencez à passer des tests pour voir votre historique ici.',
+            style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMuted),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AppSpacing.xxl),
+          ElevatedButton(
+            onPressed: () =>
+                context.push(AppRoutes.testLibraryDashboard),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.textOnPrimary,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.xxl,
+                vertical: AppSpacing.lg,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadii.button),
+              ),
+              elevation: 0,
+            ),
+            child: const Text('Commencer un test'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ═══════════════════════════════════════════
+  //  TAB 3 — Calendrier
+  // ═══════════════════════════════════════════
+
+  Widget _buildCalendarTab(double screenWidth) {
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: AppSpacing.pagePadding,
+      child: Column(
+        children: [
+          _buildCalendarHeatmap(screenWidth),
+          const SizedBox(height: AppSpacing.xxl),
+          _buildStreakCard(screenWidth),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCalendarHeatmap(double screenWidth) {
+    final now = DateTime.now();
+    final firstDay = DateTime(now.year, now.month, 1);
+    final lastDay = DateTime(now.year, now.month + 1, 0);
+    final daysInMonth = lastDay.day;
+    final startWeekday = firstDay.weekday % 7;
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -514,182 +664,193 @@ class _ProgressTrackingScreenState extends State<ProgressTrackingScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Activité récente',
-                style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: AppTheme.lightTheme.colorScheme.onSurface,
-                ),
+                '${_monthName(now.month)} ${now.year}',
+                style: AppTextStyles.titleMedium,
               ),
-              TextButton(
-                onPressed: () {
-                  // Show filter options
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomIconWidget(
-                      iconName: 'filter_list',
-                      color: AppTheme.lightTheme.colorScheme.primary,
-                      size: 4.w,
-                    ),
-                    SizedBox(width: 1.w),
-                    Text(
-                      'Filtrer',
-                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                        color: AppTheme.lightTheme.colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const Icon(Icons.calendar_today, color: AppColors.primary, size: 20),
             ],
           ),
-          SizedBox(height: 3.h),
-          _recentActivities.isEmpty
-              ? _buildEmptyState()
-              : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _recentActivities.length,
-                  itemBuilder: (context, index) {
-                    final activity = _recentActivities[index];
-                    return ActivityItemWidget(
-                      activity: activity,
-                      onRetake: () {
-                        Navigator.pushNamed(context, '/test-taking-screen');
-                      },
-                      onViewDetails: () {
-                        Navigator.pushNamed(context, '/test-results-screen');
-                      },
-                      onShare: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Résultat partagé'),
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCalendarTab() {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      padding: EdgeInsets.all(4.w),
-      child: Column(
-        children: [
-          StudyCalendarWidget(
-            studyData: _studyCalendarData,
-            onDaySelected: (selectedDay) {
-              // Handle day selection
-              final testsCompleted = _studyCalendarData[DateTime(
-                    selectedDay.year,
-                    selectedDay.month,
-                    selectedDay.day,
-                  )] ??
-                  0;
-
-              if (testsCompleted > 0) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content:
-                        Text('$testsCompleted test(s) complété(s) ce jour'),
-                    duration: const Duration(seconds: 2),
+          const SizedBox(height: AppSpacing.lg),
+          // Day headers
+          Row(
+            children: ['D', 'L', 'M', 'M', 'J', 'V', 'S'].map((d) {
+              return Expanded(
+                child: Center(
+                  child: Text(
+                    d,
+                    style: AppTextStyles.caption.copyWith(fontWeight: FontWeight.w600),
                   ),
-                );
-              }
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          // Calendar grid
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 7,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+            ),
+            itemCount: startWeekday + daysInMonth,
+            itemBuilder: (context, index) {
+              if (index < startWeekday) return const SizedBox.shrink();
+              final day = index - startWeekday + 1;
+              final date = DateTime(now.year, now.month, day);
+              final isToday = day == now.day;
+              final studyCount = _studyCalendarData[DateTime(date.year, date.month, date.day)] ?? 0;
+
+              return Container(
+                decoration: BoxDecoration(
+                  color: _heatmapColor(studyCount),
+                  borderRadius: BorderRadius.circular(AppRadii.sm),
+                  border: isToday
+                      ? Border.all(color: AppColors.primary, width: 2)
+                      : null,
+                ),
+                child: Center(
+                  child: Text(
+                    '$day',
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: studyCount > 0 || isToday
+                          ? AppColors.textPrimary
+                          : AppColors.textMuted,
+                      fontWeight: isToday ? FontWeight.w700 : FontWeight.w400,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+              );
             },
           ),
-          SizedBox(height: 4.h),
-
-          // Study streak info
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(4.w),
-            decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              children: [
-                CustomIconWidget(
-                  iconName: 'local_fire_department',
-                  color: AppTheme.warningLight,
-                  size: 12.w,
-                ),
-                SizedBox(height: 2.h),
-                Text(
-                  'Série actuelle',
-                  style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
-                    color: AppTheme.lightTheme.colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                SizedBox(height: 1.h),
-                Text(
-                  '12 jours',
-                  style: AppTheme.lightTheme.textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.lightTheme.colorScheme.onPrimaryContainer,
-                  ),
-                ),
-                SizedBox(height: 1.h),
-                Text(
-                  'Continuez comme ça ! Votre record est de 15 jours.',
-                  style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                    color: AppTheme.lightTheme.colorScheme.onPrimaryContainer
-                        .withValues(alpha: 0.8),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+          const SizedBox(height: AppSpacing.md),
+          // Legend
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _HeatmapLegend(label: '0', color: _heatmapColor(0)),
+              const SizedBox(width: AppSpacing.md),
+              _HeatmapLegend(label: '1-2', color: _heatmapColor(1)),
+              const SizedBox(width: AppSpacing.md),
+              _HeatmapLegend(label: '3-4', color: _heatmapColor(3)),
+              const SizedBox(width: AppSpacing.md),
+              _HeatmapLegend(label: '5+', color: _heatmapColor(5)),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildEmptyState() {
+  Color _heatmapColor(int count) {
+    if (count == 0) return AppColors.surfaceDim;
+    if (count <= 2) return AppColors.primary.withValues(alpha: 0.15);
+    if (count <= 4) return AppColors.primary.withValues(alpha: 0.35);
+    return AppColors.primary.withValues(alpha: 0.6);
+  }
+
+  String _monthName(int month) {
+    const names = [
+      '', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+      'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre',
+    ];
+    return names[month];
+  }
+
+  Widget _buildStreakCard(double screenWidth) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(8.w),
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.primary, AppColors.primaryDark],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.ctaLg,
+      ),
       child: Column(
         children: [
-          CustomIconWidget(
-            iconName: 'quiz',
-            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-            size: 20.w,
-          ),
-          SizedBox(height: 3.h),
+          const Icon(Icons.local_fire_department, color: AppColors.accent, size: 48),
+          const SizedBox(height: AppSpacing.md),
           Text(
-            'Aucune activité récente',
-            style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+            'Série actuelle',
+            style: AppTextStyles.titleMedium.copyWith(
+              color: AppColors.textOnPrimary.withValues(alpha: 0.8),
             ),
           ),
-          SizedBox(height: 2.h),
+          const SizedBox(height: AppSpacing.xs),
           Text(
-            'Commencez à passer des tests pour voir vos progrès ici.',
-            style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-              color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+            '$_currentStreak jours',
+            style: AppTextStyles.displayLarge.copyWith(
+              color: AppColors.textOnPrimary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            'Continuez comme ça !',
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textOnPrimary.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 4.h),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/test-library-dashboard');
-            },
-            child: const Text('Commencer un test'),
-          ),
         ],
       ),
+    );
+  }
+}
+
+class _ScoreStat extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color color;
+
+  const _ScoreStat({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: AppTextStyles.titleMedium.copyWith(color: color, fontWeight: FontWeight.w700),
+        ),
+        const SizedBox(height: AppSpacing.xxs),
+        Text(label, style: AppTextStyles.caption),
+      ],
+    );
+  }
+}
+
+class _HeatmapLegend extends StatelessWidget {
+  final String label;
+  final Color color;
+
+  const _HeatmapLegend({required this.label, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+        const SizedBox(width: AppSpacing.xs),
+        Text(label, style: AppTextStyles.caption),
+      ],
     );
   }
 }

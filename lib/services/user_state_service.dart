@@ -1,13 +1,29 @@
+import 'dart:math' as math;
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart'; // Importation ajoutée pour ChangeNotifier
 
 class UserStateService extends ChangeNotifier {
+  static const String _guestUserIdKey = 'guest_user_id';
   static const String _hasCompletedDemoKey = 'has_completed_demo';
-  static const String _hasLifetimeAccessKey = 'has_lifetime_access'; // Nouvelle clé
+  static const String _hasLifetimeAccessKey =
+      'has_lifetime_access'; // Nouvelle clé
   static const String _demoScoreKey = 'demo_score';
   static const String _lastDemoDateKey = 'last_demo_date';
   static const String _visibleResultsCountKey = 'visible_results_count';
   static const String _demoStartTimeKey = 'demo_start_time';
+
+  /// Identité invité persistée (T3). Aucun compte requis ; remplace 'current_user'.
+  static Future<String> ensureGuestUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    var id = prefs.getString(_guestUserIdKey);
+    if (id == null || id.isEmpty) {
+      id = 'guest_${DateTime.now().millisecondsSinceEpoch}'
+          '_${math.Random().nextInt(9999).toString().padLeft(4, '0')}';
+      await prefs.setString(_guestUserIdKey, id);
+    }
+    return id;
+  }
 
   bool _hasLifetimeAccess = false; // État local pour l'accès à vie
 
@@ -66,12 +82,15 @@ class UserStateService extends ChangeNotifier {
   Future<DateTime?> getLastDemoDate() async {
     final prefs = await SharedPreferences.getInstance();
     final timestamp = prefs.getInt(_lastDemoDateKey);
-    return timestamp != null ? DateTime.fromMillisecondsSinceEpoch(timestamp) : null;
+    return timestamp != null
+        ? DateTime.fromMillisecondsSinceEpoch(timestamp)
+        : null;
   }
 
   Future<int> getVisibleResultsCount() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_visibleResultsCountKey) ?? 10; // Par défaut 10 questions visibles
+    return prefs.getInt(_visibleResultsCountKey) ??
+        10; // Par défaut 10 questions visibles
   }
 
   Future<void> setVisibleResultsCount(int count) async {
@@ -81,13 +100,16 @@ class UserStateService extends ChangeNotifier {
 
   Future<void> recordDemoStartTime() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_demoStartTimeKey, DateTime.now().millisecondsSinceEpoch);
+    await prefs.setInt(
+        _demoStartTimeKey, DateTime.now().millisecondsSinceEpoch);
   }
 
   Future<DateTime?> getDemoStartTime() async {
     final prefs = await SharedPreferences.getInstance();
     final timestamp = prefs.getInt(_demoStartTimeKey);
-    return timestamp != null ? DateTime.fromMillisecondsSinceEpoch(timestamp) : null;
+    return timestamp != null
+        ? DateTime.fromMillisecondsSinceEpoch(timestamp)
+        : null;
   }
 
   // Logique des résultats progressifs
@@ -99,7 +121,8 @@ class UserStateService extends ChangeNotifier {
       return 10; // Toujours 10 questions visibles pendant la démo
     }
 
-    if (hasLifetimeAccess) { // Utilise le nouvel état
+    if (hasLifetimeAccess) {
+      // Utilise le nouvel état
       return 40; // Toutes les questions visibles si accès à vie
     }
 

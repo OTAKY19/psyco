@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// @deprecated Utilisez [Icon] de Material directement avec l'icône Material correspondante.
+/// Exemple : `CustomIconWidget(iconName: 'arrow_back')` → `Icon(Icons.arrow_back)`
+@Deprecated('Utilisez Icon(Icons.xxx) directement plutôt que ce wrapper')
 class CustomIconWidget extends StatelessWidget {
   final String iconName;
   final double size;
@@ -61,7 +64,6 @@ class CustomIconWidget extends StatelessWidget {
       'add_to_queue': Icons.add_to_queue,
       'addchart': Icons.addchart,
       'adjust': Icons.adjust,
-      'admin_panel_settings': Icons.admin_panel_settings,
       'adobe': Icons.adobe,
       'ads_click': Icons.ads_click,
       'agriculture': Icons.agriculture,

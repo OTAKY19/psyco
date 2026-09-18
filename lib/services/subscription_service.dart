@@ -8,7 +8,7 @@ class SubscriptionService {
   // Constantes pour les limites et prix
   static const int maxFreeTests = 10;
   static const double premiumPrice = 2499.0;
-  static const double basicPrice = 1500.0;
+  static const double basicPrice = 3000.0;
   static const double annualPrice = 10000.0;
 
   // Clés pour SharedPreferences
@@ -16,6 +16,8 @@ class SubscriptionService {
   static const String _subscriptionTypeKey = 'subscription_type';
   static const String _subscriptionExpiryKey = 'subscription_expiry';
   static const String _lastResetKey = 'last_reset';
+  // Mirroir de UserStateService._hasLifetimeAccessKey (accès à vie post-paiement)
+  static const String _lifetimeAccessKey = 'has_lifetime_access';
 
   /// Vérifie si l'utilisateur peut faire un test gratuit
   Future<bool> canTakeFreeTest() async {
@@ -35,7 +37,7 @@ class SubscriptionService {
   Future<int> getRemainingFreeTests() async {
     final prefs = await SharedPreferences.getInstance();
     final usedTests = prefs.getInt(_freeTestsUsedKey) ?? 0;
-    return max(0, maxFreeTests - usedTests);
+    return (maxFreeTests - usedTests).clamp(0, maxFreeTests);
   }
 
   /// Obtient le nombre de tests gratuits utilisés
@@ -95,7 +97,8 @@ class SubscriptionService {
     await prefs.setString(_subscriptionTypeKey, type);
 
     if (expiryDate != null) {
-      await prefs.setString(_subscriptionExpiryKey, expiryDate.toIso8601String());
+      await prefs.setString(
+          _subscriptionExpiryKey, expiryDate.toIso8601String());
     }
   }
 
@@ -118,7 +121,7 @@ class SubscriptionService {
 
   /// Calcule le prix avec remise pour l'abonnement annuel
   double calculateAnnualDiscount() {
-    final monthlyTotal = premiumPrice * 12;
+    const monthlyTotal = premiumPrice * 12;
     return monthlyTotal - annualPrice;
   }
 
@@ -130,6 +133,7 @@ class SubscriptionService {
     final expiryDate = await getSubscriptionExpiry();
 
     return {
+      'isPremium': hasSubscription,
       'hasActiveSubscription': hasSubscription,
       'subscriptionType': subscriptionType,
       'remainingFreeTests': remainingFreeTests,
@@ -168,7 +172,7 @@ class SubscriptionService {
     // Certaines fonctionnalités peuvent être accessibles avec des tests gratuits
     switch (feature) {
       case 'basic_tests':
-        return await canTakeFreeTest();
+        return true; // Tests basiques toujours accessibles (freemium)
       case 'premium_tests':
       case 'advanced_stats':
       case 'unlimited_access':
@@ -191,21 +195,25 @@ class SubscriptionService {
       'totalFreeTests': maxFreeTests,
       'hasActiveSubscription': hasSubscription,
       'subscriptionType': subscriptionType,
-      'usagePercentage': maxFreeTests > 0 ? (usedTests / maxFreeTests * 100).round() : 0,
+      'usagePercentage':
+          maxFreeTests > 0 ? (usedTests / maxFreeTests * 100).round() : 0,
     };
   }
 
   /// Vérifie si l'utilisateur peut faire un test
   Future<bool> canTakeTest() async {
-    final hasSubscription = await hasActiveSubscription();
-    if (hasSubscription) return true;
-
-    return await canTakeFreeTest();
+    if (await hasActiveSubscription()) return true;
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool(_lifetimeAccessKey) ?? false) return true;
+    final usedTests = prefs.getInt(_freeTestsUsedKey) ?? 0;
+    return usedTests < maxFreeTests;
   }
 
   /// Vérifie si l'utilisateur est premium
   Future<bool> isPremiumUser() async {
-    return await hasActiveSubscription();
+    if (await hasActiveSubscription()) return true;
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_lifetimeAccessKey) ?? false;
   }
 
   /// Marque un test gratuit comme utilisé
@@ -244,24 +252,15 @@ class SubscriptionService {
     // Simulation de traitement de paiement
     await Future.delayed(const Duration(seconds: 2));
 
-    final success = true; // Simulation toujours réussie pour les tests
-
-    if (success) {
-      return {
-        'success': true,
-        'transactionId': 'TXN_${DateTime.now().millisecondsSinceEpoch}',
-        'amount': amount,
-        'phoneNumber': phoneNumber,
-        'method': paymentMethod,
-        'status': 'completed',
-        'message': 'Paiement traité avec succès',
-      };
-    } else {
-      return {
-        'success': false,
-        'error': 'Échec du paiement',
-      };
-    }
+    return {
+      'success': true,
+      'transactionId': 'TXN_${DateTime.now().millisecondsSinceEpoch}',
+      'amount': amount,
+      'phoneNumber': phoneNumber,
+      'method': paymentMethod,
+      'status': 'completed',
+      'message': 'Paiement traité avec succès',
+    };
   }
 
   /// Vérifie le statut d'un paiement
@@ -326,5 +325,4 @@ class SubscriptionService {
   }
 }
 
-// Fonction utilitaire max (au cas où math n'est pas importé)
-int max(int a, int b) => a > b ? a : b;
+// Fin subscription_service.dart

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
 import '../../services/subscription_service.dart';
-import '../../models/payment_models.dart';
-import '../../widgets/custom_icon_widget.dart';
 
 /// Écran de paiement mobile money
 class MobileMoneyPaymentScreen extends StatefulWidget {
@@ -17,16 +15,15 @@ class MobileMoneyPaymentScreen extends StatefulWidget {
 
 class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     with TickerProviderStateMixin {
-  
   final SubscriptionService _subscriptionService = SubscriptionService();
   final _phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  
+
   String? _selectedPaymentMethod;
   bool _isProcessing = false;
   bool _showInstructions = false;
   List<Map<String, dynamic>> _paymentMethods = [];
-  
+
   late AnimationController _instructionsAnimationController;
   late Animation<double> _instructionsAnimation;
 
@@ -42,12 +39,8 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    
     _instructionsAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _instructionsAnimationController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _instructionsAnimationController, curve: Curves.easeInOut),
     );
   }
 
@@ -69,21 +62,15 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
       _selectedPaymentMethod = methodId;
       _showInstructions = true;
     });
-    
     _instructionsAnimationController.forward();
-    
-    // Vérifier et pré-remplir le numéro si possible
     _validateAndFormatPhoneNumber();
   }
 
   void _validateAndFormatPhoneNumber() {
     if (_selectedPaymentMethod == null || _phoneController.text.isEmpty) return;
-    
     final phoneNumber = _phoneController.text;
     final isValid = _subscriptionService.isValidPhoneNumber(phoneNumber, _selectedPaymentMethod!);
-    
     if (isValid) {
-      // Formater le numéro pour un affichage plus lisible
       final cleaned = phoneNumber.replaceAll(RegExp(r'[^\d]'), '');
       if (cleaned.length >= 8) {
         final formatted = '${cleaned.substring(0, 2)} ${cleaned.substring(2, 5)} ${cleaned.substring(5)}';
@@ -100,29 +87,19 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
       _showErrorSnackBar('Veuillez remplir tous les champs correctement');
       return;
     }
-    
-    setState(() {
-      _isProcessing = true;
-    });
-    
+    setState(() => _isProcessing = true);
     try {
-      // Nettoyer le numéro de téléphone
       final phoneNumber = _phoneController.text.replaceAll(RegExp(r'[^\d]'), '');
-
-      // Traiter le paiement
       final result = await _subscriptionService.processMobileMoneyPayment(
         amount: SubscriptionService.premiumPrice.toDouble(),
         phoneNumber: phoneNumber,
         paymentMethod: _selectedPaymentMethod!,
-        description: 'Paiement MTN Mobile Money',
+        description: 'Paiement Mobile Money',
       );
-      
-      if (result['success'] == true) {
-        // Paiement réussi, naviguer vers la confirmation
-        Navigator.pushReplacementNamed(
-          context,
+      if (result['success'] == true && mounted) {
+        context.pushReplacement(
           AppRoutes.paymentConfirmation,
-          arguments: result,
+          extra: TestResultRouteExtra(paymentResult: result),
         );
       } else {
         _showErrorDialog('Échec du paiement', result['error'] ?? 'Erreur inconnue');
@@ -130,11 +107,7 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     } catch (e) {
       _showErrorDialog('Erreur', 'Une erreur est survenue lors du paiement: $e');
     } finally {
-      if (mounted) {
-        setState(() {
-          _isProcessing = false;
-        });
-      }
+      if (mounted) setState(() => _isProcessing = false);
     }
   }
 
@@ -142,8 +115,9 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: AppColors.error,
         behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
       ),
     );
   }
@@ -152,11 +126,9 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(
-          title,
-          style: TextStyle(color: Theme.of(context).colorScheme.error),
-        ),
-        content: Text(message),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.lg)),
+        title: Text(title, style: AppTextStyles.titleMedium.copyWith(color: AppColors.error)),
+        content: Text(message, style: AppTextStyles.bodyMedium),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -168,123 +140,148 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
   }
 
   String? _validatePhoneNumber(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Veuillez entrer votre numéro de téléphone';
-    }
-    
-    if (_selectedPaymentMethod == null) {
-      return 'Veuillez sélectionner une méthode de paiement';
-    }
-    
+    if (value == null || value.isEmpty) return 'Veuillez entrer votre numéro de téléphone';
+    if (_selectedPaymentMethod == null) return 'Veuillez sélectionner une méthode de paiement';
     final phoneNumber = value.replaceAll(RegExp(r'[^\d]'), '');
-    
     if (!_subscriptionService.isValidPhoneNumber(phoneNumber, _selectedPaymentMethod!)) {
       final method = _paymentMethods.firstWhere((m) => m['id'] == _selectedPaymentMethod);
       return 'Numéro non valide pour ${method['name']}';
     }
-    
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Paiement Mobile Money'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const CustomIconWidget(iconName: 'arrow_back'),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: AppSpacing.xxl),
+                      _buildPriceHeader(),
+                      const SizedBox(height: AppSpacing.xxl),
+                      _buildPaymentMethodsSection(),
+                      if (_selectedPaymentMethod != null) ...[
+                        const SizedBox(height: AppSpacing.xxl),
+                        _buildPhoneNumberField(),
+                      ],
+                      if (_showInstructions && _selectedPaymentMethod != null) ...[
+                        const SizedBox(height: AppSpacing.xxl),
+                        _buildInstructionsSection(),
+                      ],
+                      if (_selectedPaymentMethod != null) ...[
+                        const SizedBox(height: AppSpacing.xxl),
+                        _buildPaymentButton(),
+                      ],
+                      const SizedBox(height: AppSpacing.lg),
+                      _buildSecurityInfo(),
+                      SizedBox(height: padding.bottom + AppSpacing.xxl),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(2.h),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header avec prix
-              _buildPriceHeader(),
-              
-              SizedBox(height: 3.h),
-              
-              // Sélection de la méthode de paiement
-              _buildPaymentMethodsSection(),
-              
-              SizedBox(height: 3.h),
-              
-              // Champ numéro de téléphone
-              if (_selectedPaymentMethod != null) ...[
-                _buildPhoneNumberField(),
-                SizedBox(height: 2.h),
-              ],
-              
-              // Instructions
-              if (_showInstructions && _selectedPaymentMethod != null) ...[
-                _buildInstructionsSection(),
-                SizedBox(height: 3.h),
-              ],
-              
-              // Bouton de paiement
-              if (_selectedPaymentMethod != null) ...[
-                _buildPaymentButton(),
-                SizedBox(height: 2.h),
-              ],
-              
-              // Informations de sécurité
-              _buildSecurityInfo(),
-              
-              SizedBox(height: 2.h),
-            ],
-          ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.sm, AppSpacing.xl, AppSpacing.lg),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(AppRadii.xxl),
+          bottomRight: Radius.circular(AppRadii.xxl),
         ),
+        boxShadow: AppShadows.header,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(AppRadii.pill),
+            ),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.primary),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.lg),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Paiement Mobile Money', style: AppTextStyles.titleMedium),
+                Text(
+                  'Sélectionnez votre opérateur',
+                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildPriceHeader() {
     final price = _subscriptionService.formatPrice(SubscriptionService.premiumPrice);
-    
+
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(2.h),
+      padding: const EdgeInsets.all(AppSpacing.xxl),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).colorScheme.primaryContainer,
-            Theme.of(context).colorScheme.secondaryContainer,
-          ],
+        gradient: const LinearGradient(
+          colors: [AppColors.primary, AppColors.primaryDark],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(2.h),
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.ctaLg,
       ),
       child: Column(
         children: [
-          Icon(
-            Icons.workspace_premium,
-            size: 4.h,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          SizedBox(height: 1.h),
-          Text(
-            'DouaneTest Pro Premium',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
+          Container(
+            width: 64,
+            height: 64,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.2),
+              shape: BoxShape.circle,
             ),
+            child: const Icon(Icons.workspace_premium_rounded, size: 36, color: Colors.white),
           ),
-          SizedBox(height: 0.5.h),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            'PsychoTest+ Premium',
+            style: AppTextStyles.titleLarge.copyWith(color: Colors.white),
+          ),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             price,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: AppTextStyles.displayMedium.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
           ),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             'Paiement unique • Accès à vie',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onPrimaryContainer,
-            ),
+            style: AppTextStyles.bodyMedium.copyWith(color: Colors.white.withValues(alpha: 0.9)),
           ),
         ],
       ),
@@ -295,86 +292,63 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Choisissez votre méthode de paiement',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(height: 2.h),
+        Text('Choisissez votre opérateur', style: AppTextStyles.titleMedium),
+        const SizedBox(height: AppSpacing.lg),
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 2.w,
-            mainAxisSpacing: 2.h,
-            childAspectRatio: 1.5,
+            crossAxisSpacing: AppSpacing.md,
+            mainAxisSpacing: AppSpacing.md,
+            childAspectRatio: 1.6,
           ),
           itemCount: _paymentMethods.length,
           itemBuilder: (context, index) {
             final method = _paymentMethods[index];
             final isSelected = _selectedPaymentMethod == method['id'];
-            
+
             return GestureDetector(
               onTap: method['available'] ? () => _selectPaymentMethod(method['id']) : null,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.all(1.5.h),
+                padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: isSelected 
-                      ? Theme.of(context).colorScheme.primaryContainer
-                      : Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(1.5.h),
+                  color: isSelected ? AppColors.primaryContainer : AppColors.surface,
+                  borderRadius: BorderRadius.circular(AppRadii.card),
                   border: Border.all(
-                    color: isSelected 
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+                    color: isSelected ? AppColors.primary : AppColors.borderLight,
                     width: isSelected ? 2 : 1,
                   ),
-                  boxShadow: isSelected ? [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-                      blurRadius: 8,
-                      spreadRadius: 2,
-                    ),
-                  ] : null,
+                  boxShadow: isSelected ? AppShadows.cardSm : null,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 6.h,
-                      height: 6.h,
+                      width: 48,
+                      height: 48,
                       decoration: BoxDecoration(
                         color: Color(method['color']),
-                        borderRadius: BorderRadius.circular(1.h),
+                        borderRadius: BorderRadius.circular(AppRadii.sm),
                       ),
                       child: Icon(
                         _getPaymentIcon(method['id']),
                         color: Colors.white,
-                        size: 3.h,
+                        size: 24,
                       ),
                     ),
-                    SizedBox(height: 1.h),
+                    const SizedBox(height: AppSpacing.sm),
                     Text(
                       method['name'],
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurface,
+                      style: AppTextStyles.titleSmall.copyWith(
+                        color: isSelected ? AppColors.primary : AppColors.textPrimary,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     if (!method['available']) ...[
-                      SizedBox(height: 0.5.h),
-                      Text(
-                        'Bientôt',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
+                      const SizedBox(height: AppSpacing.xxs),
+                      Text('Bientôt', style: AppTextStyles.bodySmall),
                     ],
                   ],
                 ),
@@ -390,17 +364,15 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     final selectedMethod = _paymentMethods.firstWhere(
       (method) => method['id'] == _selectedPaymentMethod,
     );
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Numéro de téléphone ${selectedMethod['name']}',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          'Numéro ${selectedMethod['name']}',
+          style: AppTextStyles.titleSmall,
         ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpacing.sm),
         TextFormField(
           controller: _phoneController,
           keyboardType: TextInputType.phone,
@@ -411,32 +383,32 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
           decoration: InputDecoration(
             hintText: _getPhoneHint(_selectedPaymentMethod!),
             prefixIcon: Container(
-              width: 12.w,
+              width: 56,
               alignment: Alignment.center,
               child: Container(
-                width: 4.h,
-                height: 4.h,
+                width: 32,
+                height: 32,
                 decoration: BoxDecoration(
                   color: Color(selectedMethod['color']),
-                  borderRadius: BorderRadius.circular(0.5.h),
+                  borderRadius: BorderRadius.circular(AppRadii.xs),
                 ),
                 child: Icon(
                   _getPaymentIcon(_selectedPaymentMethod!),
                   color: Colors.white,
-                  size: 2.h,
+                  size: 18,
                 ),
               ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(1.h),
+              borderRadius: BorderRadius.circular(AppRadii.md),
+              borderSide: const BorderSide(color: AppColors.border),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(1.h),
-              borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
-              ),
+              borderRadius: BorderRadius.circular(AppRadii.md),
+              borderSide: const BorderSide(color: AppColors.primary, width: 2),
             ),
+            filled: true,
+            fillColor: AppColors.surface,
           ),
           validator: _validatePhoneNumber,
           onChanged: (value) => _validateAndFormatPhoneNumber(),
@@ -449,7 +421,7 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
     final selectedMethod = _paymentMethods.firstWhere(
       (method) => method['id'] == _selectedPaymentMethod,
     );
-    
+
     return AnimatedBuilder(
       animation: _instructionsAnimation,
       builder: (context, child) {
@@ -459,10 +431,10 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
             opacity: _instructionsAnimation.value,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(2.h),
+              padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(1.5.h),
+                color: AppColors.surfaceContainer,
+                borderRadius: BorderRadius.circular(AppRadii.card),
                 border: Border.all(
                   color: Color(selectedMethod['color']).withValues(alpha: 0.3),
                 ),
@@ -472,36 +444,22 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
                 children: [
                   Row(
                     children: [
-                      Icon(
-                        Icons.info_outline,
-                        color: Theme.of(context).colorScheme.onSecondaryContainer,
-                        size: 2.5.h,
-                      ),
-                      SizedBox(width: 2.w),
-                      Text(
-                        'Instructions',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onSecondaryContainer,
-                        ),
-                      ),
+                      const Icon(Icons.info_outline_rounded, color: AppColors.textSecondary, size: 20),
+                      const SizedBox(width: AppSpacing.sm),
+                      Text('Instructions', style: AppTextStyles.titleSmall),
                     ],
                   ),
-                  SizedBox(height: 1.h),
+                  const SizedBox(height: AppSpacing.md),
                   Text(
                     selectedMethod['instructions'],
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
+                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
                   ),
-                  SizedBox(height: 1.h),
+                  const SizedBox(height: AppSpacing.md),
                   Text(
                     '• Assurez-vous d\'avoir suffisamment de solde\n'
                     '• Gardez votre téléphone à proximité\n'
                     '• Vous recevrez une notification de confirmation',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.8),
-                    ),
+                    style: AppTextStyles.bodySmall,
                   ),
                 ],
               ),
@@ -514,33 +472,40 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
 
   Widget _buildPaymentButton() {
     final price = _subscriptionService.formatPrice(SubscriptionService.premiumPrice);
-    
+
     return SizedBox(
       width: double.infinity,
-      child: ElevatedButton.icon(
-        onPressed: _isProcessing ? null : _processPayment,
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 2.h),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      height: 56,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [AppColors.primary, AppColors.primaryDark],
+          ),
+          borderRadius: BorderRadius.circular(AppRadii.button),
+          boxShadow: AppShadows.ctaLg,
         ),
-        icon: _isProcessing 
-            ? SizedBox(
-                width: 2.h,
-                height: 2.h,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).colorScheme.onPrimary,
+        child: ElevatedButton.icon(
+          onPressed: _isProcessing ? null : _processPayment,
+          icon: _isProcessing
+              ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
-                ),
-              )
-            : Icon(Icons.payment, size: 2.5.h),
-        label: Text(
-          _isProcessing ? 'Traitement en cours...' : 'Payer $price',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onPrimary,
-            fontWeight: FontWeight.bold,
+                )
+              : const Icon(Icons.payment_rounded, color: Colors.white, size: 22),
+          label: Text(
+            _isProcessing ? 'Traitement en cours...' : 'Payer $price',
+            style: AppTextStyles.buttonLarge.copyWith(color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadii.button),
+            ),
           ),
         ),
       ),
@@ -549,40 +514,29 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
 
   Widget _buildSecurityInfo() {
     return Container(
-      padding: EdgeInsets.all(2.h),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(1.5.h),
+        color: AppColors.surfaceContainer,
+        borderRadius: BorderRadius.circular(AppRadii.card),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                Icons.security,
-                color: Theme.of(context).colorScheme.primary,
-                size: 2.5.h,
-              ),
-              SizedBox(width: 2.w),
-              Text(
-                'Paiement sécurisé',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
+              const Icon(Icons.shield_rounded, color: AppColors.primary, size: 20),
+              const SizedBox(width: AppSpacing.sm),
+              Text('Paiement sécurisé', style: AppTextStyles.titleSmall),
             ],
           ),
-          SizedBox(height: 1.h),
+          const SizedBox(height: AppSpacing.md),
           Text(
             '• Toutes les transactions sont cryptées\n'
             '• Aucune information bancaire stockée\n'
             '• Paiement traité par nos partenaires certifiés\n'
             '• Support client disponible 24/7',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+            style: AppTextStyles.bodySmall,
           ),
         ],
       ),
@@ -592,17 +546,17 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
   IconData _getPaymentIcon(String methodId) {
     switch (methodId) {
       case 'orange_money':
-        return Icons.phone_android;
+        return Icons.phone_android_rounded;
       case 'mtn_money':
-        return Icons.mobile_friendly;
+        return Icons.mobile_friendly_rounded;
       case 'moov_money':
-        return Icons.smartphone;
+        return Icons.smartphone_rounded;
       case 'wave':
-        return Icons.waves;
+        return Icons.waves_rounded;
       case 'free_money':
-        return Icons.account_balance_wallet;
+        return Icons.account_balance_wallet_rounded;
       default:
-        return Icons.payment;
+        return Icons.payment_rounded;
     }
   }
 
@@ -611,9 +565,9 @@ class _MobileMoneyPaymentScreenState extends State<MobileMoneyPaymentScreen>
       case 'orange_money':
         return 'Ex: 07 123 456';
       case 'mtn_money':
-        return 'Ex: 06 123 456';
+        return 'Ex: 90 123 456';
       case 'moov_money':
-        return 'Ex: 05 123 456';
+        return 'Ex: 94 123 456';
       case 'wave':
         return 'Ex: 07 123 456';
       case 'free_money':

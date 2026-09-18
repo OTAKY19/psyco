@@ -156,6 +156,16 @@ class UserDataService {
     }
   }
 
+  /// L'utilisateur a-t-il déjà vu l'onboarding first-run ?
+  Future<bool> isOnboardingCompleted() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.getBool('onboarding_completed') ?? false;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// Recalcule le score moyen basé sur tous les progrès de catégories
   Future<void> _recalculateAverageScore() async {
     try {

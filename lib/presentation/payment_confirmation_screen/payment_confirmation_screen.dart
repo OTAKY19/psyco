@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import '../../core/app_export.dart';
 import '../../services/subscription_service.dart';
-import '../../widgets/custom_icon_widget.dart';
 
 /// Écran de confirmation de paiement et d'activation du compte premium
 class PaymentConfirmationScreen extends StatefulWidget {
@@ -16,28 +15,28 @@ class PaymentConfirmationScreen extends StatefulWidget {
   });
 
   @override
-  State<PaymentConfirmationScreen> createState() => _PaymentConfirmationScreenState();
+  State<PaymentConfirmationScreen> createState() =>
+      _PaymentConfirmationScreenState();
 }
 
 class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     with TickerProviderStateMixin {
-  
   final SubscriptionService _subscriptionService = SubscriptionService();
-  
+
   late AnimationController _mainAnimationController;
   late AnimationController _successAnimationController;
   late AnimationController _loadingAnimationController;
-  
+
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
   late Animation<double> _rotationAnimation;
-  
+
   PaymentConfirmationState _currentState = PaymentConfirmationState.verifying;
   String? _errorMessage;
   Map<String, dynamic>? _paymentData;
   Timer? _verificationTimer;
   int _verificationAttempts = 0;
-  static const int maxVerificationAttempts = 6; // 60 secondes max
+  static const int maxVerificationAttempts = 6;
 
   @override
   void initState() {
@@ -48,45 +47,29 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
   }
 
   void _initializeAnimations() {
-    // Animation principale
     _mainAnimationController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
-    // Animation de succès
     _successAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-    
-    // Animation de chargement
     _loadingAnimationController = AnimationController(
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
-    
+
     _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _mainAnimationController,
-        curve: Curves.elasticOut,
-      ),
+      CurvedAnimation(parent: _mainAnimationController, curve: Curves.elasticOut),
     );
-    
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _mainAnimationController,
-        curve: const Interval(0.2, 1.0),
-      ),
+      CurvedAnimation(parent: _mainAnimationController, curve: const Interval(0.2, 1.0)),
     );
-    
     _rotationAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _loadingAnimationController,
-        curve: Curves.linear,
-      ),
+      CurvedAnimation(parent: _loadingAnimationController, curve: Curves.linear),
     );
-    
+
     _mainAnimationController.forward();
     _loadingAnimationController.repeat();
   }
@@ -99,17 +82,14 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
       });
       return;
     }
-    
     _verifyPaymentStatus();
   }
 
   Future<void> _verifyPaymentStatus() async {
     try {
       final transactionId = _paymentData!['transactionId'];
-      
-      // Vérifier le statut du paiement
       final statusResult = await _subscriptionService.checkPaymentStatus(transactionId!);
-      
+
       switch (statusResult['status']) {
         case 'completed':
           await _activatePremiumAccount();
@@ -129,7 +109,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
       if (_verificationAttempts >= maxVerificationAttempts) {
         setState(() {
           _currentState = PaymentConfirmationState.error;
-          _errorMessage = 'Délai d\'attente dépassé. Contactez le support.';
+          _errorMessage = "Délai d'attente dépassé. Contactez le support.";
         });
       } else {
         _scheduleNextVerification();
@@ -139,7 +119,6 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
 
   void _scheduleNextVerification() {
     _verificationAttempts++;
-    
     if (_verificationAttempts >= maxVerificationAttempts) {
       setState(() {
         _currentState = PaymentConfirmationState.timeout;
@@ -147,11 +126,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
       });
       return;
     }
-    
     _verificationTimer = Timer(const Duration(seconds: 10), () {
-      if (mounted) {
-        _verifyPaymentStatus();
-      }
+      if (mounted) _verifyPaymentStatus();
     });
   }
 
@@ -161,28 +137,19 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
         transactionId: _paymentData!['transactionId'],
         amount: _paymentData!['amount']?.toDouble() ?? SubscriptionService.premiumPrice,
       );
-      
       if (success) {
-        setState(() {
-          _currentState = PaymentConfirmationState.success;
-        });
+        setState(() => _currentState = PaymentConfirmationState.success);
         _loadingAnimationController.stop();
         _successAnimationController.forward();
-        
-        // Naviguer vers l'écran principal après 3 secondes
         Timer(const Duration(seconds: 3), () {
           if (mounted) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              AppRoutes.testLibraryDashboard,
-              (route) => false,
-            );
+            context.go(AppRoutes.testLibraryDashboard);
           }
         });
       } else {
         setState(() {
           _currentState = PaymentConfirmationState.error;
-          _errorMessage = 'Erreur lors de l\'activation du compte';
+          _errorMessage = "Erreur lors de l'activation du compte";
         });
       }
     } catch (e) {
@@ -213,21 +180,25 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
   }
 
   void _goToSupport() {
-    // Ici, vous pourriez ouvrir un chat, email ou téléphone de support
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Contacter le Support'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.lg)),
+        title: Text('Contacter le Support', style: AppTextStyles.titleMedium),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Transaction ID: ${_paymentData?['transactionId'] ?? 'N/A'}'),
-            SizedBox(height: 2.h),
-            const Text('Contactez-nous:'),
-            const Text('📧 support@douanetest.pro'),
-            const Text('📱 +229 XX XX XX XX'),
-            const Text('⏰ Lundi-Vendredi 8h-18h'),
+            Text(
+              'Transaction ID: ${_paymentData?['transactionId'] ?? 'N/A'}',
+              style: AppTextStyles.bodySmall,
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Text('Contactez-nous:', style: AppTextStyles.bodyMedium),
+            const SizedBox(height: AppSpacing.xs),
+            Text('📧 support@psychotest.com', style: AppTextStyles.bodyMedium),
+            Text('📱 +229 XX XX XX XX', style: AppTextStyles.bodyMedium),
+            Text('⏰ Lundi-Vendredi 8h-18h', style: AppTextStyles.bodyMedium),
           ],
         ),
         actions: [
@@ -241,67 +212,125 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
   }
 
   void _goToHome() {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      AppRoutes.testLibraryDashboard,
-      (route) => false,
-    );
+    context.go(AppRoutes.testLibraryDashboard);
   }
 
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Confirmation de Paiement'),
-        automaticallyImplyLeading: false,
-        actions: [
-          if (_currentState == PaymentConfirmationState.success ||
-              _currentState == PaymentConfirmationState.error)
-            IconButton(
-              onPressed: _goToHome,
-              icon: const CustomIconWidget(iconName: 'close'),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: AnimatedBuilder(
+                animation: _mainAnimationController,
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: _scaleAnimation.value,
+                    child: Opacity(
+                      opacity: _opacityAnimation.value,
+                      child: _buildContent(padding),
+                    ),
+                  );
+                },
+              ),
             ),
-        ],
-      ),
-      body: AnimatedBuilder(
-        animation: _mainAnimationController,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: Opacity(
-              opacity: _opacityAnimation.value,
-              child: _buildContent(),
-            ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.sm, AppSpacing.xl, AppSpacing.lg),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(AppRadii.xxl),
+          bottomRight: Radius.circular(AppRadii.xxl),
+        ),
+        boxShadow: AppShadows.header,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(AppRadii.pill),
+            ),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.primary),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.lg),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Confirmation de Paiement', style: AppTextStyles.titleMedium),
+                Text(
+                  _getStateSubtitle(),
+                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
+                ),
+              ],
+            ),
+          ),
+          if (_currentState == PaymentConfirmationState.success ||
+              _currentState == PaymentConfirmationState.error)
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer,
+                borderRadius: BorderRadius.circular(AppRadii.pill),
+              ),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: const Icon(Icons.close_rounded, size: 20, color: AppColors.primary),
+                onPressed: _goToHome,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  String _getStateSubtitle() {
+    switch (_currentState) {
+      case PaymentConfirmationState.verifying:
+        return 'Vérification en cours';
+      case PaymentConfirmationState.success:
+        return 'Paiement confirmé';
+      case PaymentConfirmationState.error:
+        return 'Problème détecté';
+      case PaymentConfirmationState.timeout:
+        return 'Vérification en attente';
+    }
+  }
+
+  Widget _buildContent(EdgeInsets padding) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(3.h),
+      padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         children: [
-          SizedBox(height: 4.h),
-          
-          // État principal
+          const SizedBox(height: AppSpacing.xxxl),
           _buildMainStateWidget(),
-          
-          SizedBox(height: 4.h),
-          
-          // Informations de transaction
+          const SizedBox(height: AppSpacing.xxl),
           if (_paymentData != null) _buildTransactionInfo(),
-          
-          SizedBox(height: 3.h),
-          
-          // Boutons d'action
+          const SizedBox(height: AppSpacing.xl),
           _buildActionButtons(),
-          
-          SizedBox(height: 4.h),
-          
-          // Informations d'aide
+          const SizedBox(height: AppSpacing.xxl),
           _buildHelpInfo(),
+          SizedBox(height: padding.bottom),
         ],
       ),
     );
@@ -329,57 +358,46 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
             return Transform.rotate(
               angle: _rotationAnimation.value * 2 * 3.14159,
               child: Container(
-                width: 15.h,
-                height: 15.h,
+                width: 120,
+                height: 120,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: AppColors.primaryContainer,
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 2),
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-                      blurRadius: 20,
-                      spreadRadius: 5,
+                      color: AppColors.primary.withValues(alpha: 0.2),
+                      blurRadius: 24,
+                      spreadRadius: 4,
                     ),
                   ],
                 ),
-                child: Icon(
-                  Icons.sync,
-                  size: 6.h,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                child: const Icon(Icons.sync_rounded, size: 56, color: AppColors.primary),
               ),
             );
           },
         ),
-        SizedBox(height: 3.h),
-        Text(
-          'Vérification du paiement...',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpacing.xl),
+        Text('Vérification du paiement...', style: AppTextStyles.headlineSmall),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Nous vérifions votre paiement mobile money.\nCela peut prendre quelques instants.',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 2.h),
-        LinearProgressIndicator(
-          backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-          valueColor: AlwaysStoppedAnimation<Color>(
-            Theme.of(context).colorScheme.primary,
+        const SizedBox(height: AppSpacing.lg),
+        SizedBox(
+          width: 200,
+          child: LinearProgressIndicator(
+            backgroundColor: AppColors.borderLight,
+            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+            borderRadius: BorderRadius.circular(AppRadii.pill),
           ),
         ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Tentative ${_verificationAttempts + 1}/$maxVerificationAttempts',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          style: AppTextStyles.bodySmall,
         ),
       ],
     );
@@ -394,63 +412,57 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
           child: Column(
             children: [
               Container(
-                width: 15.h,
-                height: 15.h,
+                width: 120,
+                height: 120,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  color: AppColors.successContainer,
+                  border: Border.all(color: AppColors.success.withValues(alpha: 0.3), width: 2),
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.3),
-                      blurRadius: 20,
-                      spreadRadius: 5,
+                      color: AppColors.success.withValues(alpha: 0.2),
+                      blurRadius: 24,
+                      spreadRadius: 4,
                     ),
                   ],
                 ),
-                child: Icon(
-                  Icons.check_circle_outline,
-                  size: 8.h,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
+                child: const Icon(Icons.check_circle_outline_rounded, size: 64, color: AppColors.success),
               ),
-              SizedBox(height: 3.h),
+              const SizedBox(height: AppSpacing.xl),
               Text(
                 'Paiement confirmé !',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                textAlign: TextAlign.center,
+                style: AppTextStyles.headlineSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.w700),
               ),
-              SizedBox(height: 1.h),
+              const SizedBox(height: AppSpacing.sm),
               Text(
                 'Félicitations ! Votre compte Premium a été activé avec succès.',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 2.h),
+              const SizedBox(height: AppSpacing.lg),
               Container(
-                padding: EdgeInsets.all(2.h),
+                width: double.infinity,
+                padding: const EdgeInsets.all(AppSpacing.xl),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.tertiaryContainer.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(1.5.h),
+                  color: AppColors.successContainer,
+                  borderRadius: BorderRadius.circular(AppRadii.card),
+                  border: Border.all(color: AppColors.success.withValues(alpha: 0.2)),
                 ),
                 child: Column(
                   children: [
-                    Icon(
-                      Icons.workspace_premium,
-                      color: Theme.of(context).colorScheme.tertiary,
-                      size: 4.h,
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: const BoxDecoration(
+                        color: AppColors.success,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.workspace_premium_rounded, color: Colors.white, size: 24),
                     ),
-                    SizedBox(height: 1.h),
+                    const SizedBox(height: AppSpacing.md),
                     Text(
                       'Vous avez maintenant accès à tous les tests premium !',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onTertiaryContainer,
-                      ),
+                      style: AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimary),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -467,40 +479,31 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     return Column(
       children: [
         Container(
-          width: 15.h,
-          height: 15.h,
+          width: 120,
+          height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.errorContainer,
+            color: AppColors.errorContainer,
+            border: Border.all(color: AppColors.error.withValues(alpha: 0.3), width: 2),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.error.withValues(alpha: 0.3),
-                blurRadius: 20,
-                spreadRadius: 5,
+                color: AppColors.error.withValues(alpha: 0.2),
+                blurRadius: 24,
+                spreadRadius: 4,
               ),
             ],
           ),
-          child: Icon(
-            Icons.error_outline,
-            size: 8.h,
-            color: Theme.of(context).colorScheme.error,
-          ),
+          child: const Icon(Icons.error_outline_rounded, size: 64, color: AppColors.error),
         ),
-        SizedBox(height: 3.h),
+        const SizedBox(height: AppSpacing.xl),
         Text(
           'Problème de paiement',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.error,
-          ),
-          textAlign: TextAlign.center,
+          style: AppTextStyles.headlineSmall.copyWith(color: AppColors.error, fontWeight: FontWeight.w700),
         ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           _errorMessage ?? 'Une erreur est survenue lors du traitement de votre paiement.',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
           textAlign: TextAlign.center,
         ),
       ],
@@ -511,40 +514,31 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     return Column(
       children: [
         Container(
-          width: 15.h,
-          height: 15.h,
+          width: 120,
+          height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.secondaryContainer,
+            color: AppColors.accentContainer,
+            border: Border.all(color: AppColors.accent.withValues(alpha: 0.3), width: 2),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
-                blurRadius: 20,
-                spreadRadius: 5,
+                color: AppColors.accent.withValues(alpha: 0.2),
+                blurRadius: 24,
+                spreadRadius: 4,
               ),
             ],
           ),
-          child: Icon(
-            Icons.schedule,
-            size: 8.h,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+          child: const Icon(Icons.schedule_rounded, size: 64, color: AppColors.accent),
         ),
-        SizedBox(height: 3.h),
+        const SizedBox(height: AppSpacing.xl),
         Text(
           'Vérification en cours',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          textAlign: TextAlign.center,
+          style: AppTextStyles.headlineSmall.copyWith(color: AppColors.accent, fontWeight: FontWeight.w700),
         ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpacing.sm),
         Text(
           'Votre paiement est en cours de traitement. Vous recevrez une confirmation par SMS.',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
           textAlign: TextAlign.center,
         ),
       ],
@@ -553,29 +547,54 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
 
   Widget _buildTransactionInfo() {
     return Container(
-      padding: EdgeInsets.all(2.h),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(1.5.h),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Détails de la transaction',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
+          Row(
+            children: [
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: AppColors.accentContainer,
+                  borderRadius: BorderRadius.circular(AppRadii.sm),
+                ),
+                child: const Icon(Icons.receipt_long_rounded, color: AppColors.accent, size: 20),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Text('Détails de la transaction', style: AppTextStyles.titleMedium),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(AppRadii.md),
+            ),
+            child: Column(
+              children: [
+                _buildInfoRow(
+                  'Montant',
+                  _subscriptionService.formatPrice(
+                    _paymentData!['amount']?.toDouble() ?? SubscriptionService.premiumPrice,
+                  ),
+                ),
+                _buildInfoRow('Méthode', _getPaymentMethodName(_paymentData!['paymentMethod'])),
+                _buildInfoRow('Téléphone', _paymentData!['phoneNumber'] ?? 'N/A'),
+                _buildInfoRow('Transaction', _paymentData!['transactionId'] ?? 'N/A'),
+                if (_paymentData!['timestamp'] != null)
+                  _buildInfoRow('Date', _formatDateTime(_paymentData!['timestamp'])),
+              ],
             ),
           ),
-          SizedBox(height: 1.5.h),
-          _buildInfoRow('Montant', _subscriptionService.formatPrice(
-            _paymentData!['amount']?.toDouble() ?? SubscriptionService.premiumPrice
-          )),
-          _buildInfoRow('Méthode', _getPaymentMethodName(_paymentData!['paymentMethod'])),
-          _buildInfoRow('Téléphone', _paymentData!['phoneNumber'] ?? 'N/A'),
-          _buildInfoRow('Transaction', _paymentData!['transactionId'] ?? 'N/A'),
-          if (_paymentData!['timestamp'] != null)
-            _buildInfoRow('Date', _formatDateTime(_paymentData!['timestamp'])),
         ],
       ),
     );
@@ -583,24 +602,20 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
 
   Widget _buildInfoRow(String label, String value) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 1.h),
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 25.w,
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
+            width: 100,
+            child: Text(label, style: AppTextStyles.bodySmall),
           ),
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
+              style: AppTextStyles.bodySmall.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
               ),
             ),
           ),
@@ -616,14 +631,27 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
       case PaymentConfirmationState.success:
         return SizedBox(
           width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed: _goToHome,
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 1.8.h),
-              backgroundColor: Theme.of(context).colorScheme.primary,
+          height: 56,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [AppColors.primary, AppColors.primaryDark],
+              ),
+              borderRadius: BorderRadius.circular(AppRadii.button),
+              boxShadow: AppShadows.ctaLg,
             ),
-            icon: const Icon(Icons.arrow_forward),
-            label: const Text('Continuer'),
+            child: ElevatedButton.icon(
+              onPressed: _goToHome,
+              icon: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 22),
+              label: Text('Continuer', style: AppTextStyles.buttonLarge.copyWith(color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                ),
+              ),
+            ),
           ),
         );
       case PaymentConfirmationState.error:
@@ -631,25 +659,44 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
           children: [
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _retryVerification,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 1.8.h),
+              height: 56,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [AppColors.primary, AppColors.primaryDark],
+                  ),
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                  boxShadow: AppShadows.ctaLg,
                 ),
-                icon: const Icon(Icons.refresh),
-                label: const Text('Réessayer'),
+                child: ElevatedButton.icon(
+                  onPressed: _retryVerification,
+                  icon: const Icon(Icons.refresh_rounded, color: Colors.white, size: 22),
+                  label: Text('Réessayer', style: AppTextStyles.buttonLarge.copyWith(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadii.button),
+                    ),
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 2.h),
+            const SizedBox(height: AppSpacing.lg),
             SizedBox(
               width: double.infinity,
+              height: 56,
               child: OutlinedButton.icon(
                 onPressed: _goToSupport,
+                icon: const Icon(Icons.support_agent_rounded, color: AppColors.primary, size: 22),
+                label: Text('Contacter le Support', style: AppTextStyles.buttonLarge.copyWith(color: AppColors.primary)),
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 1.8.h),
+                  foregroundColor: AppColors.primary,
+                  side: const BorderSide(color: AppColors.primary, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
                 ),
-                icon: const Icon(Icons.support_agent),
-                label: const Text('Contacter le Support'),
               ),
             ),
           ],
@@ -659,25 +706,44 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
           children: [
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: _retryVerification,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 1.8.h),
+              height: 56,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [AppColors.primary, AppColors.primaryDark],
+                  ),
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                  boxShadow: AppShadows.ctaLg,
                 ),
-                icon: const Icon(Icons.refresh),
-                label: const Text('Vérifier à nouveau'),
+                child: ElevatedButton.icon(
+                  onPressed: _retryVerification,
+                  icon: const Icon(Icons.refresh_rounded, color: Colors.white, size: 22),
+                  label: Text('Vérifier à nouveau', style: AppTextStyles.buttonLarge.copyWith(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadii.button),
+                    ),
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 2.h),
+            const SizedBox(height: AppSpacing.lg),
             SizedBox(
               width: double.infinity,
+              height: 56,
               child: OutlinedButton.icon(
                 onPressed: _goToHome,
+                icon: const Icon(Icons.home_rounded, color: AppColors.primary, size: 22),
+                label: Text("Retour à l'accueil", style: AppTextStyles.buttonLarge.copyWith(color: AppColors.primary)),
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 1.8.h),
+                  foregroundColor: AppColors.primary,
+                  side: const BorderSide(color: AppColors.primary, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
                 ),
-                icon: const Icon(Icons.home),
-                label: const Text('Retour à l\'accueil'),
               ),
             ),
           ],
@@ -687,39 +753,37 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
 
   Widget _buildHelpInfo() {
     return Container(
-      padding: EdgeInsets.all(2.h),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(1.5.h),
+        color: AppColors.primaryContainer,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.15)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(
-                Icons.help_outline,
-                color: Theme.of(context).colorScheme.primary,
-                size: 2.5.h,
-              ),
-              SizedBox(width: 2.w),
-              Text(
-                'Besoin d\'aide ?',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(AppRadii.pill),
                 ),
+                child: const Icon(Icons.help_outline_rounded, color: AppColors.primary, size: 20),
               ),
+              const SizedBox(width: AppSpacing.md),
+              Text('Besoin d\'aide ?', style: AppTextStyles.titleMedium.copyWith(color: AppColors.primary)),
             ],
           ),
-          SizedBox(height: 1.h),
+          const SizedBox(height: AppSpacing.lg),
           Text(
             '• Si votre paiement a été débité mais le Premium n\'est pas activé, contactez-nous\n'
             '• Gardez votre ID de transaction pour toute assistance\n'
             '• Le support est disponible 24/7 pour vous aider',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+            style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.w500),
           ),
         ],
       ),
@@ -748,8 +812,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen>
     try {
       final dateTime = DateTime.parse(timestamp);
       return '${dateTime.day}/${dateTime.month}/${dateTime.year} '
-             '${dateTime.hour.toString().padLeft(2, '0')}:'
-             '${dateTime.minute.toString().padLeft(2, '0')}';
+          '${dateTime.hour.toString().padLeft(2, '0')}:'
+          '${dateTime.minute.toString().padLeft(2, '0')}';
     } catch (e) {
       return timestamp;
     }

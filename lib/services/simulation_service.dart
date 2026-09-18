@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math' as math;
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import '../models/simulation_model.dart';
 
 class SimulationService {
@@ -12,8 +13,8 @@ class SimulationService {
     title: 'Simulation Test Douane Bénin',
     description: 'Test de simulation officiel avec 40 questions en 40 minutes',
     totalQuestions: 40,
-    totalDuration: Duration(minutes: 40),
-    questionDuration: Duration(seconds: 60),
+    totalDuration: const Duration(minutes: 40),
+    questionDuration: const Duration(seconds: 60),
     categories: [
       'culture_generale',
       'francais',
@@ -34,7 +35,7 @@ class SimulationService {
       
       return jsonList.map((json) => SimulationQuestion.fromMap(json)).toList();
     } catch (e) {
-      print('Erreur lors du chargement des questions: $e');
+      debugPrint('Erreur lors du chargement des questions: $e');
       return [];
     }
   }

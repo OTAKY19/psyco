@@ -278,9 +278,150 @@ echo "   4. Soumission pour révision"
 echo ""
 
 # ===========================================
+# INSTALLATION VIA USB
+# ===========================================
+
+print_header "INSTALLATION VIA USB"
+
+# Configurer le PATH Flutter
+export PATH="$PATH:$HOME/flutter/bin"
+
+# Vérifier que Flutter est accessible
+if ! command -v flutter &> /dev/null; then
+    print_error "Flutter n'est pas accessible dans le PATH"
+    print_info "Tentative de localisation de Flutter..."
+
+    # Chercher Flutter dans les emplacements courants
+    FLUTTER_PATHS=(
+        "$HOME/flutter/bin/flutter"
+        "$HOME/development/flutter/bin/flutter"
+        "/usr/local/bin/flutter"
+        "/opt/flutter/bin/flutter"
+    )
+
+    FLUTTER_FOUND=false
+    for flutter_path in "${FLUTTER_PATHS[@]}"; do
+        if [ -f "$flutter_path" ]; then
+            export PATH="$(dirname $flutter_path):$PATH"
+            print_success "Flutter trouvé: $flutter_path"
+            FLUTTER_FOUND=true
+            break
+        fi
+    done
+
+    if [ "$FLUTTER_FOUND" = false ]; then
+        print_error "Flutter non trouvé. Assurez-vous qu'il est installé."
+        exit 1
+    fi
+fi
+
+print_info "Vérification des appareils connectés..."
+DEVICES_OUTPUT=$(flutter devices 2>/dev/null)
+echo "$DEVICES_OUTPUT"
+
+# Vérifier si un appareil est connecté
+if echo "$DEVICES_OUTPUT" | grep -q "No devices detected"; then
+    print_warning "Aucun appareil détecté"
+    print_info "Connectez votre téléphone via USB et activez le débogage USB"
+    echo ""
+    read -p "Appuyez sur Entrée après avoir connecté votre appareil..."
+
+    # Re-vérifier les appareils
+    print_info "Nouvelle vérification des appareils..."
+    flutter devices
+fi
+
+echo ""
+read -p "Voulez-vous installer l'APK sur un appareil connecté via USB? (y/N): " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [ -f "build/app/outputs/flutter-apk/$APK_NAME" ]; then
+
+        # Demander si on doit désinstaller l'ancienne version
+        echo ""
+        read -p "Désinstaller l'ancienne version avant installation? (y/N): " -n 1 -r
+        echo
+
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Désinstallation de l'ancienne version..."
+
+            # Utiliser adb pour désinstaller si disponible
+            if command -v adb &> /dev/null; then
+                adb uninstall com.psychotest.plus 2>/dev/null || true
+                print_success "Ancienne version désinstallée (si elle existait)"
+            else
+                print_warning "ADB non disponible - désinstallation manuelle requise"
+            fi
+        fi
+
+        print_info "Installation de l'APK via USB..."
+        print_info "APK: $APK_NAME"
+
+        # Installer l'APK avec gestion d'erreur améliorée
+        if flutter install --device-id=all 2>/dev/null; then
+            print_success "APK installé avec succès sur l'appareil !"
+            print_info "L'application PsychoTest+ est maintenant sur votre téléphone ! 📱"
+            print_info "Vous pouvez la trouver dans vos applications."
+        else
+            print_warning "Installation via 'flutter install' échouée, tentative alternative..."
+
+            # Méthode alternative avec adb
+            if command -v adb &> /dev/null; then
+                print_info "Installation via ADB..."
+                if adb install -r "build/app/outputs/flutter-apk/$APK_NAME"; then
+                    print_success "APK installé avec succès via ADB !"
+                else
+                    print_error "Échec de l'installation via ADB"
+                    print_info "Instructions manuelles:"
+                    echo "  1. Copiez le fichier: build/app/outputs/flutter-apk/$APK_NAME"
+                    echo "  2. Transférez-le sur votre téléphone"
+                    echo "  3. Installez-le manuellement depuis le gestionnaire de fichiers"
+                fi
+            else
+                print_error "Échec de l'installation automatique"
+                print_info "Instructions manuelles:"
+                echo "  1. Copiez le fichier: build/app/outputs/flutter-apk/$APK_NAME"
+                echo "  2. Transférez-le sur votre téléphone"
+                echo "  3. Installez-le manuellement depuis le gestionnaire de fichiers"
+            fi
+        fi
+
+        # Vérifier l'installation
+        echo ""
+        print_info "Vérification de l'installation..."
+        if command -v adb &> /dev/null; then
+            if adb shell pm list packages | grep -q "com.psychotest.plus"; then
+                print_success "✅ Application correctement installée !"
+                print_info "Package: com.psychotest.plus"
+
+                # Optionnel: lancer l'app
+                echo ""
+                read -p "Voulez-vous lancer l'application maintenant? (y/N): " -n 1 -r
+                echo
+                if [[ $REPLY =~ ^[Yy]$ ]]; then
+                    print_info "Lancement de PsychoTest+..."
+                    adb shell am start -n com.psychotest.plus/com.psychotest.plus.MainActivity
+                    print_success "Application lancée !"
+                fi
+            else
+                print_warning "Impossible de vérifier l'installation"
+            fi
+        fi
+
+    else
+        print_error "APK non trouvé: build/app/outputs/flutter-apk/$APK_NAME"
+        print_info "Assurez-vous que le build s'est terminé avec succès"
+    fi
+else
+    print_info "Installation USB ignorée"
+fi
+
+# ===========================================
 # NETTOYAGE OPTIONNEL
 # ===========================================
 
+echo ""
 read -p "Voulez-vous nettoyer les fichiers temporaires? (y/N): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then

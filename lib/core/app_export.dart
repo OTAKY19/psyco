@@ -1,5 +1,11 @@
 export 'package:connectivity_plus/connectivity_plus.dart';
-export '../routes/app_routes.dart';
+export '../router/app_routes.dart';
+export '../router/route_extras.dart';
 export '../widgets/custom_icon_widget.dart';
 export '../widgets/custom_image_widget.dart';
 export '../theme/app_theme.dart';
+export '../design/app_colors.dart';
+export '../design/app_text_styles.dart';
+export '../design/app_radii.dart';
+export '../design/app_shadows.dart';
+export '../design/app_spacing.dart';

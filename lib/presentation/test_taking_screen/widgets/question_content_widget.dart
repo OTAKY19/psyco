@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../core/app_export.dart';
+import '../../../utils/memory_question_utils.dart';
+import 'memory_question_widget.dart';
 
 class QuestionContentWidget extends StatelessWidget {
   final String questionText;
@@ -19,17 +21,72 @@ class QuestionContentWidget extends StatelessWidget {
     this.questionImage,
   });
 
+  int _calculateMemoryDuration(String questionText) {
+    final sequence = MemoryQuestionUtils.extractMemorySequence(questionText);
+    
+    // Durée de base selon le type de contenu
+    int baseDuration = 3;
+    
+    // Détecter les emojis/symboles (plus difficile)
+    if (RegExp(r'[\u{1F300}-\u{1F9FF}]', unicode: true).hasMatch(sequence)) {
+      baseDuration = 5;
+    }
+    // Détecter les couleurs
+    else if (['rouge', 'bleu', 'vert', 'jaune', 'blanc'].any((color) => 
+        sequence.toLowerCase().contains(color))) {
+      baseDuration = 3;
+    }
+    // Détecter les nombres purs
+    else if (RegExp(r'^[\d\s,.-]+$').hasMatch(sequence)) {
+      baseDuration = 2;
+    }
+    // Détecter les mots (plus difficile)
+    else if (sequence.split(RegExp(r'[,\s-–]+')).length > 3) {
+      baseDuration = 4;
+    }
+    
+    // Ajuster selon la longueur
+    final elements = sequence.split(RegExp(r'[,\s-–]+'));
+    if (elements.length > 6) baseDuration += 1;
+    if (elements.length > 8) baseDuration += 1;
+    
+    return baseDuration.clamp(2, 8);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Vérifier si c'est une question mémoire
+    final isMemoryQuestion = MemoryQuestionUtils.isMemoryQuestion(questionText);
+    
+    if (isMemoryQuestion) {
+      if (kDebugMode) {
+        debugPrint('🧠 [QuestionContentWidget] Question mémoire détectée');
+      }
+      
+      // Utiliser le widget mémoire spécialisé
+      return MemoryQuestionWidget(
+        memorySequence: MemoryQuestionUtils.extractMemorySequence(questionText),
+        questionText: MemoryQuestionUtils.extractMemoryQuestion(questionText),
+        options: options,
+        selectedOption: selectedOption,
+        onOptionSelected: onOptionSelected,
+        displayDuration: _calculateMemoryDuration(questionText),
+      );
+    }
+    
+    // Question normale
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.lg,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Question Text
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(4.w),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             decoration: BoxDecoration(
               color: AppTheme.lightTheme.colorScheme.surface,
               borderRadius: BorderRadius.circular(12),
@@ -50,7 +107,7 @@ class QuestionContentWidget extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 1.h),
+                const SizedBox(height: AppSpacing.sm),
 
                 Text(
                   questionText,
@@ -62,13 +119,13 @@ class QuestionContentWidget extends StatelessWidget {
 
                 // Question Image (if available)
                 if (questionImage != null) ...[
-                  SizedBox(height: 2.h),
+                  const SizedBox(height: AppSpacing.md),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: CustomImageWidget(
                       imageUrl: questionImage!,
                       width: double.infinity,
-                      height: 25.h,
+                      height: 200,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -77,7 +134,7 @@ class QuestionContentWidget extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 3.h),
+          const SizedBox(height: AppSpacing.xxl),
 
           // Options Label
           Text(
@@ -87,7 +144,7 @@ class QuestionContentWidget extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 2.h),
+          const SizedBox(height: AppSpacing.md),
 
           // Answer Options
           ...options.asMap().entries.map((entry) {
@@ -96,13 +153,13 @@ class QuestionContentWidget extends StatelessWidget {
             final isSelected = selectedOption == index;
 
             return Container(
-              margin: EdgeInsets.only(bottom: 2.h),
+              margin: const EdgeInsets.only(bottom: AppSpacing.md),
               child: GestureDetector(
                 onTap: () => onOptionSelected(index),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   width: double.infinity,
-                  padding: EdgeInsets.all(4.w),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   decoration: BoxDecoration(
                     color: isSelected
                         ? AppTheme.lightTheme.colorScheme.primary
@@ -121,8 +178,8 @@ class QuestionContentWidget extends StatelessWidget {
                     children: [
                       // Option Letter
                       Container(
-                        width: 8.w,
-                        height: 8.w,
+                        width: 32,
+                        height: 32,
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppTheme.lightTheme.colorScheme.primary
@@ -145,7 +202,7 @@ class QuestionContentWidget extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(width: 4.w),
+                      const SizedBox(width: AppSpacing.lg),
 
                       // Option Text
                       Expanded(
@@ -165,8 +222,8 @@ class QuestionContentWidget extends StatelessWidget {
 
                       // Selection Indicator
                       if (isSelected)
-                        CustomIconWidget(
-                          iconName: 'check_circle',
+                        Icon(
+                          Icons.check_circle,
                           color: AppTheme.lightTheme.colorScheme.primary,
                           size: 24,
                         ),
@@ -177,7 +234,7 @@ class QuestionContentWidget extends StatelessWidget {
             );
           }),
 
-          SizedBox(height: 4.h), // Extra space for navigation buttons
+          const SizedBox(height: AppSpacing.massive), // Extra space for navigation buttons
         ],
       ),
     );
