@@ -51,11 +51,6 @@ class ActivationService {
 
   // Vérifier si l'app est activée (basé sur l'activation active)
   Future<bool> isAppActivated() async {
-    // 🔧 MODE DÉVELOPPEUR: Toujours activé pour les tests
-    // Supprime cette ligne en production !
-    return true;
-    
-    /* CODE ORIGINAL - À RESTAURER EN PRODUCTION
     final prefs = await SharedPreferences.getInstance();
 
     // Vérifier d'abord si il y a une activation payante active
@@ -83,7 +78,6 @@ class ActivationService {
     }
 
     return false; // Aucune activation active
-    */
   }
 
   // Activer l'app (méthode de compatibilité - utilise l'essai par défaut)

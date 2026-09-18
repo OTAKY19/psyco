@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart'; // Importation ajoutée pour ChangeNotifier
+import 'entitlement_service.dart';
 
 class UserStateService extends ChangeNotifier {
   static const String _guestUserIdKey = 'guest_user_id';
@@ -35,7 +36,12 @@ class UserStateService extends ChangeNotifier {
   Future<void> _loadLifetimeAccessStatus() async {
     final prefs = await SharedPreferences.getInstance();
     _hasLifetimeAccess = prefs.getBool(_hasLifetimeAccessKey) ?? false;
-    notifyListeners();
+    // Superset backfill (ET2) : toute autre source premium élève l'accès à vie.
+    final entitlement = await EntitlementService().refresh();
+    if (entitlement.hasLifetime != _hasLifetimeAccess) {
+      _hasLifetimeAccess = entitlement.hasLifetime;
+      notifyListeners();
+    }
   }
 
   // État utilisateur simplifié

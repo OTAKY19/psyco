@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import '../models/exam_config.dart';
 import '../models/question.dart';
 import 'database_service.dart';
 
@@ -9,9 +10,10 @@ class ExamBlancService {
   static const String _examBlancs6Path = 'assets/data/examens_blancs_6.json';
   
   // Configuration des examens blancs
-  static const int examDurationMinutes = 40;
-  static const int questionDurationSeconds = 60; // 1 minute par question
-  static const int totalQuestions = 40;
+  static const ExamConfig config = ExamConfig.blancStandard;
+  static const int examDurationMinutes = 25;
+  static const int questionDurationSeconds = 60;
+  static const int totalQuestions = 25;
   
   // Instance du service de base de données
   final DatabaseService _databaseService = DatabaseService();
@@ -24,7 +26,7 @@ class ExamBlancService {
   /// Génère un examen blanc dynamique avec des questions aléatoirement sélectionnées
   Future<ExamBlanc> generateDynamicExamBlanc(int examNumber, {String? series}) async {
     try {
-      // Sélectionner 40 questions aléatoirement depuis la base de données
+      // Sélectionner les questions aléatoirement depuis la base de données
       final allQuestions = await _databaseService.getRandomQuestions(limit: totalQuestions);
 
       if (allQuestions.length < totalQuestions) {
@@ -39,7 +41,7 @@ class ExamBlancService {
       return ExamBlanc(
         id: examId,
         title: title,
-        description: 'Examen blanc généré dynamiquement - ${allQuestions.length} questions en 40 minutes',
+        description: 'Examen blanc généré dynamiquement - ${allQuestions.length} questions en $examDurationMinutes minutes',
         questions: allQuestions,
         duration: const Duration(minutes: examDurationMinutes),
         questionDuration: const Duration(seconds: questionDurationSeconds),
@@ -101,7 +103,7 @@ class ExamBlancService {
         allExams.add(ExamBlanc(
           id: examKey,
           title: 'Examen Blanc ${examKey.split('_').last} (Statique)',
-          description: 'Test d\'entraînement officiel - ${questions.length} questions en 40 minutes',
+          description: 'Test d\'entraînement officiel - ${questions.length} questions en $examDurationMinutes minutes',
           questions: questions,
           duration: const Duration(minutes: examDurationMinutes),
           questionDuration: const Duration(seconds: questionDurationSeconds),
@@ -121,7 +123,7 @@ class ExamBlancService {
         allExams.add(ExamBlanc(
           id: '${examKey}_6',
           title: 'Examen Blanc ${examKey.split('_').last} (Série 6 - Statique)',
-          description: 'Test d\'entraînement officiel - ${questions.length} questions en 40 minutes',
+          description: 'Test d\'entraînement officiel - ${questions.length} questions en $examDurationMinutes minutes',
           questions: questions,
           duration: const Duration(minutes: examDurationMinutes),
           questionDuration: const Duration(seconds: questionDurationSeconds),
