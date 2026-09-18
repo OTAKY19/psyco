@@ -56,6 +56,10 @@ class DemoService {
 
   // Vérifier si on doit afficher la séquence de démonstration
   Future<DemoStep> getNextDemoStep() async {
+    // 🔧 MODE DÉVELOPPEUR: Réactivé pour voir la popup de choix
+    return DemoStep.showDemo;
+    
+    /* CODE ORIGINAL - À RESTAURER EN PRODUCTION
     final isFirst = await isFirstLogin();
     if (!isFirst) return DemoStep.none;
 
@@ -69,6 +73,7 @@ class DemoService {
     if (!simulationCompleted) return DemoStep.showSimulationDemo;
 
     return DemoStep.none;
+    */
   }
 
   // Réinitialiser toutes les données de démo (pour les tests)

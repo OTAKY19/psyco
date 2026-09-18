@@ -198,5 +198,35 @@
     "explication": "Temps = Distance ÷ Vitesse = 450 ÷ 120 = 3,75h = 3h45min.",
     "niveau": "facile",
     "proba_simple": 0.8
+  },
+  {
+    "id": 101,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette séquence de couleurs : Rouge, Bleu, Vert, Jaune, Orange. Quelle était la troisième couleur ?",
+    "options": ["Rouge", "Bleu", "Vert", "Jaune"],
+    "reponse": "Vert",
+    "explication": "La séquence était : 1-Rouge, 2-Bleu, 3-Vert, 4-Jaune, 5-Orange. La troisième couleur était Vert.",
+    "niveau": "facile",
+    "proba_simple": 0.8
+  },
+  {
+    "id": 102,
+    "categorie": "memoire_attention",
+    "question": "Mémorisez cette suite de nombres : 2, 4, 6, 8, 10, 12. Quel était l'élément en cinquième position ?",
+    "options": ["8", "10", "12", "14"],
+    "reponse": "10",
+    "explication": "La séquence était : 1-2, 2-4, 3-6, 4-8, 5-10, 6-12. L'élément en cinquième position était 10.",
+    "niveau": "facile",
+    "proba_simple": 0.7
+  },
+  {
+    "id": 103,
+    "categorie": "memoire_attention",
+    "question": "Retenez cette suite de lettres : B, D, F, H, J. Quelle était la lettre en deuxième position ?",
+    "options": ["B", "D", "F", "H"],
+    "reponse": "D",
+    "explication": "La séquence était : 1-B, 2-D, 3-F, 4-H, 5-J. La lettre en deuxième position était D.",
+    "niveau": "moyen",
+    "proba_simple": 0.6
   }
 ]

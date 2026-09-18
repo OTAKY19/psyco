@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 
@@ -30,7 +29,7 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(4.w),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppTheme.lightTheme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -56,16 +55,12 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
                   color: AppTheme.lightTheme.colorScheme.onSurface,
                 ),
               ),
-              CustomIconWidget(
-                iconName: 'more_vert',
-                color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                size: 5.w,
-              ),
+              Icon(Icons.more_vert, color: AppTheme.lightTheme.colorScheme.onSurfaceVariant, size: AppSpacing.xl),
             ],
           ),
-          SizedBox(height: 3.h),
+          const SizedBox(height: AppSpacing.xxl),
           SizedBox(
-            height: 25.h,
+            height: 200,
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(

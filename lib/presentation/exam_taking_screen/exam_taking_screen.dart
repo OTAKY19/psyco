@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
+import '../../design/app_colors.dart';
+import '../../design/app_text_styles.dart';
+import '../../design/app_spacing.dart';
+import '../../design/app_radii.dart';
+import '../../design/app_shadows.dart';
 import '../../services/exam_blanc_service.dart';
 import '../../services/subscription_service.dart';
-import '../exam_results_screen/exam_results_screen.dart';
-import '../activation_screen/activation_screen.dart';
-import 'widgets/exam_header_widget.dart';
-import 'widgets/exam_question_widget.dart';
-import 'widgets/exam_navigation_widget.dart';
+import '../../services/test_service.dart';
+import '../../router/app_routes.dart';
+import '../../router/route_extras.dart';
 
 class ExamTakingScreen extends StatefulWidget {
   final ExamBlancSession session;
@@ -23,16 +26,18 @@ class ExamTakingScreen extends StatefulWidget {
 }
 
 class _ExamTakingScreenState extends State<ExamTakingScreen>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late ExamBlancSession _session;
   late Timer _examTimer;
-  late Timer _questionTimer;
   final SubscriptionService _subscriptionService = SubscriptionService();
-  
+
   int _remainingTimeInSeconds = 0;
   int _questionRemainingTime = 0;
   bool _isPaused = false;
   bool _isCompleted = false;
+  bool _showQuestionGrid = false;
+
+  late AnimationController _pulseController;
 
   @override
   void initState() {
@@ -40,14 +45,19 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
     _session = widget.session;
     _remainingTimeInSeconds = _session.exam.duration.inSeconds;
     _questionRemainingTime = _session.exam.questionDuration.inSeconds;
-    
+
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat(reverse: true);
+
     _startExam();
   }
 
   @override
   void dispose() {
     _examTimer.cancel();
-    _questionTimer.cancel();
+    _pulseController.dispose();
     super.dispose();
   }
 
@@ -57,29 +67,18 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
   }
 
   void _startTimers() {
-    // Timer principal de l'examen
-    _examTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (!_isPaused && !_isCompleted) {
-        setState(() {
-          _remainingTimeInSeconds--;
-        });
-        
-        if (_remainingTimeInSeconds <= 0) {
-          _completeExam();
-        }
-      }
-    });
+    // Un seul ticker 1s pour les deux compteurs (E6) : un seul rebuild/s.
+    _examTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_isPaused || _isCompleted) return;
+      setState(() {
+        _remainingTimeInSeconds--;
+        _questionRemainingTime--;
+      });
 
-    // Timer par question
-    _questionTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (!_isPaused && !_isCompleted) {
-        setState(() {
-          _questionRemainingTime--;
-        });
-        
-        if (_questionRemainingTime <= 0) {
-          _autoNextQuestion();
-        }
+      if (_remainingTimeInSeconds <= 0) {
+        _completeExam();
+      } else if (_questionRemainingTime <= 0) {
+        _autoNextQuestion();
       }
     });
   }
@@ -88,11 +87,7 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
     setState(() {
       _session.answerQuestion(optionIndex);
     });
-    
-    // Vibration pour feedback
     HapticFeedback.lightImpact();
-    
-    // Auto-sauvegarde
     _saveProgress();
   }
 
@@ -128,7 +123,7 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
     setState(() {
       _isPaused = !_isPaused;
     });
-    
+
     if (_isPaused) {
       _showPauseDialog();
     }
@@ -138,43 +133,127 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text('Examen en pause'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Votre examen est en pause.'),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Temps restant:'),
-                Text(_formatTime(_remainingTimeInSeconds)),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Question:'),
-                Text('${_session.currentQuestionIndex + 1}/${_session.exam.totalQuestions}'),
-              ],
-            ),
-          ],
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadii.modal),
         ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _pauseExam();
-            },
-            child: Text('Reprendre'),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.xxl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: const BoxDecoration(
+                  color: AppColors.warningContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.pause_circle,
+                  color: AppColors.warning,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              Text(
+                'Examen en pause',
+                style: AppTextStyles.headlineMedium.copyWith(
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              _buildPauseStat(
+                'Temps restant',
+                _formatTime(_remainingTimeInSeconds),
+                Icons.timer_outlined,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              _buildPauseStat(
+                'Question',
+                '${_session.currentQuestionIndex + 1}/${_session.exam.totalQuestions}',
+                Icons.help_outline,
+              ),
+              const SizedBox(height: AppSpacing.xxl),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _pauseExam();
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.textSecondary,
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                      ),
+                      child: Text(
+                        'Reprendre',
+                        style: AppTextStyles.buttonMedium.copyWith(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _completeExam();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: AppColors.onPrimary,
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.button),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        'Terminer',
+                        style: AppTextStyles.buttonMedium.copyWith(
+                          color: AppColors.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _completeExam();
-            },
-            child: Text('Terminer'),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPauseStat(String label, String value, IconData icon) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.lg,
+        vertical: AppSpacing.md,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceDim,
+        borderRadius: BorderRadius.circular(AppRadii.sm),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 18, color: AppColors.textSecondary),
+          const SizedBox(width: AppSpacing.sm),
+          Text(
+            label,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+          const Spacer(),
+          Text(
+            value,
+            style: AppTextStyles.titleMedium.copyWith(
+              color: AppColors.textPrimary,
+            ),
           ),
         ],
       ),
@@ -184,41 +263,39 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
   void _completeExam() {
     _isCompleted = true;
     _examTimer.cancel();
-    _questionTimer.cancel();
-    
+
     _session.complete();
-    
-    // Calculer le résultat
+
     final result = ExamBlancService().calculateResult(_session);
-    
-    // Vérifier si l'utilisateur est activé pour afficher les réponses complètes
+
     _checkSubscriptionAndShowResults(result);
   }
 
   Future<void> _checkSubscriptionAndShowResults(ExamBlancResult result) async {
     final isPremium = await _subscriptionService.isPremiumUser();
-    
-    // Marquer qu'un test gratuit a été utilisé si l'utilisateur n'est pas premium
+
     if (!isPremium) {
       await _subscriptionService.markFreeTestUsed();
     }
-    
+
+    // Historique réel pour l'accueil filières.
+    unawaited(TestService().recordCompletedTest(
+      testId: result.examId,
+      category: 'examen_blanc',
+      correctAnswers: result.correctAnswers,
+      totalQuestions: result.totalQuestions,
+      durationSeconds: result.timeSpent.inSeconds,
+    ));
+
     if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ExamResultsScreen(
-            result: result,
-          ),
-        ),
+      context.pushReplacement(
+        AppRoutes.examResults,
+        extra: ExamResultRouteExtra(result: result),
       );
     }
   }
 
-  void _saveProgress() {
-    // Ici, vous pourriez sauvegarder le progrès dans SharedPreferences
-    // ou dans une base de données locale
-  }
+  void _saveProgress() {}
 
   String _formatTime(int seconds) {
     final minutes = seconds ~/ 60;
@@ -227,60 +304,559 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
   }
 
   Color _getTimerColor() {
-    if (_remainingTimeInSeconds <= 300) return Colors.red; // 5 minutes
-    if (_remainingTimeInSeconds <= 600) return Colors.orange; // 10 minutes
-    return Colors.green;
+    if (_remainingTimeInSeconds <= 300) return AppColors.error;
+    if (_remainingTimeInSeconds <= 600) return AppColors.warning;
+    return AppColors.success;
   }
 
   Color _getQuestionTimerColor() {
-    if (_questionRemainingTime <= 10) return Colors.red;
-    if (_questionRemainingTime <= 30) return Colors.orange;
-    return Colors.blue;
+    if (_questionRemainingTime <= 10) return AppColors.error;
+    if (_questionRemainingTime <= 30) return AppColors.warning;
+    return AppColors.primary;
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        _showExitDialog();
-        return false;
+    final size = MediaQuery.of(context).size;
+
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) _showExitDialog();
       },
       child: Scaffold(
-        backgroundColor: Colors.grey[50],
-        body: Column(
-          children: [
-            // En-tête avec timer et navigation
-            ExamHeaderWidget(
-              currentQuestion: _session.currentQuestionIndex + 1,
-              totalQuestions: _session.exam.totalQuestions,
-              examTimeRemaining: _formatTime(_remainingTimeInSeconds),
-              questionTimeRemaining: _formatTime(_questionRemainingTime),
-              examTimerColor: _getTimerColor(),
-              questionTimerColor: _getQuestionTimerColor(),
-              isPaused: _isPaused,
-              onPause: _pauseExam,
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Column(
+            children: [
+              _buildExamHeader(size),
+              Expanded(
+                child: _showQuestionGrid
+                    ? _buildQuestionGrid(size)
+                    : _buildQuestionArea(size),
+              ),
+              if (!_showQuestionGrid) _buildNavigationBar(size),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExamHeader(Size size) {
+    final timerProgress = _remainingTimeInSeconds /
+        _session.exam.duration.inSeconds;
+    final questionProgress =
+        _questionRemainingTime / _session.exam.questionDuration.inSeconds;
+
+    return Container(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.md,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        boxShadow: AppShadows.header,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: _showExitDialog,
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceDim,
+                    borderRadius: BorderRadius.circular(AppRadii.sm),
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: AppColors.textSecondary,
+                    size: 18,
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _session.exam.title,
+                      style: AppTextStyles.titleMedium.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      'Question ${_session.currentQuestionIndex + 1}/${_session.exam.totalQuestions}',
+                      style: AppTextStyles.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              _buildCountdownTimer(),
+              const SizedBox(width: AppSpacing.sm),
+              GestureDetector(
+                onTap: _pauseExam,
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: _isPaused
+                        ? AppColors.warningContainer
+                        : AppColors.surfaceDim,
+                    borderRadius: BorderRadius.circular(AppRadii.sm),
+                  ),
+                  child: Icon(
+                    _isPaused ? Icons.play_arrow : Icons.pause,
+                    color: _isPaused ? AppColors.warning : AppColors.textSecondary,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Examen',
+                          style: AppTextStyles.labelSmall,
+                        ),
+                        Text(
+                          _formatTime(_remainingTimeInSeconds),
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: _getTimerColor(),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(AppRadii.xs),
+                      child: LinearProgressIndicator(
+                        value: timerProgress,
+                        backgroundColor: AppColors.surfaceDim,
+                        valueColor: AlwaysStoppedAnimation<Color>(_getTimerColor()),
+                        minHeight: 4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.lg),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Question',
+                          style: AppTextStyles.labelSmall,
+                        ),
+                        Text(
+                          _formatTime(_questionRemainingTime),
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: _getQuestionTimerColor(),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(AppRadii.xs),
+                      child: LinearProgressIndicator(
+                        value: questionProgress,
+                        backgroundColor: AppColors.surfaceDim,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            _getQuestionTimerColor()),
+                        minHeight: 4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCountdownTimer() {
+    final isUrgent = _remainingTimeInSeconds <= 300;
+
+    return _ExamAnimatedBuilder(
+      listenable: _pulseController,
+      builder: (context, child) {
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.sm,
+          ),
+          decoration: BoxDecoration(
+            color: isUrgent
+                ? AppColors.error.withValues(alpha: 0.1 + (_pulseController.value * 0.1))
+                : AppColors.primaryContainer,
+            borderRadius: BorderRadius.circular(AppRadii.sm),
+            border: isUrgent
+                ? Border.all(
+                    color: AppColors.error.withValues(alpha: 0.3 + (_pulseController.value * 0.2)),
+                    width: 1.5,
+                  )
+                : null,
+          ),
+          child: Text(
+            _formatTime(_remainingTimeInSeconds),
+            style: AppTextStyles.titleMedium.copyWith(
+              color: isUrgent ? AppColors.error : AppColors.primary,
+              fontWeight: FontWeight.w800,
+              fontFeatures: const [FontFeature.tabularFigures()],
             ),
-            
-            // Contenu de la question
-            Expanded(
-              child: ExamQuestionWidget(
-                question: _session.currentQuestion,
-                selectedAnswer: _session.userAnswers[_session.currentQuestionIndex],
-                onAnswerSelected: _answerQuestion,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildQuestionArea(Size size) {
+    final question = _session.currentQuestion;
+    final selectedAnswer = _session.userAnswers[_session.currentQuestionIndex];
+    final optionLabels = ['A', 'B', 'C', 'D'];
+    final optionColors = [
+      AppColors.quizA,
+      AppColors.quizB,
+      AppColors.quizC,
+      AppColors.quizD,
+    ];
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(AppRadii.card),
+              boxShadow: AppShadows.card,
+            ),
+            child: Text(
+              question.question,
+              style: AppTextStyles.quizQuestion.copyWith(
+                color: AppColors.textPrimary,
               ),
             ),
-            
-            // Navigation
-            ExamNavigationWidget(
-              hasPrevious: _session.hasPrevious,
-              hasNext: _session.hasNext,
-              isLastQuestion: !_session.hasNext,
-              onPrevious: _previousQuestion,
-              onNext: _nextQuestion,
-              onComplete: _completeExam,
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          ...List.generate(question.options.length, (index) {
+            final isSelected = selectedAnswer == index;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.md),
+              child: GestureDetector(
+                onTap: () => _answerQuestion(index),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? optionColors[index].withValues(alpha: 0.12)
+                        : AppColors.surface,
+                    borderRadius: BorderRadius.circular(AppRadii.md),
+                    border: Border.all(
+                      color: isSelected
+                          ? optionColors[index]
+                          : AppColors.border,
+                      width: isSelected ? 2 : 1,
+                    ),
+                    boxShadow: isSelected ? AppShadows.cardSm : null,
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? optionColors[index]
+                              : AppColors.surfaceDim,
+                          borderRadius: BorderRadius.circular(AppRadii.sm),
+                        ),
+                        child: Center(
+                          child: Text(
+                            optionLabels[index],
+                            style: AppTextStyles.labelMedium.copyWith(
+                              color: isSelected
+                                  ? AppColors.onPrimary
+                                  : AppColors.textSecondary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Text(
+                          question.options[index],
+                          style: AppTextStyles.quizOption.copyWith(
+                            color: isSelected
+                                ? AppColors.textPrimary
+                                : AppColors.textSecondary,
+                            fontWeight:
+                                isSelected ? FontWeight.w600 : FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      if (isSelected)
+                        Icon(
+                          Icons.check_circle,
+                          color: optionColors[index],
+                          size: 22,
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavigationBar(Size size) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.md,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        boxShadow: AppShadows.header,
+      ),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: _session.hasPrevious ? _previousQuestion : null,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: _session.hasPrevious
+                    ? AppColors.surfaceDim
+                    : AppColors.surfaceContainer,
+                borderRadius: BorderRadius.circular(AppRadii.sm),
+              ),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: _session.hasPrevious
+                    ? AppColors.textPrimary
+                    : AppColors.disabled,
+                size: 18,
+              ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: GestureDetector(
+              onTap: () => setState(() => _showQuestionGrid = true),
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceDim,
+                  borderRadius: BorderRadius.circular(AppRadii.sm),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.grid_view,
+                      color: AppColors.textSecondary,
+                      size: 16,
+                    ),
+                    const SizedBox(width: AppSpacing.xs),
+                    Text(
+                      '${_session.answeredCount}/${_session.exam.totalQuestions}',
+                      style: AppTextStyles.labelMedium.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          GestureDetector(
+            onTap: _session.hasNext ? _nextQuestion : _completeExam,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: _session.hasNext ? AppColors.primary : AppColors.success,
+                borderRadius: BorderRadius.circular(AppRadii.sm),
+              ),
+              child: Icon(
+                _session.hasNext ? Icons.arrow_forward_ios : Icons.check,
+                color: AppColors.onPrimary,
+                size: 18,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionGrid(Size size) {
+    return Padding(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryContainer,
+                  borderRadius: BorderRadius.circular(AppRadii.sm),
+                ),
+                child: const Icon(
+                  Icons.grid_view,
+                  color: AppColors.primary,
+                  size: 18,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Text(
+                  'Questions de l\'examen',
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () => setState(() => _showQuestionGrid = false),
+                icon: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceDim,
+                    borderRadius: BorderRadius.circular(AppRadii.sm),
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: AppColors.textSecondary,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemCount: _session.exam.totalQuestions,
+              itemBuilder: (context, index) {
+                final isAnswered = _session.userAnswers.containsKey(index);
+                final isCurrent = _session.currentQuestionIndex == index;
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _session.currentQuestionIndex = index;
+                      _questionRemainingTime =
+                          _session.exam.questionDuration.inSeconds;
+                      _showQuestionGrid = false;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      color: isCurrent
+                          ? AppColors.primary
+                          : isAnswered
+                              ? AppColors.success.withValues(alpha: 0.15)
+                              : AppColors.surface,
+                      borderRadius: BorderRadius.circular(AppRadii.sm),
+                      border: Border.all(
+                        color: isCurrent
+                            ? AppColors.primary
+                            : isAnswered
+                                ? AppColors.success
+                                : AppColors.border,
+                        width: isCurrent ? 2 : 1,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${index + 1}',
+                        style: AppTextStyles.labelMedium.copyWith(
+                          color: isCurrent
+                              ? AppColors.onPrimary
+                              : isAnswered
+                                  ? AppColors.success
+                                  : AppColors.textSecondary,
+                          fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () => setState(() => _showQuestionGrid = false),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.onPrimary,
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                'Retour aux questions',
+                style: AppTextStyles.buttonMedium.copyWith(
+                  color: AppColors.onPrimary,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -288,23 +864,107 @@ class _ExamTakingScreenState extends State<ExamTakingScreen>
   void _showExitDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Quitter l\'examen'),
-        content: Text('Êtes-vous sûr de vouloir quitter l\'examen ? Votre progrès sera perdu.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Annuler'),
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadii.modal),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.xxl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: const BoxDecoration(
+                  color: AppColors.errorContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.warning_amber_rounded,
+                  color: AppColors.error,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              Text(
+                'Quitter l\'examen',
+                style: AppTextStyles.headlineMedium.copyWith(
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                'Êtes-vous sûr de vouloir quitter l\'examen ? Votre progrès sera perdu.',
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AppSpacing.xxl),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.textSecondary,
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                      ),
+                      child: Text(
+                        'Annuler',
+                        style: AppTextStyles.buttonMedium.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.error,
+                        foregroundColor: AppColors.onPrimary,
+                        padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppRadii.button),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        'Quitter',
+                        style: AppTextStyles.buttonMedium.copyWith(
+                          color: AppColors.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-            },
-            child: Text('Quitter'),
-          ),
-        ],
+        ),
       ),
     );
+  }
+}
+
+class _ExamAnimatedBuilder extends AnimatedWidget {
+  final Widget Function(BuildContext, Widget?) builder;
+
+  const _ExamAnimatedBuilder({
+    required super.listenable,
+    required this.builder,
+  });
+
+  Animation<double> get animation => listenable as Animation<double>;
+
+  @override
+  Widget build(BuildContext context) {
+    return builder(context, null);
   }
 }

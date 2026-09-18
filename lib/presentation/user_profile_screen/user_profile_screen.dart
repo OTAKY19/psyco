@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
-import '../../core/app_export.dart';
+import '../../design/app_colors.dart';
+import '../../design/app_radii.dart';
+import '../../design/app_shadows.dart';
+import '../../design/app_spacing.dart';
+import '../../design/app_text_styles.dart';
+import '../../routes/app_routes.dart';
 import '../../services/subscription_service.dart';
+import '../../services/one_time_purchase_service.dart';
 import '../../services/test_service.dart';
-import './widgets/premium_subscription_widget.dart';
-import './widgets/profile_header_widget.dart';
-import './widgets/settings_section_widget.dart';
-import './widgets/study_statistics_widget.dart';
+import '../../widgets/neural_header_simple.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -19,16 +23,14 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   final SubscriptionService _subscriptionService = SubscriptionService();
   final TestService _testService = TestService();
-  
-  // État de l'interface utilisateur
+
   bool _isLoading = true;
   Map<String, dynamic>? _subscriptionInfo;
   Map<String, dynamic>? _userStats;
-  
-  // Données utilisateur (mocked pour le nom et email)
+
   final Map<String, dynamic> userData = {
     "id": 1,
-    "name": "Utilisateur DouaneTest",
+    "name": "Utilisateur PsychoTest",
     "email": "user@douanetest.pro",
     "avatar":
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
@@ -50,19 +52,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     _timerEnabled = userData["timerEnabled"] as bool;
     _loadUserData();
   }
-  
+
   Future<void> _loadUserData() async {
     try {
       final subscriptionInfo = await _subscriptionService.getSubscriptionInfo();
       final userStats = await _testService.getUserStats();
-      
       setState(() {
         _subscriptionInfo = subscriptionInfo;
         _userStats = userStats;
         _isLoading = false;
       });
     } catch (e) {
-      print('Erreur lors du chargement des données utilisateur: \$e');
+      debugPrint('Erreur lors du chargement des données utilisateur: $e');
       setState(() {
         _isLoading = false;
       });
@@ -71,289 +72,414 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: Text(
-          'Profil',
-          style: AppTheme.lightTheme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: CustomIconWidget(
-            iconName: 'arrow_back',
-            color: AppTheme.lightTheme.colorScheme.onSurface,
-            size: 24,
-          ),
-        ),
-      ),
+      backgroundColor: AppColors.background,
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
           : RefreshIndicator(
               onRefresh: _loadUserData,
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(4.w),
-                child: Column(
-                  children: [
-                    // Profile Header
-                    ProfileHeaderWidget(
-                      userName: userData["name"] as String,
-                      userEmail: userData["email"] as String,
-                      isPremium: _subscriptionInfo?['isPremium'] ?? false,
-                      avatarUrl: userData["avatar"] as String,
-                      onEditPressed: _onEditProfile,
-                      onAvatarTap: _onChangeAvatar,
+              color: AppColors.primary,
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: _buildNeuralHeader(screenWidth),
+                  ),
+                  SliverToBoxAdapter(
+                    child: _buildStatsRow(screenWidth),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.lg, AppSpacing.xxl, AppSpacing.lg, AppSpacing.xxl,
                     ),
-                    SizedBox(height: 3.h),
-
-                    // Study Statistics
-                    StudyStatisticsWidget(
-                      totalTests: _userStats?['totalTests'] ?? 0,
-                      averageScore: _userStats?['averageScore'] ?? 0.0,
-                      currentStreak: 0, // TODO: implémenter les streaks
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate([
+                        _buildSection('Compte', [
+                          _SettingItem(
+                            icon: Icons.person_outline,
+                            iconColor: AppColors.primary,
+                            title: 'Modifier le profil',
+                            subtitle: 'Nom, email, photo de profil',
+                            onTap: _onEditProfile,
+                          ),
+                          _SettingItem(
+                            icon: Icons.lock_outline,
+                            iconColor: AppColors.primaryDark,
+                            title: 'Changer le mot de passe',
+                            subtitle: 'Sécurité du compte',
+                            onTap: _onChangePassword,
+                          ),
+                        ]),
+                        _buildSection('Préférences', [
+                          _SettingItem(
+                            icon: Icons.timer_outlined,
+                            iconColor: AppColors.accent,
+                            title: 'Minuteur',
+                            subtitle: _timerEnabled ? 'Activé' : 'Désactivé',
+                            trailing: Switch(
+                              value: _timerEnabled,
+                              onChanged: (v) => setState(() => _timerEnabled = v),
+                              activeColor: AppColors.primary,
+                            ),
+                          ),
+                          _SettingItem(
+                            icon: Icons.tune,
+                            iconColor: AppColors.accentDark,
+                            title: 'Difficulté',
+                            subtitle: userData["difficultyPreference"] as String,
+                            onTap: _onDifficultyPreferences,
+                          ),
+                          _SettingItem(
+                            icon: Icons.notifications_outlined,
+                            iconColor: AppColors.accentLight,
+                            title: 'Notifications',
+                            subtitle: 'Rappels d\'étude',
+                            trailing: Switch(
+                              value: _notificationsEnabled,
+                              onChanged: (v) => setState(() => _notificationsEnabled = v),
+                              activeColor: AppColors.primary,
+                            ),
+                          ),
+                        ]),
+                        _buildSection('Application', [
+                          _SettingItem(
+                            icon: Icons.download_outlined,
+                            iconColor: AppColors.success,
+                            title: 'Téléchargements hors ligne',
+                            subtitle: 'Tests disponibles hors connexion',
+                            trailing: Switch(
+                              value: _offlineDownloadsEnabled,
+                              onChanged: (v) => setState(() => _offlineDownloadsEnabled = v),
+                              activeColor: AppColors.primary,
+                            ),
+                          ),
+                          _SettingItem(
+                            icon: Icons.language,
+                            iconColor: AppColors.primaryLight,
+                            title: 'Langue',
+                            subtitle: 'Français',
+                            onTap: _onLanguageSettings,
+                          ),
+                        ]),
+                        _buildSection('Support', [
+                          _SettingItem(
+                            icon: Icons.help_outline,
+                            iconColor: AppColors.primary,
+                            title: 'Centre d\'aide',
+                            subtitle: 'FAQ et guides d\'utilisation',
+                            onTap: _onHelpCenter,
+                          ),
+                          _SettingItem(
+                            icon: Icons.support_agent,
+                            iconColor: AppColors.primaryDark,
+                            title: 'Contacter',
+                            subtitle: 'Obtenir de l\'aide personnalisée',
+                            onTap: _onContactSupport,
+                          ),
+                          _SettingItem(
+                            icon: Icons.star_outline,
+                            iconColor: AppColors.accent,
+                            title: 'Noter l\'application',
+                            subtitle: 'Partagez votre expérience',
+                            onTap: _onRateApp,
+                          ),
+                        ]),
+                        _buildSection('Données', [
+                          _SettingItem(
+                            icon: Icons.cleaning_services_outlined,
+                            iconColor: AppColors.warning,
+                            title: 'Vider cache',
+                            subtitle: 'Libérer de l\'espace de stockage',
+                            onTap: _onClearCache,
+                          ),
+                          _SettingItem(
+                            icon: Icons.file_download_outlined,
+                            iconColor: AppColors.primary,
+                            title: 'Exporter progrès',
+                            subtitle: 'Sauvegarder vos données',
+                            onTap: _onExportProgress,
+                          ),
+                        ]),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildLogoutButton(),
+                        const SizedBox(height: AppSpacing.massive),
+                      ]),
                     ),
-                    SizedBox(height: 3.h),
-
-                    // Premium Subscription
-                    PremiumSubscriptionWidget(
-                      isPremium: _subscriptionInfo?['isPremium'] ?? false,
-                      currentPlan: _getSubscriptionPlanName(),
-                      renewalDate: _getSubscriptionDate(),
-                      onUpgradePressed: _onManageSubscription,
-                    ),
-            SizedBox(height: 3.h),
-
-            // Account Settings
-            SettingsSectionWidget(
-              title: 'Compte',
-              items: [
-                SettingsItem(
-                  title: 'Modifier le profil',
-                  subtitle: 'Nom, email, photo de profil',
-                  iconName: 'person',
-                  iconColor: AppTheme.lightTheme.colorScheme.primary,
-                  onTap: _onEditProfile,
-                ),
-                SettingsItem(
-                  title: 'Changer le mot de passe',
-                  subtitle: 'Sécurité du compte',
-                  iconName: 'lock',
-                  iconColor: AppTheme.lightTheme.colorScheme.secondary,
-                  onTap: _onChangePassword,
-                ),
-                SettingsItem(
-                  title: 'Préférences email',
-                  subtitle: 'Notifications par email',
-                  iconName: 'email',
-                  iconColor: AppTheme.lightTheme.colorScheme.tertiary,
-                  onTap: _onEmailPreferences,
-                ),
-              ],
-            ),
-
-            // Study Preferences
-            SettingsSectionWidget(
-              title: 'Préférences d\'étude',
-              items: [
-                SettingsItem(
-                  title: 'Minuteur des tests',
-                  subtitle: 'Activer/désactiver le chronomètre',
-                  iconName: 'timer',
-                  iconColor: AppTheme.lightTheme.colorScheme.primary,
-                  isToggle: true,
-                  toggleValue: _timerEnabled,
-                  onToggleChanged: (value) {
-                    setState(() {
-                      _timerEnabled = value;
-                    });
-                  },
-                ),
-                SettingsItem(
-                  title: 'Niveau de difficulté',
-                  subtitle: userData["difficultyPreference"] as String,
-                  iconName: 'tune',
-                  iconColor: AppTheme.lightTheme.colorScheme.secondary,
-                  onTap: _onDifficultyPreferences,
-                ),
-                SettingsItem(
-                  title: 'Notifications',
-                  subtitle: 'Rappels d\'étude',
-                  iconName: 'notifications',
-                  iconColor: AppTheme.lightTheme.colorScheme.tertiary,
-                  isToggle: true,
-                  toggleValue: _notificationsEnabled,
-                  onToggleChanged: (value) {
-                    setState(() {
-                      _notificationsEnabled = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-
-            // App Settings
-            SettingsSectionWidget(
-              title: 'Paramètres de l\'application',
-              items: [
-                SettingsItem(
-                  title: 'Téléchargements hors ligne',
-                  subtitle: 'Télécharger les tests pour un accès hors ligne',
-                  iconName: 'download',
-                  iconColor: AppTheme.lightTheme.colorScheme.primary,
-                  isToggle: true,
-                  toggleValue: _offlineDownloadsEnabled,
-                  onToggleChanged: (value) {
-                    setState(() {
-                      _offlineDownloadsEnabled = value;
-                    });
-                  },
-                ),
-                SettingsItem(
-                  title: 'Utilisation des données',
-                  subtitle: 'Gérer la consommation de données',
-                  iconName: 'data_usage',
-                  iconColor: AppTheme.lightTheme.colorScheme.secondary,
-                  onTap: _onDataUsage,
-                ),
-                SettingsItem(
-                  title: 'Langue',
-                  subtitle: 'Français',
-                  iconName: 'language',
-                  iconColor: AppTheme.lightTheme.colorScheme.tertiary,
-                  onTap: _onLanguageSettings,
-                ),
-              ],
-            ),
-
-            // Support
-            SettingsSectionWidget(
-              title: 'Support',
-              items: [
-                SettingsItem(
-                  title: 'Centre d\'aide',
-                  subtitle: 'FAQ et guides d\'utilisation',
-                  iconName: 'help',
-                  iconColor: AppTheme.lightTheme.colorScheme.primary,
-                  onTap: _onHelpCenter,
-                ),
-                SettingsItem(
-                  title: 'Contacter le support',
-                  subtitle: 'Obtenir de l\'aide personnalisée',
-                  iconName: 'support_agent',
-                  iconColor: AppTheme.lightTheme.colorScheme.secondary,
-                  onTap: _onContactSupport,
-                ),
-                SettingsItem(
-                  title: 'Noter l\'application',
-                  subtitle: 'Partagez votre expérience',
-                  iconName: 'star_rate',
-                  iconColor: AppTheme.lightTheme.colorScheme.tertiary,
-                  onTap: _onRateApp,
-                ),
-              ],
-            ),
-
-            // Data Management
-            SettingsSectionWidget(
-              title: 'Gestion des données',
-              items: [
-                SettingsItem(
-                  title: 'Vider le cache',
-                  subtitle: 'Libérer de l\'espace de stockage',
-                  iconName: 'clear_all',
-                  iconColor: AppTheme.lightTheme.colorScheme.secondary,
-                  onTap: _onClearCache,
-                ),
-                SettingsItem(
-                  title: 'Télécharger tous les tests',
-                  subtitle: 'Accès hors ligne complet',
-                  iconName: 'cloud_download',
-                  iconColor: AppTheme.lightTheme.colorScheme.primary,
-                  onTap: _onDownloadAllTests,
-                ),
-                SettingsItem(
-                  title: 'Exporter les progrès',
-                  subtitle: 'Sauvegarder vos données',
-                  iconName: 'file_download',
-                  iconColor: AppTheme.lightTheme.colorScheme.tertiary,
-                  onTap: _onExportProgress,
-                ),
-              ],
-            ),
-
-            // Logout Button
-            SizedBox(height: 2.h),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(4.w),
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppTheme.lightTheme.colorScheme.shadow
-                        .withValues(alpha: 0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
-              child: ElevatedButton(
-                onPressed: _onLogout,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.lightTheme.colorScheme.error
-                      .withValues(alpha: 0.1),
-                  foregroundColor: AppTheme.lightTheme.colorScheme.error,
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(vertical: 2.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+            ),
+    );
+  }
+
+  Widget _buildNeuralHeader(double screenWidth) {
+    return NeuralHeaderSimple(
+      height: screenWidth > 600 ? 220 : 200,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: _onChangeAvatar,
+            child: Stack(
+              children: [
+                CircleAvatar(
+                  radius: screenWidth > 600 ? 36 : 32,
+                  backgroundImage: NetworkImage(userData["avatar"] as String),
+                  backgroundColor: AppColors.primaryLight.withValues(alpha: 0.3),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: AppColors.accent,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.camera_alt, color: Colors.white, size: 14),
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ],
+            ),
+          ),
+          const SizedBox(width: AppSpacing.lg),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
                   children: [
-                    CustomIconWidget(
-                      iconName: 'logout',
-                      color: AppTheme.lightTheme.colorScheme.error,
-                      size: 20,
-                    ),
-                    SizedBox(width: 2.w),
-                    Text(
-                      'Se déconnecter',
-                      style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.lightTheme.colorScheme.error,
+                    Flexible(
+                      child: Text(
+                        userData["name"] as String,
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: AppColors.textOnPrimary,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    if (_subscriptionInfo?['isPremium'] ?? false) ...[
+                      const SizedBox(width: AppSpacing.sm),
+                      GestureDetector(
+                        onTap: _onManageSubscription,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppSpacing.sm,
+                            vertical: AppSpacing.xxs,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.accent,
+                            borderRadius: BorderRadius.circular(AppRadii.pill),
+                          ),
+                          child: Text(
+                            'PREMIUM',
+                            style: AppTextStyles.labelSmall.copyWith(
+                              color: Colors.white,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  userData["email"] as String,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.textOnPrimary.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: _onEditProfile,
+            icon: Icon(
+              Icons.edit_outlined,
+              color: AppColors.textOnPrimary.withValues(alpha: 0.8),
+              size: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsRow(double screenWidth) {
+    final totalTests = _userStats?['totalTests'] ?? 0;
+    final averageScore = (_userStats?['averageScore'] ?? 0.0).toDouble();
+    final currentStreak = _userStats?['currentStreak'] ?? 0;
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(
+        AppSpacing.lg, -AppSpacing.xl, AppSpacing.lg, 0,
+      ),
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _StatItem(
+            value: '$totalTests',
+            label: 'Tests',
+            color: AppColors.primary,
+          ),
+          Container(width: 1, height: 36, color: AppColors.border),
+          _StatItem(
+            value: '${averageScore.round()}%',
+            label: 'Score moy.',
+            color: AppColors.success,
+          ),
+          Container(width: 1, height: 36, color: AppColors.border),
+          _StatItem(
+            value: '$currentStreak',
+            label: 'Série',
+            color: AppColors.accent,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSection(String title, List<_SettingItem> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: AppSpacing.xs,
+            top: AppSpacing.lg,
+            bottom: AppSpacing.sm,
+          ),
+          child: Text(
+            title,
+            style: AppTextStyles.labelLarge.copyWith(
+              color: AppColors.textMuted,
+              letterSpacing: 0.8,
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(AppRadii.card),
+            boxShadow: AppShadows.cardSm,
+          ),
+          child: Column(
+            children: items.asMap().entries.map((entry) {
+              final index = entry.key;
+              final item = entry.value;
+              final isLast = index == items.length - 1;
+              return Column(
+                children: [
+                  _buildSettingsTile(item),
+                  if (!isLast)
+                    const Divider(
+                      height: 1,
+                      indent: 56,
+                      color: AppColors.borderLight,
+                    ),
+                ],
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSettingsTile(_SettingItem item) {
+    return InkWell(
+      onTap: item.onTap,
+      borderRadius: BorderRadius.circular(AppRadii.card),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.md,
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: item.iconColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(AppRadii.iconContainer),
+              ),
+              child: Icon(item.icon, color: item.iconColor, size: 20),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title,
+                    style: AppTextStyles.bodyLarge.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  if (item.subtitle.isNotEmpty)
+                    Text(
+                      item.subtitle,
+                      style: AppTextStyles.bodySmall,
+                    ),
+                ],
               ),
             ),
-            SizedBox(height: 4.h),
+            if (item.trailing != null)
+              item.trailing!
+            else
+              const Icon(
+                Icons.chevron_right,
+                color: AppColors.textMuted,
+                size: 20,
+              ),
           ],
         ),
       ),
-    ),
     );
   }
+
+  Widget _buildLogoutButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: _onLogout,
+        icon: const Icon(Icons.logout, color: AppColors.error),
+        label: Text(
+          'Se déconnecter',
+          style: AppTextStyles.buttonLarge.copyWith(color: AppColors.error),
+        ),
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+          side: BorderSide(color: AppColors.error.withValues(alpha: 0.3)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadii.button),
+          ),
+          backgroundColor: AppColors.error.withValues(alpha: 0.04),
+        ),
+      ),
+    );
+  }
+
+  // ─── Navigation / Dialog ───
 
   void _onEditProfile() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Modifier le profil'),
-        content:
-            Text('Fonctionnalité de modification du profil à implémenter.'),
+        title: const Text('Modifier le profil'),
+        content: const Text('Fonctionnalité de modification du profil à implémenter.'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
         ],
       ),
     );
@@ -362,138 +488,105 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void _onChangeAvatar() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: EdgeInsets.all(4.w),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Changer la photo de profil',
-              style: AppTheme.lightTheme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.modalTop)),
+      ),
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.xxl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.border,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
-            SizedBox(height: 2.h),
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'camera_alt',
-                color: AppTheme.lightTheme.colorScheme.primary,
-                size: 24,
+              const SizedBox(height: AppSpacing.xl),
+              Text(
+                'Changer la photo de profil',
+                style: AppTextStyles.titleMedium,
               ),
-              title: Text('Prendre une photo'),
-              onTap: () {
-                Navigator.pop(context);
-                // Implement camera functionality
-              },
-            ),
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'photo_library',
-                color: AppTheme.lightTheme.colorScheme.secondary,
-                size: 24,
+              const SizedBox(height: AppSpacing.xl),
+              ListTile(
+                leading: const Icon(Icons.camera_alt, color: AppColors.primary),
+                title: const Text('Prendre une photo'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
               ),
-              title: Text('Choisir depuis la galerie'),
-              onTap: () {
-                Navigator.pop(context);
-                // Implement gallery selection
-              },
-            ),
-          ],
+              ListTile(
+                leading: const Icon(Icons.photo_library, color: AppColors.primaryDark),
+                title: const Text('Choisir depuis la galerie'),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _onChangePassword() {
-    Navigator.pushNamed(context, '/change-password');
-  }
+  void _soon(BuildContext context) => ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Bientôt disponible')),
+      );
 
-  void _onEmailPreferences() {
-    Navigator.pushNamed(context, '/email-preferences');
-  }
+  void _onChangePassword() => _soon(context);
 
   void _onDifficultyPreferences() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Niveau de difficulté'),
+        title: const Text('Niveau de difficulté'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<String>(
-              title: Text('Débutant'),
-              value: 'Débutant',
+          children: ['Débutant', 'Intermédiaire', 'Avancé'].map((level) {
+            return RadioListTile<String>(
+              title: Text(level),
+              value: level,
               groupValue: userData["difficultyPreference"],
+              activeColor: AppColors.primary,
               onChanged: (value) {
-                setState(() {
-                  userData["difficultyPreference"] = value;
-                });
+                setState(() => userData["difficultyPreference"] = value);
                 Navigator.pop(context);
               },
-            ),
-            RadioListTile<String>(
-              title: Text('Intermédiaire'),
-              value: 'Intermédiaire',
-              groupValue: userData["difficultyPreference"],
-              onChanged: (value) {
-                setState(() {
-                  userData["difficultyPreference"] = value;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            RadioListTile<String>(
-              title: Text('Avancé'),
-              value: 'Avancé',
-              groupValue: userData["difficultyPreference"],
-              onChanged: (value) {
-                setState(() {
-                  userData["difficultyPreference"] = value;
-                });
-                Navigator.pop(context);
-              },
-            ),
-          ],
+            );
+          }).toList(),
         ),
       ),
     );
   }
 
-  void _onDataUsage() {
-    Navigator.pushNamed(context, '/data-usage');
-  }
-
-  void _onLanguageSettings() {
-    Navigator.pushNamed(context, '/language-settings');
-  }
-
-  void _onHelpCenter() {
-    Navigator.pushNamed(context, '/help-center');
-  }
-
-  void _onContactSupport() {
-    Navigator.pushNamed(context, '/contact-support');
-  }
+  void _onLanguageSettings() => _soon(context);
+  void _onHelpCenter() => _soon(context);
+  void _onContactSupport() => _soon(context);
 
   void _onRateApp() {
-    // Implement app rating functionality
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Noter l\'application'),
-        content: Text(
-            'Merci de nous aider à améliorer DouaneTest Pro en laissant une note sur le store.'),
+        title: const Text('Noter l\'application'),
+        content: const Text(
+          'Merci de nous aider à améliorer PsychoTest+ en laissant une note sur le store.',
+        ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Plus tard'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Plus tard')),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              // Open app store for rating
             },
-            child: Text('Noter maintenant'),
+            child: const Text('Noter maintenant'),
           ),
         ],
       ),
@@ -504,50 +597,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Vider le cache'),
-        content: Text(
-            'Êtes-vous sûr de vouloir vider le cache ? Cette action libérera de l\'espace mais nécessitera de retélécharger certaines données.'),
+        title: const Text('Vider le cache'),
+        content: const Text(
+          'Êtes-vous sûr de vouloir vider le cache ? Cette action libérera de l\'espace mais nécessitera de retélécharger certaines données.',
+        ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Annuler'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Annuler')),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              // Implement cache clearing
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Cache vidé avec succès')),
+                const SnackBar(content: Text('Cache vidé avec succès')),
               );
             },
-            child: Text('Vider'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _onDownloadAllTests() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Télécharger tous les tests'),
-        content: Text(
-            'Cette action téléchargera tous les tests disponibles pour un accès hors ligne. Cela peut prendre du temps et utiliser des données.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Annuler'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // Implement download all tests
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Téléchargement en cours...')),
-              );
-            },
-            child: Text('Télécharger'),
+            child: const Text('Vider'),
           ),
         ],
       ),
@@ -558,23 +621,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Exporter les progrès'),
-        content: Text(
-            'Vos données de progression seront exportées dans un fichier CSV.'),
+        title: const Text('Exporter les progrès'),
+        content: const Text('Vos données de progression seront exportées dans un fichier CSV.'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Annuler'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Annuler')),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              // Implement progress export
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Données exportées avec succès')),
+                const SnackBar(content: Text('Données exportées avec succès')),
               );
             },
-            child: Text('Exporter'),
+            child: const Text('Exporter'),
           ),
         ],
       ),
@@ -582,28 +640,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   String? _getSubscriptionPlanName() {
-    if (_subscriptionInfo == null || !(_subscriptionInfo!['isPremium'] ?? false)) {
-      return null;
-    }
-    
+    if (_subscriptionInfo == null || !(_subscriptionInfo!['isPremium'] ?? false)) return null;
     final subscriptionType = _subscriptionInfo!['subscriptionType'] ?? 'lifetime';
     switch (subscriptionType) {
-      case 'lifetime':
-        return 'Premium à vie';
-      case 'monthly':
-        return 'Premium Mensuel';
-      case 'yearly':
-        return 'Premium Annuel';
-      default:
-        return 'Premium';
+      case 'lifetime': return 'Premium à vie';
+      case 'monthly': return 'Premium Mensuel';
+      case 'yearly': return 'Premium Annuel';
+      default: return 'Premium';
     }
   }
-  
+
   String? _getSubscriptionDate() {
-    if (_subscriptionInfo == null || !(_subscriptionInfo!['isPremium'] ?? false)) {
-      return null;
-    }
-    
+    if (_subscriptionInfo == null || !(_subscriptionInfo!['isPremium'] ?? false)) return null;
     final subscriptionDate = _subscriptionInfo!['subscriptionDate'];
     if (subscriptionDate != null) {
       try {
@@ -613,32 +661,29 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         return subscriptionDate;
       }
     }
-    
     return null;
   }
-  
+
   void _onManageSubscription() {
     final isPremium = _subscriptionInfo?['isPremium'] ?? false;
-    
     if (isPremium) {
-      // Afficher les informations d'abonnement
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Abonnement Premium'),
+          title: const Text('Activation Premium'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Statut: Premium Actif ✅'),
-              SizedBox(height: 1.h),
+              const Text('Statut: Premium Actif'),
+              const SizedBox(height: AppSpacing.sm),
               Text('Plan: ${_getSubscriptionPlanName() ?? "Premium"}'),
               if (_getSubscriptionDate() != null) ...[
-                SizedBox(height: 0.5.h),
+                const SizedBox(height: AppSpacing.xxs),
                 Text('Activé le: ${_getSubscriptionDate()}'),
               ],
               if (_subscriptionInfo!['transactionId'] != null) ...[
-                SizedBox(height: 0.5.h),
+                const SizedBox(height: AppSpacing.xxs),
                 Text('Transaction: ${_subscriptionInfo!['transactionId']}'),
               ],
             ],
@@ -648,12 +693,39 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               onPressed: () => Navigator.pop(context),
               child: const Text('Fermer'),
             ),
+            TextButton(
+              onPressed: () async {
+                // Reçu d'achat (E8) : preuve à conserver / transmettre au support.
+                final info =
+                    await OneTimePurchaseService().getPremiumInfo();
+                final txn =
+                    info?['transaction_id']?.toString() ?? 'inconnue';
+                final date = info?['purchase_date'] != null
+                    ? DateTime.parse(
+                            info!['purchase_date'].toString())
+                        .toLocal()
+                        .toString()
+                        .split('.')
+                        .first
+                    : 'inconnue';
+                await SharePlus.instance.share(
+                  ShareParams(
+                    text: 'Reçu PsychoTest+ Premium\n'
+                        'Transaction : $txn\n'
+                        'Date : $date\n'
+                        'Montant : 3000 FCFA\n'
+                        'Conservez ce reçu : il permet de restaurer votre accès.',
+                    title: 'Reçu PsychoTest+ Premium',
+                  ),
+                );
+              },
+              child: const Text('Partager mon reçu'),
+            ),
           ],
         ),
       );
     } else {
-      // Naviguer vers l'écran de paiement
-      Navigator.pushNamed(context, AppRoutes.mobileMoneyPayment);
+      context.push(AppRoutes.mobileMoneyPayment);
     }
   }
 
@@ -661,28 +733,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Se déconnecter'),
-        content: Text(
-            'Êtes-vous sûr de vouloir vous déconnecter ? Vos progrès seront sauvegardés.'),
+        title: const Text('Se déconnecter'),
+        content: const Text(
+          'Êtes-vous sûr de vouloir vous déconnecter ? Vos progrès seront sauvegardés.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Annuler'),
+            child: const Text('Annuler'),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              // Implement logout functionality
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/login',
-                (route) => false,
-              );
+              context.go(AppRoutes.home);
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppTheme.lightTheme.colorScheme.error,
-            ),
-            child: Text('Se déconnecter'),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
+            child: const Text('Se déconnecter'),
           ),
         ],
       ),
@@ -690,4 +756,50 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 }
 
+class _SettingItem {
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final String subtitle;
+  final VoidCallback? onTap;
+  final Widget? trailing;
 
+  const _SettingItem({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.subtitle,
+    this.onTap,
+    this.trailing,
+  });
+}
+
+class _StatItem extends StatelessWidget {
+  final String value;
+  final String label;
+  final Color color;
+
+  const _StatItem({
+    required this.value,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          value,
+          style: AppTextStyles.headlineLarge.copyWith(color: color),
+        ),
+        const SizedBox(height: AppSpacing.xxs),
+        Text(
+          label,
+          style: AppTextStyles.caption,
+        ),
+      ],
+    );
+  }
+}

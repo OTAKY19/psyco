@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -45,12 +46,25 @@ class DatabaseService {
       )
     ''');
 
+    // Index pour optimiser les requêtes fréquentes
     await db.execute('''
       CREATE INDEX idx_questions_categorie ON questions(categorie);
     ''');
 
     await db.execute('''
       CREATE INDEX idx_questions_niveau ON questions(niveau);
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_questions_proba ON questions(proba_simple);
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_questions_composite ON questions(categorie, niveau);
+    ''');
+
+    await db.execute('''
+      CREATE INDEX idx_questions_created ON questions(created_at);
     ''');
 
     // Charger les questions initiales
@@ -67,21 +81,42 @@ class DatabaseService {
 
   Future<void> _loadInitialQuestions(Database db) async {
     try {
-      // Charger les questions depuis le fichier JSON des assets
+      final batch = db.batch();
+
+      // Charger uniquement les questions principales et difficiles (comme avant)
       final jsonString = await rootBundle.loadString('assets/data/questions_balanced.json');
       final List<dynamic> questionsJson = json.decode(jsonString);
-      
-      final batch = db.batch();
-      
+
+      // Charger les nouvelles questions difficiles
+      final difficileJsonString = await rootBundle.loadString('assets/data/questions_difficiles_200.json');
+      final List<dynamic> questionsDifficiles = json.decode(difficileJsonString);
+
+      // Insérer les questions principales (ignore les doublons :
+      // les deux banques partagent certains IDs, ex. 3003)
       for (final questionJson in questionsJson) {
         final question = Question.fromJson(questionJson);
-        batch.insert('questions', question.toDatabase());
+        batch.insert(
+          'questions',
+          question.toDatabase(),
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
       }
-      
+
+      // Insérer les questions difficiles
+      for (final questionJson in questionsDifficiles) {
+        final question = Question.fromJson(questionJson);
+        batch.insert(
+          'questions',
+          question.toDatabase(),
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
+      }
+
       await batch.commit(noResult: true);
-      print('✅ ${questionsJson.length} questions chargées avec succès');
+      debugPrint('✅ ${questionsJson.length + questionsDifficiles.length} questions chargées avec succès');
     } catch (e) {
-      print('❌ Erreur lors du chargement des questions: \$e');
+      debugPrint('❌ Erreur lors du chargement des questions: $e');
+      rethrow;
     }
   }
 
@@ -161,7 +196,11 @@ class DatabaseService {
 
   Future<int> insertQuestion(Question question) async {
     final db = await database;
-    return await db.insert('questions', question.toDatabase());
+    return await db.insert(
+      'questions',
+      question.toDatabase(),
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
   }
 
   Future<int> updateQuestion(Question question) async {
@@ -280,5 +319,47 @@ class DatabaseService {
     );
     
     return List.generate(maps.length, (i) => Question.fromDatabase(maps[i]));
+  }
+
+  // Méthodes d'optimisation et maintenance
+
+  /// Analyser les performances des requêtes
+  Future<void> analyzeDatabase() async {
+    final db = await database;
+    await db.execute('ANALYZE');
+  }
+
+  /// Nettoyer et optimiser la base de données
+  Future<void> vacuum() async {
+    final db = await database;
+    await db.execute('VACUUM');
+  }
+
+  /// Obtenir des statistiques détaillées de performance
+  Future<Map<String, dynamic>> getPerformanceStats() async {
+    final db = await database;
+    
+    // Taille de la base de données
+    final sizeResult = await db.rawQuery('PRAGMA page_count');
+    final pageSizeResult = await db.rawQuery('PRAGMA page_size');
+    
+    final pageCount = sizeResult.first['page_count'] as int;
+    final pageSize = pageSizeResult.first['page_size'] as int;
+    final dbSizeBytes = pageCount * pageSize;
+    
+    // Informations sur les index
+    final indexInfo = await db.rawQuery('''
+      SELECT name, sql FROM sqlite_master 
+      WHERE type = 'index' AND tbl_name = 'questions'
+    ''');
+    
+    return {
+      'database_size_bytes': dbSizeBytes,
+      'database_size_mb': (dbSizeBytes / (1024 * 1024)).toStringAsFixed(2),
+      'page_count': pageCount,
+      'page_size': pageSize,
+      'indexes': indexInfo.map((idx) => idx['name']).toList(),
+      'last_analyzed': DateTime.now().toIso8601String(),
+    };
   }
 }

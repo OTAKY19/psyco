@@ -111,7 +111,8 @@ build_*.sh
 *.md
 scripts/
 web/
-test/
+#test/ # tests versionnés (ET9): suite flutter test
 devtools_options.yaml
 env.json
 #*#
+*.keystore

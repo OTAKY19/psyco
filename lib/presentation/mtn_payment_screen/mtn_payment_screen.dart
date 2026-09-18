@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../core/app_export.dart';
-import '../../services/payment_service.dart';
-import '../../theme/app_theme.dart';
+import '../../design/app_colors.dart';
+import '../../design/app_radii.dart';
+import '../../design/app_spacing.dart';
+import '../../design/app_text_styles.dart';
+import '../../services/auth_service.dart';
+import '../../services/one_time_purchase_service.dart';
+
+const Color _mtnYellow = Color(0xFFFFC107);
+const Color _mtnYellowDark = Color(0xFFFFB300);
 
 class MtnPaymentScreen extends StatefulWidget {
   final double amount;
@@ -24,99 +31,209 @@ class MtnPaymentScreen extends StatefulWidget {
   State<MtnPaymentScreen> createState() => _MtnPaymentScreenState();
 }
 
-class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
-  final PaymentService _paymentService = PaymentService();
+class _MtnPaymentScreenState extends State<MtnPaymentScreen>
+    with WidgetsBindingObserver {
   final TextEditingController _phoneController = TextEditingController();
 
   bool _isLoading = false;
   bool _isPaymentInitiated = false;
   Map<String, dynamic>? _paymentResult;
   String? _ussdCode;
-  int _step = 1; // 1: Saisie numéro, 2: Confirmation, 3: Traitement
+  String? _transactionId;
+  int _step = 1;
+  final OneTimePurchaseService _purchaseService = OneTimePurchaseService();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _reAttachInFlightCta();
+  }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _phoneController.dispose();
     super.dispose();
   }
 
+  /// App death mid-paiement → le CTA se ré-attache à partir de la
+  /// transaction persistée (ET8). Ne crée jamais un nouvel intent.
+  Future<void> _reAttachInFlightCta() async {
+    final pending = await _purchaseService.getPendingTransaction();
+    if (!mounted || pending == null) return;
+
+    final txnId = pending['id'] as String?;
+    final provider = pending['provider'] as String? ?? 'mtn';
+    if (txnId == null) return;
+
+    // Transaction expirée : la reprise la signalera (verifyOnResume).
+    if (OneTimePurchaseService.isTransactionExpired(
+        pending['created_at'] as String?)) {
+      return;
+    }
+
+    setState(() {
+      _isPaymentInitiated = true;
+      _transactionId = txnId;
+      _ussdCode = _purchaseService.ussdCodeFor(provider);
+      _step = 3;
+    });
+  }
+
+  /// Retour d'app (résumption) : re-vérifie l'intent (ET8). Un 429 ou une
+  /// attestation absente laisse le CTA en vol ; une attestation déjà posée
+  /// avant le kill débloque immédiatement (grant idempotent).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_verifyOnResume());
+    }
+  }
+
+  Future<void> _verifyOnResume() async {
+    final result = await _purchaseService.verifyOnResume();
+    if (!mounted) return;
+
+    switch (result) {
+      case ResumeVerification.granted:
+        setState(() {
+          _paymentResult = {
+            'success': true,
+            'transactionId': _transactionId,
+            'method': 'mobile_money',
+            'status': 'completed',
+            'message': 'Paiement confirmé. Accès premium activé.',
+          };
+          _isLoading = false;
+        });
+        widget.onPaymentSuccess?.call(_paymentResult!);
+      case ResumeVerification.expired:
+        setState(() {
+          _paymentResult = {
+            'success': false,
+            'message': 'La transaction a expiré. Veuillez repayer.',
+          };
+          _isLoading = false;
+          _isPaymentInitiated = false;
+          _transactionId = null;
+          _ussdCode = null;
+          _step = 1;
+        });
+      case ResumeVerification.inFlight:
+      case ResumeVerification.none:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Paiement MTN Mobile Money',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: const Color(0xFFFFC107), // Couleur MTN
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: _handleBack,
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: AppSpacing.xxl),
+
+                    // MTN branding header
+                    _buildMtnHeader(),
+
+                    const SizedBox(height: AppSpacing.xxl),
+
+                    // Payment details
+                    _buildPaymentDetails(),
+
+                    const SizedBox(height: AppSpacing.xxl),
+
+                    if (!_isPaymentInitiated) ...[
+                      _buildStepIndicator(),
+                      const SizedBox(height: AppSpacing.xxl),
+                      _buildPhoneNumberInput(),
+                    ] else ...[
+                      _buildPaymentProgress(),
+                    ],
+
+                    if (_paymentResult != null) ...[
+                      const SizedBox(height: AppSpacing.xxl),
+                      _buildPaymentResult(),
+                    ],
+
+                    SizedBox(height: padding.bottom + AppSpacing.xxl),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color(0xFFFFC107).withValues(alpha: 0.1),
-              Colors.white,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.sm, AppSpacing.xl, AppSpacing.lg),
+      decoration: const BoxDecoration(
+        color: _mtnYellow,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(AppRadii.xxl),
+          bottomRight: Radius.circular(AppRadii.xxl),
         ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(5.w),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(AppRadii.pill),
+            ),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: Colors.white),
+              onPressed: _handleBack,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.lg),
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // En-tête MTN
-                _buildMtnHeader(),
-
-                SizedBox(height: 4.w),
-
-                // Montant et description
-                _buildPaymentDetails(),
-
-                SizedBox(height: 4.w),
-
-                // Étapes du processus
-                if (!_isPaymentInitiated) ...[
-                  _buildStepIndicator(),
-                  SizedBox(height: 4.w),
-                  _buildPhoneNumberInput(),
-                ] else ...[
-                  _buildPaymentProgress(),
-                ],
-
-                // Résultat du paiement
-                if (_paymentResult != null) ...[
-                  SizedBox(height: 4.w),
-                  _buildPaymentResult(),
-                ],
+                Text(
+                  'Paiement MTN Mobile Money',
+                  style: AppTextStyles.titleMedium.copyWith(color: Colors.white),
+                ),
+                Text(
+                  'Paiement sécurisé',
+                  style: AppTextStyles.bodySmall.copyWith(color: Colors.white.withValues(alpha: 0.9)),
+                ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   Widget _buildMtnHeader() {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFFFC107).withValues(alpha: 0.2),
+            color: _mtnYellow.withValues(alpha: 0.15),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -125,38 +242,24 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(3.w),
+            width: 56,
+            height: 56,
             decoration: BoxDecoration(
-              color: const Color(0xFFFFC107),
-              borderRadius: BorderRadius.circular(12),
+              color: _mtnYellow,
+              borderRadius: BorderRadius.circular(AppRadii.md),
             ),
-            child: Icon(
-              Icons.phone_android,
-              color: Colors.white,
-              size: 8.w,
-            ),
+            child: const Icon(Icons.phone_android_rounded, color: Colors.white, size: 28),
           ),
-          SizedBox(width: 4.w),
+          const SizedBox(width: AppSpacing.lg),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'MTN Mobile Money',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 1.w),
+                Text('MTN Mobile Money', style: AppTextStyles.titleLarge),
+                const SizedBox(height: AppSpacing.xxs),
                 Text(
                   'Paiement sécurisé et rapide',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
                 ),
               ],
             ),
@@ -168,74 +271,47 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
 
   Widget _buildPaymentDetails() {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey.withValues(alpha: 0.2),
-          width: 1,
-        ),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight),
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Montant à payer',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                '${widget.amount.toStringAsFixed(0)} FCFA',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFFFFC107),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 2.w),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Description',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  widget.description,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-          ),
+          _buildDetailRow('Montant à payer', '${widget.amount.toStringAsFixed(0)} FCFA', isPrice: true),
+          const SizedBox(height: AppSpacing.md),
+          const Divider(height: 1, color: AppColors.borderLight),
+          const SizedBox(height: AppSpacing.md),
+          _buildDetailRow('Description', widget.description),
         ],
       ),
     );
   }
 
+  Widget _buildDetailRow(String label, String value, {bool isPrice = false}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
+        Text(
+          value,
+          style: isPrice
+              ? AppTextStyles.titleLarge.copyWith(color: _mtnYellow, fontWeight: FontWeight.w700)
+              : AppTextStyles.titleSmall.copyWith(color: AppColors.textPrimary),
+        ),
+      ],
+    );
+  }
+
   Widget _buildStepIndicator() {
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight),
       ),
       child: Row(
         children: [
@@ -254,29 +330,28 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       child: Column(
         children: [
           Container(
-            width: 8.w,
-            height: 8.w,
+            width: 36,
+            height: 36,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isActive ? const Color(0xFFFFC107) : Colors.grey[300],
+              color: isActive ? _mtnYellow : AppColors.borderLight,
             ),
             child: Center(
               child: Text(
                 stepNumber.toString(),
                 style: TextStyle(
-                  color: isActive ? Colors.white : Colors.grey[600],
+                  color: isActive ? Colors.white : AppColors.textMuted,
                   fontWeight: FontWeight.w600,
-                  fontSize: 12.sp,
+                  fontSize: 14,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 1.w),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 10.sp,
-              color: isActive ? const Color(0xFFFFC107) : Colors.grey[600],
+            style: AppTextStyles.caption.copyWith(
+              color: isActive ? _mtnYellow : AppColors.textMuted,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
@@ -289,34 +364,25 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
   Widget _buildStepLine(bool isActive) {
     return Container(
       height: 2,
-      width: 4.w,
-      color: isActive ? const Color(0xFFFFC107) : Colors.grey[300],
+      width: 24,
+      color: isActive ? _mtnYellow : AppColors.borderLight,
     );
   }
 
   Widget _buildPhoneNumberInput() {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey.withValues(alpha: 0.2),
-          width: 1,
-        ),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Numéro MTN Mobile Money',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-          SizedBox(height: 2.w),
+          Text('Numéro MTN Mobile Money', style: AppTextStyles.titleMedium),
+          const SizedBox(height: AppSpacing.md),
           TextFormField(
             controller: _phoneController,
             keyboardType: TextInputType.phone,
@@ -327,60 +393,50 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
             decoration: InputDecoration(
               hintText: 'Ex: 90000000',
               prefixText: '+229 ',
-              prefixStyle: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.w500,
-              ),
+              prefixStyle: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w500),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.3)),
+                borderRadius: BorderRadius.circular(AppRadii.md),
+                borderSide: const BorderSide(color: AppColors.border),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Color(0xFFFFC107), width: 2),
+                borderRadius: BorderRadius.circular(AppRadii.md),
+                borderSide: const BorderSide(color: _mtnYellow, width: 2),
               ),
               filled: true,
-              fillColor: Colors.grey.withValues(alpha: 0.05),
+              fillColor: AppColors.background,
             ),
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: 3.w),
-          Container(
+          const SizedBox(height: AppSpacing.xl),
+          SizedBox(
             width: double.infinity,
-            height: 12.w,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFFC107), Color(0xFFFFB300)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFFFFC107).withValues(alpha: 0.3),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
+            height: 56,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [_mtnYellow, _mtnYellowDark],
                 ),
-              ],
-            ),
-            child: ElevatedButton(
-              onPressed: _validateAndProceed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                borderRadius: BorderRadius.circular(AppRadii.button),
+                boxShadow: [
+                  BoxShadow(
+                    color: _mtnYellow.withValues(alpha: 0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-              child: Text(
-                'Continuer',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+              child: ElevatedButton(
+                onPressed: _validateAndProceed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
+                ),
+                child: Text(
+                  'Continuer',
+                  style: AppTextStyles.buttonLarge.copyWith(color: Colors.white),
                 ),
               ),
             ),
@@ -392,127 +448,119 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
 
   Widget _buildPaymentProgress() {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.grey.withValues(alpha: 0.2),
-          width: 1,
-        ),
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight),
       ),
       child: Column(
         children: [
           if (_ussdCode != null) ...[
-            Text(
-              'Code USSD généré',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            SizedBox(height: 2.w),
+            Text('Code USSD généré', style: AppTextStyles.titleMedium),
+            const SizedBox(height: AppSpacing.md),
             Container(
-              padding: EdgeInsets.all(3.w),
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: BoxDecoration(
-                color: Colors.grey.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: const Color(0xFFFFC107).withValues(alpha: 0.3),
-                  width: 2,
-                ),
+                color: AppColors.surfaceContainer,
+                borderRadius: BorderRadius.circular(AppRadii.md),
+                border: Border.all(color: _mtnYellow.withValues(alpha: 0.3), width: 2),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     _ussdCode!,
-                    style: TextStyle(
-                      fontSize: 18.sp,
+                    style: AppTextStyles.headlineLarge.copyWith(
+                      color: _mtnYellow,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFFFFC107),
                       letterSpacing: 2,
                     ),
                   ),
-                  SizedBox(width: 3.w),
+                  const SizedBox(width: AppSpacing.md),
                   IconButton(
-                    onPressed: () => _copyUssdCode(),
-                    icon: Icon(
-                      Icons.copy,
-                      color: const Color(0xFFFFC107),
-                      size: 6.w,
-                    ),
+                    tooltip: 'Copier le code USSD',
+                    onPressed: _copyUssdCode,
+                    icon: const Icon(Icons.copy_rounded, color: _mtnYellow, size: 24),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 2.w),
+            const SizedBox(height: AppSpacing.md),
             Text(
               'Composez ce code sur votre téléphone pour valider le paiement',
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w400,
-              ),
+              style: AppTextStyles.bodySmall,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 3.w),
+            const SizedBox(height: AppSpacing.xl),
           ],
 
           if (_isLoading) ...[
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFFC107)),
+              valueColor: AlwaysStoppedAnimation<Color>(_mtnYellow),
             ),
-            SizedBox(height: 2.w),
-            Text(
-              'Traitement du paiement...',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
+            const SizedBox(height: AppSpacing.md),
+            Text('Traitement du paiement...', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
+          ] else ...[
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: _isLoading ? null : _attestAndConfirm,
+                icon: const Icon(Icons.check_circle_outline_rounded,
+                    color: _mtnYellow, size: 20),
+                label: Text(
+                  "J'ai payé sur mon téléphone",
+                  style: AppTextStyles.buttonMedium
+                      .copyWith(color: _mtnYellow),
+                ),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: _mtnYellow, width: 1.5),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadii.md),
+                  ),
+                ),
               ),
             ),
-          ] else ...[
+            const SizedBox(height: AppSpacing.md),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
                     onPressed: _checkPaymentStatus,
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Color(0xFFFFC107)),
-                      padding: EdgeInsets.symmetric(vertical: 3.w),
+                      foregroundColor: _mtnYellow,
+                      side: const BorderSide(color: _mtnYellow),
+                      padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(AppRadii.md),
                       ),
                     ),
-                    child: Text(
-                      'Vérifier le statut',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: const Color(0xFFFFC107),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    child: Text('Vérifier le statut', style: AppTextStyles.buttonMedium.copyWith(color: _mtnYellow)),
                   ),
                 ),
-                SizedBox(width: 3.w),
+                const SizedBox(width: AppSpacing.md),
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: _handlePaymentSuccess,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFC107),
-                      padding: EdgeInsets.symmetric(vertical: 3.w),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  child: SizedBox(
+                    height: 48,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: _mtnYellow,
+                        borderRadius: BorderRadius.circular(AppRadii.md),
                       ),
-                    ),
-                    child: Text(
-                      'Confirmer',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                      child: ElevatedButton(
+                        onPressed: _handlePaymentSuccess,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadii.md),
+                          ),
+                        ),
+                        child: Text('Confirmer', style: AppTextStyles.buttonMedium.copyWith(color: Colors.white)),
                       ),
                     ),
                   ),
@@ -529,50 +577,45 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
     final isSuccess = _paymentResult?['success'] == true;
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: isSuccess ? Colors.green.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
+        color: isSuccess ? AppColors.successContainer : AppColors.errorContainer,
+        borderRadius: BorderRadius.circular(AppRadii.card),
         border: Border.all(
-          color: isSuccess ? Colors.green.withValues(alpha: 0.3) : Colors.red.withValues(alpha: 0.3),
-          width: 1,
+          color: isSuccess ? AppColors.success.withValues(alpha: 0.3) : AppColors.error.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
-              color: isSuccess ? Colors.green : Colors.red,
+              color: isSuccess ? AppColors.success : AppColors.error,
               shape: BoxShape.circle,
             ),
             child: Icon(
-              isSuccess ? Icons.check : Icons.close,
+              isSuccess ? Icons.check_rounded : Icons.close_rounded,
               color: Colors.white,
-              size: 6.w,
+              size: 24,
             ),
           ),
-          SizedBox(width: 3.w),
+          const SizedBox(width: AppSpacing.lg),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   isSuccess ? 'Paiement réussi !' : 'Échec du paiement',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: isSuccess ? Colors.green : Colors.red,
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: isSuccess ? AppColors.successDark : AppColors.errorDark,
                   ),
                 ),
-                SizedBox(height: 1.w),
+                const SizedBox(height: AppSpacing.xxs),
                 Text(
                   _paymentResult?['message'] ?? 'Une erreur est survenue',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: AppTextStyles.bodySmall.copyWith(color: AppColors.textSecondary),
                 ),
               ],
             ),
@@ -591,14 +634,12 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       );
       return;
     }
-
     if (phoneNumber.length != 8) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Le numéro doit contenir 8 chiffres')),
       );
       return;
     }
-
     if (!phoneNumber.startsWith('9') && !phoneNumber.startsWith('6')) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Numéro MTN invalide. Doit commencer par 9 ou 6')),
@@ -606,10 +647,7 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       return;
     }
 
-    setState(() {
-      _step = 2;
-    });
-
+    setState(() => _step = 2);
     _showConfirmationDialog();
   }
 
@@ -618,30 +656,32 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text(
-          'Confirmer le paiement',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.lg)),
+        title: Text('Confirmer le paiement', style: AppTextStyles.titleMedium),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Vous allez payer ${widget.amount.toStringAsFixed(0)} FCFA via MTN Mobile Money.',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.black87,
-              ),
+              "Vous allez payer ${widget.amount.toStringAsFixed(0)} FCFA via MTN Mobile Money.",
+              style: AppTextStyles.bodyMedium,
             ),
-            SizedBox(height: 2.w),
-            Text(
-              'Numéro: +229 ${_phoneController.text}',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFFFFC107),
+            const SizedBox(height: AppSpacing.md),
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: AppColors.accentContainer,
+                borderRadius: BorderRadius.circular(AppRadii.sm),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.phone_rounded, color: _mtnYellow, size: 18),
+                  const SizedBox(width: AppSpacing.sm),
+                  Text(
+                    '+229 ${_phoneController.text}',
+                    style: AppTextStyles.titleSmall.copyWith(color: _mtnYellow),
+                  ),
+                ],
               ),
             ),
           ],
@@ -650,17 +690,9 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              setState(() {
-                _step = 1;
-              });
+              setState(() => _step = 1);
             },
-            child: Text(
-              'Annuler',
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            child: Text('Annuler', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary)),
           ),
           ElevatedButton(
             onPressed: () {
@@ -668,8 +700,11 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
               _initiatePayment();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFFC107),
+              backgroundColor: _mtnYellow,
               foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadii.button),
+              ),
             ),
             child: const Text('Confirmer'),
           ),
@@ -686,26 +721,61 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
     });
 
     try {
-      // Générer un code USSD simulé
-      _ussdCode = '*133*1*${widget.amount.toStringAsFixed(0)}#';
+      // ET7 : sign-in anon au premier contact paywall (fail-open si le rail
+      // Supabase n'est pas configuré au build). Ne bloque jamais le flux.
+      final anon = await AuthService().ensureAnonSession();
+      if (anon.rateLimited && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(anon.error ?? 'Trop de tentatives.'),
+            backgroundColor: _mtnYellow,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
 
-      // Simuler l'appel à l'API MTN
-      await Future.delayed(const Duration(seconds: 2));
-
-      setState(() {
-        _isLoading = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Code USSD généré. Composez-le sur votre téléphone.'),
-          backgroundColor: const Color(0xFFFFC107),
-          duration: const Duration(seconds: 5),
-        ),
+      // Chemin canonique : montant offre unique 3000 FCFA (OneTimePurchaseService).
+      final phoneNumber =
+          _phoneController.text.replaceAll(RegExp(r'[^\d]'), '');
+      final result = await _purchaseService.initiatePurchase(
+        provider: 'mtn',
+        phoneNumber: phoneNumber,
       );
+      if (!mounted) return;
+      if (result['success'] == true) {
+        setState(() {
+          _ussdCode = result['ussd_code'] as String?;
+          _transactionId = result['transaction_id'] as String?;
+          _paymentResult = null;
+          _isLoading = false;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+                'Code USSD généré. Composez-le sur votre téléphone.'),
+            backgroundColor: _mtnYellow,
+            duration: const Duration(seconds: 5),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppRadii.sm)),
+          ),
+        );
+      } else {
+        setState(() {
+          _isLoading = false;
+          _isPaymentInitiated = false;
+          _step = 2;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(result['error'] as String? ?? 'Erreur')),
+        );
+      }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
+        _isPaymentInitiated = false;
+        _step = 2;
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erreur: $e')),
@@ -713,48 +783,90 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
     }
   }
 
+  /// Attestation manuelle (pas d'API opérateur) puis vérification.
+  void _attestAndConfirm() async {
+    if (_transactionId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Aucune transaction en cours. Recommencez.')),
+      );
+      return;
+    }
+    setState(() => _isLoading = true);
+    try {
+      await _purchaseService.markUserAttested(_transactionId!);
+      await _checkPaymentStatus();
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
   void _copyUssdCode() {
     if (_ussdCode != null) {
       Clipboard.setData(ClipboardData(text: _ussdCode!));
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Code USSD copié dans le presse-papiers'),
-          backgroundColor: Color(0xFFFFC107),
+        SnackBar(
+          content: const Text('Code USSD copié dans le presse-papiers'),
+          backgroundColor: _mtnYellow,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
         ),
       );
     }
   }
 
-  void _checkPaymentStatus() async {
+  Future<void> _checkPaymentStatus() async {
+    if (_transactionId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Aucune transaction en cours. Recommencez.')),
+      );
+      return;
+    }
     setState(() => _isLoading = true);
-
     try {
-      // Simuler la vérification du statut
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Simuler un paiement réussi
-      final result = {
-        'success': true,
-        'transactionId': 'MTN_${DateTime.now().millisecondsSinceEpoch}',
-        'method': 'mobile_money',
-        'amount': widget.amount,
-        'status': 'completed',
-        'message': 'Paiement MTN Mobile Money confirmé',
-      };
-
-      setState(() {
-        _paymentResult = result;
-        _isLoading = false;
-      });
-
-      // Appeler le callback de succès
-      widget.onPaymentSuccess?.call(result);
-
+      final result =
+          await _purchaseService.confirmPayment(_transactionId!);
+      if (!mounted) return;
+      if (result['success'] == true) {
+        setState(() {
+          _paymentResult = {
+            'success': true,
+            'transactionId': result['transaction_id'],
+            'method': 'mobile_money',
+            'status': 'completed',
+            'message': 'Paiement confirmé. Accès premium activé.',
+          };
+          _isLoading = false;
+        });
+        widget.onPaymentSuccess?.call(_paymentResult!);
+      } else if (result['error_code'] == 'PAYMENT_EXPIRED') {
+        await _purchaseService.clearPendingTransaction();
+        setState(() {
+          _paymentResult = {
+            'success': false,
+            'message': result['error'],
+          };
+          _isLoading = false;
+          _isPaymentInitiated = false;
+          _transactionId = null;
+          _ussdCode = null;
+          _step = 1;
+        });
+      } else {
+        setState(() {
+          _paymentResult = {
+            'success': false,
+            'message': result['error'] ?? 'Paiement non confirmé',
+          };
+          _isLoading = false;
+        });
+      }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _paymentResult = {
           'success': false,
-          'error': 'Erreur lors de la vérification',
+          'error': 'Erreur lors de la vérification'
         };
         _isLoading = false;
       });
@@ -766,9 +878,10 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       Navigator.of(context).pop(_paymentResult);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Veuillez d\'abord vérifier le statut du paiement'),
-          backgroundColor: Colors.orange,
+        SnackBar(
+          content: const Text("Veuillez d'abord vérifier le statut du paiement"),
+          backgroundColor: AppColors.accent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.sm)),
         ),
       );
     }
@@ -779,8 +892,12 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('Annuler le paiement ?'),
-          content: const Text('Êtes-vous sûr de vouloir annuler le paiement en cours ?'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadii.lg)),
+          title: Text('Annuler le paiement ?', style: AppTextStyles.titleMedium),
+          content: Text(
+            'Êtes-vous sûr de vouloir annuler le paiement en cours ?',
+            style: AppTextStyles.bodyMedium,
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -789,12 +906,16 @@ class _MtnPaymentScreenState extends State<MtnPaymentScreen> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                unawaited(_purchaseService.clearPendingTransaction());
                 widget.onPaymentCancel?.call();
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: AppColors.error,
                 foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.button),
+                ),
               ),
               child: const Text('Annuler'),
             ),

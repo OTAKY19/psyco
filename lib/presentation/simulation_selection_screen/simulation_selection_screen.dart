@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-import '../../core/app_export.dart';
-import '../../models/simulation_model.dart';
+import '../../design/app_colors.dart';
+import '../../design/app_text_styles.dart';
+import '../../design/app_spacing.dart';
+import '../../design/app_radii.dart';
+import '../../design/app_shadows.dart';
 import '../../services/simulation_service.dart';
 import '../simulation_screen/simulation_screen.dart';
 
@@ -9,9 +11,9 @@ class SimulationSelectionScreen extends StatefulWidget {
   final String userId;
 
   const SimulationSelectionScreen({
-    Key? key,
+    super.key,
     required this.userId,
-  }) : super(key: key);
+  });
 
   @override
   State<SimulationSelectionScreen> createState() => _SimulationSelectionScreenState();
@@ -23,239 +25,34 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Simulations de Test'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // En-tête
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.primary,
-                    Theme.of(context).colorScheme.primary.withValues(alpha:0.8),
+            _buildHeader(size),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeroBanner(size),
+                    const SizedBox(height: AppSpacing.xxl),
+                    Text(
+                      'Simulation Disponible',
+                      style: AppTextStyles.headlineMedium.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    _buildSimulationCard(size),
+                    const SizedBox(height: AppSpacing.xxl),
+                    _buildInfoSection(size),
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.quiz,
-                    size: 48,
-                    color: Colors.white,
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    'Simulations Officielles',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Testez vos connaissances avec nos simulations officielles du concours de la douane béninoise',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.white.withValues(alpha:0.9),
-                      height: 1.4,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            SizedBox(height: 24),
-            
-            // Simulation disponible
-            Text(
-              'Simulation Disponible',
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            
-            SizedBox(height: 16),
-            
-            // Carte de simulation
-            _buildSimulationCard(),
-            
-            SizedBox(height: 24),
-            
-            // Informations importantes
-            _buildInfoSection(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSimulationCard() {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha:0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    Icons.school,
-                    color: Theme.of(context).colorScheme.primary,
-                    size: 24,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        SimulationService.defaultSimulation.title,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        SimulationService.defaultSimulation.description,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Theme.of(context).textTheme.bodySmall?.color,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            
-            SizedBox(height: 20),
-            
-            // Détails de la simulation
-            _buildDetailRow(
-              Icons.quiz,
-              'Questions',
-              '${SimulationService.defaultSimulation.totalQuestions} questions',
-            ),
-            
-            _buildDetailRow(
-              Icons.timer,
-              'Durée totale',
-              '${SimulationService.defaultSimulation.totalDuration.inMinutes} minutes',
-            ),
-            
-            _buildDetailRow(
-              Icons.schedule,
-              'Temps par question',
-              '${SimulationService.defaultSimulation.questionDuration.inSeconds} secondes',
-            ),
-            
-            _buildDetailRow(
-              Icons.category,
-              'Catégories',
-              '${SimulationService.defaultSimulation.categories.length} domaines',
-            ),
-            
-            SizedBox(height: 20),
-            
-            // Catégories
-            Text(
-              'Domaines couverts:',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            
-            SizedBox(height: 8),
-            
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: SimulationService.defaultSimulation.categories.map((category) {
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha:0.1),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha:0.3),
-                    ),
-                  ),
-                  child: Text(
-                    _getCategoryDisplayName(category),
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-            
-            SizedBox(height: 24),
-            
-            // Bouton de démarrage
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _isLoading ? null : _startSimulation,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: _isLoading
-                    ? SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.play_arrow, size: 20),
-                          SizedBox(width: 8),
-                          Text(
-                            'Commencer la simulation',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
               ),
             ),
           ],
@@ -264,29 +61,41 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
     );
   }
 
-  Widget _buildDetailRow(IconData icon, String label, String value) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 12),
+  Widget _buildHeader(Size size) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.xl,
+        vertical: AppSpacing.lg,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        boxShadow: AppShadows.header,
+      ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 20,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          SizedBox(width: 12),
-          Text(
-            '$label: ',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: AppColors.surfaceDim,
+                borderRadius: BorderRadius.circular(AppRadii.sm),
+              ),
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                color: AppColors.textSecondary,
+                size: 18,
+              ),
             ),
           ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: Theme.of(context).textTheme.bodySmall?.color,
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Text(
+              'Simulations de Test',
+              style: AppTextStyles.headlineLarge.copyWith(
+                color: AppColors.textPrimary,
+              ),
             ),
           ),
         ],
@@ -294,14 +103,258 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
     );
   }
 
-  Widget _buildInfoSection() {
+  Widget _buildHeroBanner(Size size) {
     return Container(
-      padding: EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xxl),
       decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha:0.1),
-        borderRadius: BorderRadius.circular(8),
+        gradient: const LinearGradient(
+          colors: [AppColors.primary, AppColors.primaryDark],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.elevated,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: AppColors.onPrimary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(AppRadii.md),
+            ),
+            child: const Icon(
+              Icons.quiz,
+              size: 28,
+              color: AppColors.onPrimary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            'Simulations Officielles',
+            style: AppTextStyles.headlineLarge.copyWith(
+              color: AppColors.onPrimary,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            'Testez vos connaissances avec nos simulations officielles du concours de la douane béninoise',
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.onPrimary.withValues(alpha: 0.85),
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSimulationCard(Size size) {
+    final sim = SimulationService.defaultSimulation;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        boxShadow: AppShadows.card,
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryContainer,
+                        borderRadius: BorderRadius.circular(AppRadii.sm),
+                      ),
+                      child: const Icon(
+                        Icons.school,
+                        color: AppColors.primary,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            sim.title,
+                            style: AppTextStyles.titleMedium.copyWith(
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.xxs),
+                          Text(
+                            sim.description,
+                            style: AppTextStyles.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: AppSpacing.lg),
+
+                // Details
+                _buildDetailRow(
+                  Icons.quiz_outlined,
+                  'Questions',
+                  '${sim.totalQuestions} questions',
+                ),
+                _buildDetailRow(
+                  Icons.timer_outlined,
+                  'Durée totale',
+                  '${sim.totalDuration.inMinutes} minutes',
+                ),
+                _buildDetailRow(
+                  Icons.schedule_outlined,
+                  'Temps par question',
+                  '${sim.questionDuration.inSeconds} secondes',
+                ),
+                _buildDetailRow(
+                  Icons.category_outlined,
+                  'Catégories',
+                  '${sim.categories.length} domaines',
+                ),
+
+                const SizedBox(height: AppSpacing.lg),
+
+                // Categories
+                Text(
+                  'Domaines couverts',
+                  style: AppTextStyles.titleSmall.copyWith(
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  children: sim.categories.map((category) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md,
+                        vertical: AppSpacing.sm,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryContainer,
+                        borderRadius: BorderRadius.circular(AppRadii.badge),
+                      ),
+                      child: Text(
+                        _getCategoryDisplayName(category),
+                        style: AppTextStyles.labelMedium.copyWith(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+
+          // Start button
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: AppColors.borderLight),
+              ),
+            ),
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: _isLoading ? null : _startSimulation,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: AppColors.onPrimary,
+                  padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
+                  elevation: 0,
+                ),
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 22,
+                        width: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(AppColors.onPrimary),
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.play_arrow_rounded, size: 22),
+                          const SizedBox(width: AppSpacing.sm),
+                          Text(
+                            'Commencer la simulation',
+                            style: AppTextStyles.buttonMedium.copyWith(
+                              color: AppColors.onPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            size: 18,
+            color: AppColors.primary,
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Text(
+            '$label: ',
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Text(
+            value,
+            style: AppTextStyles.bodyMedium.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(Size size) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: AppColors.primaryContainer,
+        borderRadius: BorderRadius.circular(AppRadii.card),
         border: Border.all(
-          color: Colors.blue.withValues(alpha:0.3),
+          color: AppColors.primaryLight.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -309,26 +362,34 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.info, color: Colors.blue, size: 20),
-              SizedBox(width: 8),
+              Container(
+                width: 32,
+                height: 32,
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.info_outline,
+                  color: AppColors.onPrimary,
+                  size: 16,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
               Text(
                 'Informations importantes',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue[800],
+                style: AppTextStyles.titleSmall.copyWith(
+                  color: AppColors.primaryDark,
                 ),
               ),
             ],
           ),
-          
-          SizedBox(height: 12),
-          
-          _buildInfoItem('• Le test dure exactement 40 minutes'),
-          _buildInfoItem('• Chaque question a un temps limité de 1 minute'),
-          _buildInfoItem('• Aucun retour en arrière n\'est possible'),
-          _buildInfoItem('• Les questions sont sélectionnées aléatoirement'),
-          _buildInfoItem('• Assurez-vous d\'avoir une connexion stable'),
+          const SizedBox(height: AppSpacing.md),
+          _buildInfoItem('Le test dure exactement 40 minutes'),
+          _buildInfoItem('Chaque question a un temps limité de 1 minute'),
+          _buildInfoItem('Aucun retour en arrière n\'est possible'),
+          _buildInfoItem('Les questions sont sélectionnées aléatoirement'),
+          _buildInfoItem('Assurez-vous d\'avoir une connexion stable'),
         ],
       ),
     );
@@ -336,13 +397,29 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
 
   Widget _buildInfoItem(String text) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 4),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 12.sp,
-          color: Colors.blue[700],
-        ),
+      padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            margin: const EdgeInsets.only(top: 7),
+            decoration: const BoxDecoration(
+              color: AppColors.primary,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              text,
+              style: AppTextStyles.bodySmall.copyWith(
+                color: AppColors.primaryDark,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -372,9 +449,8 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
     });
 
     try {
-      // Vérifier la connexion et charger les questions
       await _simulationService.loadQuestions();
-      
+
       if (mounted) {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -390,7 +466,11 @@ class _SimulationSelectionScreenState extends State<SimulationSelectionScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erreur lors du chargement: $e'),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadii.sm),
+            ),
           ),
         );
       }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../../core/app_export.dart';
+import '../../../design/app_colors.dart';
+import '../../../design/app_radii.dart';
+import '../../../design/app_spacing.dart';
+import '../../../design/app_text_styles.dart';
 
 class PerformanceBreakdownWidget extends StatelessWidget {
   final int correctAnswers;
@@ -20,61 +22,49 @@ class PerformanceBreakdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: const EdgeInsets.all(AppSpacing.cardPadding),
       decoration: BoxDecoration(
-        color: AppTheme.lightTheme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color:
-                AppTheme.lightTheme.colorScheme.shadow.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppRadii.card),
+        border: Border.all(color: AppColors.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Répartition des Réponses',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+            style: AppTextStyles.titleMedium,
           ),
-          SizedBox(height: 3.h),
+          const SizedBox(height: AppSpacing.lg),
           Row(
             children: [
               Expanded(
                 child: _buildBreakdownItem(
-                  context,
                   'Correctes',
                   correctAnswers,
                   totalQuestions,
-                  AppTheme.successLight,
-                  'check_circle',
+                  AppColors.success,
+                  Icons.check_circle,
                 ),
               ),
-              SizedBox(width: 2.w),
+              const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: _buildBreakdownItem(
-                  context,
                   'Incorrectes',
                   incorrectAnswers,
                   totalQuestions,
-                  AppTheme.errorLight,
-                  'cancel',
+                  AppColors.error,
+                  Icons.cancel,
                 ),
               ),
-              SizedBox(width: 2.w),
+              const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: _buildBreakdownItem(
-                  context,
                   'Ignorées',
                   skippedAnswers,
                   totalQuestions,
-                  AppTheme.warningLight,
-                  'help_outline',
+                  AppColors.warning,
+                  Icons.help_outline,
                 ),
               ),
             ],
@@ -85,53 +75,55 @@ class PerformanceBreakdownWidget extends StatelessWidget {
   }
 
   Widget _buildBreakdownItem(
-    BuildContext context,
     String label,
     int count,
     int total,
     Color color,
-    String iconName,
+    IconData icon,
   ) {
     final percentage = total > 0 ? (count / total * 100) : 0.0;
 
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
+        color: color.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(AppRadii.cardSm),
         border: Border.all(
-          color: color.withValues(alpha: 0.3),
+          color: color.withValues(alpha: 0.15),
           width: 1,
         ),
       ),
       child: Column(
         children: [
-          CustomIconWidget(
-            iconName: iconName,
-            color: color,
-            size: 24,
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 18),
           ),
-          SizedBox(height: 1.h),
+          const SizedBox(height: AppSpacing.sm),
           Text(
             count.toString(),
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w700,
-                ),
+            style: AppTextStyles.headlineSmall.copyWith(
+              color: color,
+            ),
           ),
           Text(
             '${percentage.toInt()}%',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: color,
-                  fontWeight: FontWeight.w500,
-                ),
+            style: AppTextStyles.caption.copyWith(
+              color: color,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          SizedBox(height: 0.5.h),
+          const SizedBox(height: AppSpacing.xxs),
           Text(
             label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                ),
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.textMuted,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
